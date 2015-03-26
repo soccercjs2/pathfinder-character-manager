@@ -29,7 +29,7 @@ namespace Pathfinder.Controllers
             List<EquationCategory> damageCategories = db.EquationCategories
                 .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<EquationCategory>();
 
-            ViewBag.DamageEquations = new Sele
+            ViewBag.DamageEquations = new SelectList()
             
             Attack attack = new Attack();
             attack.CharacterId = id;
