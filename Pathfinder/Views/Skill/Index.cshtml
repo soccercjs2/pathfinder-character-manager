@@ -1,0 +1,42 @@
+﻿@model Pathfinder.ViewModels.SkillManager
+
+@{
+    ViewBag.Title = "Skills";
+}
+
+<h2>Skills</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="section">
+        <thead>
+            <tr>
+                <td>Skill</td>
+                <td>Rank</td>
+                <td>CS</td>
+            </tr>
+        </thead>
+        @for (int i = 0; i < Model.Skills.Count; i++)
+        {
+            <tr>
+                <td>@(Model.Skills[i].Type == null ? Model.Skills[i].Name : Model.Skills[i].Name + " (" + Model.Skills[i].Type + ")")</td>
+                <td>@Html.EditorFor(m => Model.Skills[i].Ranks, new { htmlAttributes = new { @class = "form-control numberText" } })</td>
+                <td>@Html.EditorFor(m => Model.Skills[i].ClassSkill, new { htmlAttributes = new { @class = "input-group" } })</td>
+                @Html.HiddenFor(m => Model.Skills[i].SkillId)
+                @Html.HiddenFor(m => Model.Skills[i].CharacterId)
+                @Html.HiddenFor(m => Model.Skills[i].Name)
+                @Html.HiddenFor(m => Model.Skills[i].Type)
+                @Html.HiddenFor(m => Model.Skills[i].Ability)
+                @Html.HiddenFor(m => Model.Skills[i].UseUntrained)
+                @Html.HiddenFor(m => Model.Skills[i].ArmorCheckPenalty)
+            </tr>
+        }
+    </table>
+
+    @Html.ActionLink("+ [New Skill]", "Create", new { Id = Model.CharacterId })<br /><br />
+
+    <input id="btnSave" value="Save" type="submit" class="form-control" />
+    
+    @Html.HiddenFor(m => m.CharacterId)
+}
+

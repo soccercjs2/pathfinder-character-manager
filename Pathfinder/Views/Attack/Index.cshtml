@@ -1,0 +1,39 @@
+﻿@model Pathfinder.ViewModels.PlayerCharacter
+
+@{
+    ViewBag.Title = "Attacks";
+}
+
+<h2>Attacks</h2>
+
+<table class="section noclick full">
+    <thead onclick="ToggleRowsVisible('tblAttacks')">
+        <tr>
+            <td>Weapon</td>
+            <td>Attacks</td>
+            <td>Damage</td>
+            <td>Critical</td>
+            <td>Range</td>
+            <td>Type</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Attacks)
+    {
+        <tr>
+            <td>@item.WeaponName</td>
+            <td>@item.AttackBonuses</td>
+            <td>@item.Damage</td>
+            <td>@item.Critical</td>
+            <td>@item.Range</td>
+            <td>@item.Type</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { Id = item.AttackId })</td>
+            <td>@Html.ActionLink("Sub Attacks", "SubAttack", new { Id = item.AttackId })</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { Id = item.AttackId })</td>
+        </tr>
+    }
+</table><br />
+@Html.ActionLink("+ [New Attack]", "Create", new { Id = Model.MyCharacter.CharacterId })
+

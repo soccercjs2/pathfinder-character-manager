@@ -1,0 +1,36 @@
+﻿@model Pathfinder.ViewModels.AttackView
+
+@{
+    ViewBag.Title = "Sub Attacks";
+}
+
+<h2>Sub Attacks</h2>
+
+Weapon: @Model.WeaponName<br />
+Damage: @Model.Damage<br />
+Critical: @Model.Critical<br />
+Range: @Model.Range<br />
+Type: @Model.Type<br /><br />
+
+<table class="section noclick full">
+    <thead>
+        <tr>
+            <td>Equation Name</td>
+            <td>Equation</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach (var item in Model.SubAttacks)
+    {
+        <tr>
+            <td>@item.GetEquation().Name</td>
+            <td>@item.GetEquation().Formula</td>
+            <td>@Html.ActionLink("Edit","EditSubAttack", new { Id = item.SubAttackId })</td>
+            <td>@Html.ActionLink("Delete","DeleteSubAttack", new { Id = item.SubAttackId })</td>
+        </tr>
+    }
+</table><br />
+
+@Html.ActionLink("+ [New Sub Attack]", "CreateSubAttack", new { Id = Model.AttackId })<br /><br />
+@Html.ActionLink("Back to List", "Index", new { Id = Model.AttackId })

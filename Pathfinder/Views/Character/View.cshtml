@@ -1,0 +1,225 @@
+﻿@model Pathfinder.ViewModels.PlayerCharacter
+
+<script type="text/javascript">
+    function GoTORoller()
+    {
+        document.forms[0].submit();
+    }
+</script>
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@using (Html.BeginForm("Roller", "Character", FormMethod.Post, new { target = "_blank", width = 400, height = 400 }))
+{
+    <h1>@Model.Name</h1>
+
+    <div id="divBaseStats" class="inline float-left">
+        <table id="tblAbilityScores" class="section">
+            <tr ondblclick="@("GoToRoller('Strength Check','" + @Model.StrengthMod + "')");">
+                <td>Strength</td>
+                <td class="numberCell">@Model.Strength</td>
+                <td class="numberCell"><strong>@Model.StrengthMod</strong></td>
+            </tr>
+            <tr ondblclick="@("GoToRoller('Dexterity Check','" + @Model.DexterityMod + "')");">
+                <td>Dexterity</td>
+                <td class="numberCell">@Model.Dexterity</td>
+                <td class="numberCell"><strong>@Model.DexterityMod</strong></td>
+            </tr>
+            <tr ondblclick="@("GoToRoller('Constitution Check','" + @Model.ConstitutionMod + "')");">
+                <td>Constitution</td>
+                <td class="numberCell">@Model.Constitution</td>
+                <td class="numberCell"><strong>@Model.ConstitutionMod</strong></td>
+            </tr>
+            <tr ondblclick="@("GoToRoller('Intelligence Check','" + @Model.IntelligenceMod + "')");">
+                <td>Intelligence</td>
+                <td class="numberCell">@Model.Intelligence</td>
+                <td class="numberCell"><strong>@Model.IntelligenceMod</strong></td>
+            </tr>
+            <tr ondblclick="@("GoToRoller('Wisdom Check','" + @Model.WisdomMod + "')");">
+                <td>Wisdom</td>
+                <td class="numberCell">@Model.Wisdom</td>
+                <td class="numberCell"><strong>@Model.WisdomMod</strong></td>
+            </tr>
+            <tr ondblclick="@("GoToRoller('Charisma Check','" + @Model.CharismaMod + "')");">
+                <td>Charisma</td>
+                <td class="numberCell">@Model.Charisma</td>
+                <td class="numberCell"><strong>@Model.CharismaMod</strong></td>
+            </tr>
+        </table>
+
+        <table id="tblBab" class="section">
+            <tr id="trBab">
+                <td>BAB</td>
+                <td class="numberCell">@Model.BaseAttackBonus</td>
+                <td class="numberCell">&nbsp;</td>
+            </tr>
+            <tr id="trCmb" ondblclick="@("GoToRoller('Combat Maneuver','" + @Model.CombatManeuverBonus + "')");">
+                <td>CMB</td>
+                <td class="numberCell">@Model.CombatManeuverBonus</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+            <tr id="trCmd">
+                <td>CMD</td>
+                <td class="numberCell">@Model.CombatManeuverDefense</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+        </table>
+
+        <table id="tblArmorClass" class="section">
+            <tr id="trArmorClass">
+                <td>AC</td>
+                <td class="numberCell">@Model.ArmorClass</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+            <tr id="trTouchArmorClass">
+                <td>Touch AC</td>
+                <td class="numberCell">@Model.TouchArmorClass</td>
+                <td>[+]</td>
+            </tr>
+            <tr id="trFlatFootedArmorClass">
+                <td>Flat-Footed AC</td>
+                <td class="numberCell">@Model.FlatFootedArmorClass</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+        </table>
+
+        <table id="tblSaves" class="section">
+            <tr id="trFortitude" ondblclick="@("GoToRoller('Fortitude Save','" + @Model.FortitudeSave + "')");">
+                <td>Fortitude</td>
+                <td class="numberCell">@Model.FortitudeSave</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+            <tr id="trReflex" ondblclick="@("GoToRoller('Reflex Save','" + @Model.ReflexSave + "')");">
+                <td>Reflex</td>
+                <td class="numberCell">@Model.ReflexSave</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+            <tr id="trWill" ondblclick="@("GoToRoller('Will Save','" + @Model.WillSave + "')");">
+                <td>Will</td>
+                <td class="numberCell">@Model.WillSave</td>
+                <td class="numberCell">[+]</td>
+            </tr>
+        </table>
+
+        <table id="tblOther" class="section">
+            <tr>
+                <td>Health</td>
+                <td class="numberCell">10/10</td>
+            </tr>
+            <tr>
+                <td>Experience</td>
+                <td class="numberCell">@Model.Experience</td>
+            </tr>
+            <tr>
+                <td>Move Speed</td>
+                <td class="numberCell">@Model.MoveSpeed</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="divCenter" class="inline center-column">
+        <div id="divClasses">
+            <table id="tblClasses" class="section full">
+                <thead onclick="ToggleRowsVisible('tblClasses')">
+                    <tr>
+                        <td>Class</td>
+                        <td>Levels</td>
+                        <td>BAB</td>
+                        <td>Fort</td>
+                        <td>Ref</td>
+                        <td>Will</td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Classes)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Levels</td>
+                        <td>@item.BaseAttackBonus</td>
+                        <td>@item.ForitudeSave</td>
+                        <td>@item.ReflexSave</td>
+                        <td>@item.WillSave</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div id="divAttacks">
+            <table id="tblAttacks" class="section full">
+                <thead onclick="ToggleRowsVisible('tblAttacks')">
+                    <tr>
+                        <td>Name</td>
+                        <td>Attacks</td>
+                        <td>Damage</td>
+                        <td>Crit</td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Attacks)
+                {
+                    <tr>
+                        <td>@item.WeaponName</td>
+                        <td>@item.AttackBonuses</td>
+                        <td>@item.Damage</td>
+                        <td>@item.Critical</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div id="divClassAbilities" class="inline float-left">
+            <table id="tblClassAbilities" class="section">
+                <thead onclick="ToggleRowsVisible('tblClassAbilities')"><tr><td>Class Abilities</td></tr></thead>
+                <tr><td>Fast Movement</td></tr>
+                <tr><td>Rage</td></tr>
+                <tr><td>Rage Power</td></tr>
+                <tr><td>Damage Reduction</td></tr>
+            </table>
+
+            <table id="tblRacialAbilities" class="section">
+                <thead onclick="ToggleRowsVisible('tblRacialAbilities')"><tr><td>Racial Abilities</td></tr></thead>
+                <tr><td>Stealthy</td></tr>
+                <tr><td>Skilled</td></tr>
+            </table>
+        </div>
+
+        <div id="divFeats" class="inline float-right">
+            <table id="tblFeats" class="section">
+                <thead onclick="ToggleRowsVisible('tblFeats')"><tr><td>Feats</td></tr></thead>
+                <tr><td>Diehard</td></tr>
+                <tr><td>Endurance</td></tr>
+                <tr><td>Power Attack</td></tr>
+                <tr><td>Weapon Focus (Claws)</td></tr>
+            </table>
+
+            <table id="tblManage" class="section">
+                <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>
+                <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                <tr><td>@Html.ActionLink("Manage Skills", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                <tr><td>@Html.ActionLink("Manage Attacks", "Index", "Attack", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                <tr><td><a href="">Manage Class Abilities</a></td></tr>
+                <tr><td><a href="">Manage Racial Abilities</a></td></tr>
+                <tr><td><a href="">Manage Feats</a></td></tr>
+                <tr><td>@Html.ActionLink("Manage Equations", "Index", "Equation", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="divSkills" class="inline float-right">
+        <table id="tblSkills" class="section">
+            <thead onclick="ToggleRowsVisible('tblSkills')">
+                <tr>
+                    <td colspan="2">Skills</td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Skills)
+            {
+                <tr ondblclick="@("GoToRoller('" + item.Name + "','" + item.Bonus + "')");">
+                    <td>@item.Name</td>
+                    <td style="text-align: right;" colspan="2">@item.Bonus</td>
+                </tr>
+            }
+        </table>
+    </div>
+}

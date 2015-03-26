@@ -1,0 +1,28 @@
+﻿@model Pathfinder.ViewModels.TagViewer
+
+@{
+    ViewBag.Title = "Tags";
+}
+
+<h2>Tags</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "TagCategoryId", "Name"),
+        new { @class = "form-control", @onchange = "this.form.submit();" })<br />
+    
+    @Html.HiddenFor(m => m.CharacterId)
+
+    <table class="section noclick full">
+        @foreach (var item in Model.Tags)
+        {
+            <tr class="rosterItem">
+                <td>@item.Name</td>
+                <td>@item.Value</td>
+                <td width="50"><a href="asdf.aspx">Delete</a></td>
+            </tr>
+        }
+    </table><br />
+    @Html.ActionLink("+ [New Tag]", "Create", new { Id = Model.CharacterId })<br />
+    @Html.ActionLink("+ [New Category]", "CreateCategory", new { Id = Model.CharacterId })
+}

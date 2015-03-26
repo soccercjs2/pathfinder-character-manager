@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Pathfinder.Models.Character>
+
+@{
+    ViewBag.Title = "My Characters";
+}
+
+<h2>My Characters</h2>
+
+<table class="section noclick full">
+    @foreach (var item in Model)
+    {
+        <tr class="rosterItem">
+            <td>@item.Name</td>
+            <td width="50">@Html.ActionLink("View", "View", new { Id = item.CharacterId })</td>
+            <td width="50">@Html.ActionLink("Delete", "Delete", new { Id = item.CharacterId })</td>
+        </tr>
+    }
+</table><br />
+@Html.ActionLink("+ [New Character]", "Create")

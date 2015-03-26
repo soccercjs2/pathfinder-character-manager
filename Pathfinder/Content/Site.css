@@ -1,0 +1,177 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: auto;
+}
+
+/*Override h2 and h6*/
+h1
+{
+    /*margin-bottom: 0px;*/
+}
+
+h5
+{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: grey;
+    font-style: italic;
+}
+
+input[type="checkbox"]
+{
+    width: 20px;
+    height: 20px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input[type=text],
+input[type=number],
+select,
+textarea {
+    max-width: 280px;
+    display: inline;
+}
+
+input[type=submit],
+input[type=button] {
+    max-width: 100px;
+    display: inline;
+}
+
+.rosterItem:hover td {
+    background-color: #fbfddf;
+}
+
+/*-----start section-----*/
+.section {
+    border: 1px solid #1f5fc4;
+    font-size: medium;
+    width: 280px;
+    margin-bottom: 5px;
+    text-align: left;
+    padding: 5px;
+}
+
+.section thead tr td {
+    background-color: #0099FF;
+    font-weight: bold;
+    color: white;
+    border: 1px solid black;
+}
+
+.section td {
+    padding-left: 5px;
+    padding-right: 5px; 
+}
+
+.section tbody tr:nth-child(even):hover td {
+    background-color: #edefd3;
+    cursor: pointer;
+}
+
+.section tbody tr:nth-child(even) td {
+    background-color: #eeeeee;
+}
+
+.section.subrows tbody tr:nth-child(4n+3):hover td {
+    background-color: #edefd3;
+    cursor: pointer;
+}
+
+.section.subrows tbody tr:nth-child(4n+3) td {
+    background-color: #eeeeee;
+}
+
+.section.subrows tbody tr:nth-child(even):hover td {
+    background-color: #fbfddf;
+    cursor: pointer;
+}
+
+.section.subrows tbody tr:nth-child(even) td {
+    background-color: white;
+    border: 1px solid #1f5fc4;
+}
+
+.section tbody tr:hover td {
+    background-color: #fbfddf;
+    cursor: pointer;
+}
+/*-----end section-----*/
+
+.noclick tr td {
+    cursor: default !important;
+}
+
+.full {
+    width: 100%;
+    /*font-size: small;*/
+}
+
+.inline {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.numberCell {
+    text-align: right;
+    width: 20px;
+}
+
+.numberText {
+    width: 45px;
+}
+
+.expand {
+    outline: 1px solid black;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 300;
+}
+
+.left {
+    text-align: left;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.center-column {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 570px;
+}

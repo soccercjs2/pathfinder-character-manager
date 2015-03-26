@@ -1,0 +1,38 @@
+﻿@model Pathfinder.ViewModels.EquationViewer
+
+@{
+    ViewBag.Title = "Equation";
+}
+
+<h2>Equations</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "EquationCategoryId", "Name"),
+        new { @class = "form-control", @onchange = "this.form.submit();" })<br />
+    
+    @Html.HiddenFor(m => m.CharacterId)
+
+    <table class="section full">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Equation</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Equations)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Formula</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { Id = item.EquationId })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { Id = item.EquationId })</td>
+            </tr>
+        }
+    </table>
+
+    @Html.ActionLink("+ [New Equation]", "Create", new { Id = Model.CharacterId })<br />
+    @Html.ActionLink("+ [New Equation Category]", "CreateCategory", new { Id = Model.CharacterId })
+}

@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+@model Pathfinder.Models.Roller
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Roller</title>
+</head>
+<body style="padding-top: 20px; padding-bottom: 0px; padding-left: 10px;">
+    @using (Html.BeginForm())
+    {
+        <div>
+            <span style="font-size: x-large;">@Model.Name</span><br />
+            <span style="color: grey; font-size: medium; font-style: italic;">@Model.RollString</span><br /><br />
+            <input id="btnRoll" type="submit" value="Roll!" class="form-control" style="width: 100px; display: inline;" />
+            <div style="padding-left: 10px; font-size: large; vertical-align: middle; display: inline;">
+                @Model.RollResult
+            </div>
+        </div>
+        
+        @Html.HiddenFor(x => x.Name)
+        @Html.HiddenFor(x => x.RollString)
+        @Html.HiddenFor(x => x.Equation)
+    }
+</body>
+</html>
