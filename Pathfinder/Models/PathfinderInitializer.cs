@@ -156,7 +156,8 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "REF", Formula = "Classes.ReflexSave + DEX", EquationCategoryId = 2 },
                 new Equation{ CharacterId = 1, Name = "WILL", Formula = "Classes.WillSave + WIS", EquationCategoryId = 2 },
                 new Equation{ CharacterId = 1, Name = "MELEE_ATTACK", Formula = "BAB + STR", EquationCategoryId = 3 },
-                new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 3 }
+                new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 3 },
+                new Equation{ CharacterId = 1, Name = "One-Handed Damage", Formula = "STR", EquationCategoryId = 4 }
             };
 
             return equations;
@@ -168,7 +169,8 @@ namespace Pathfinder.Models
             {
                 new EquationCategory{ CharacterId = 1, Name = "Ability Modifier" },
                 new EquationCategory{ CharacterId = 1, Name = "Base Stats" },
-                new EquationCategory{ CharacterId = 1, Name = "Attacks" }
+                new EquationCategory{ CharacterId = 1, Name = "Attacks" },
+                new EquationCategory{ CharacterId = 1, Name = "Damage"}
             };
 
             return categories;

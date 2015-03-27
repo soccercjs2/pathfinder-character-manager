@@ -2,6 +2,7 @@
 using Pathfinder.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,15 +22,15 @@ namespace Pathfinder.Controllers
         public ActionResult Create(int id)
         {
             List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
-            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
-
+            
             EquationCategory damageCategory = db.EquationCategories
                 .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
 
-            List<EquationCategory> damageCategories = db.EquationCategories
-                .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<EquationCategory>();
+            List<Equation> damageCategories = db.Equations
+                .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
 
-            ViewBag.DamageEquations = new SelectList(damageCategories, "EquationCategoryId", "Name");
+            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
+            ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
             
             Attack attack = new Attack();
             attack.CharacterId = id;
@@ -43,6 +44,39 @@ namespace Pathfinder.Controllers
             if (ModelState.IsValid)
             {
                 db.Attacks.Add(attack);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Attack", new { Id = attack.CharacterId });
+            }
+            else
+            {
+                return View(attack);
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {
+            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
+            
+            EquationCategory damageCategory = db.EquationCategories
+                .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
+
+            List<Equation> damageCategories = db.Equations
+                .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
+
+            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
+            ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
+            
+            return View(db.Attacks.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Attack attack)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Attacks.Attach(attack);
+                db.Entry(attack).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Attack", new { Id = attack.CharacterId });

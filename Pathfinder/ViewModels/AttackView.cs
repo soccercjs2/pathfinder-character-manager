@@ -48,7 +48,7 @@ namespace Pathfinder.ViewModels
 
             this.WeaponName = this.Weapon.Name;
             this.AttackBonuses = LoadAttackBonuses(this.SubAttacks);
-            this.Damage = this.Weapon.Damage;
+            this.Damage = LoadDamage(this.Weapon, this.Attack);
             this.Critical = LoadCritical(this.Weapon);
             this.Range = this.Weapon.Range + "ft";
             this.Type = this.Weapon.Type;
@@ -67,6 +67,15 @@ namespace Pathfinder.ViewModels
             }
             
             return attack;
+        }
+
+        private string LoadDamage(Weapon weapon, Attack attack)
+        {
+            Equation damageEquation = db.Equations.Find(attack.DamageEquationId);
+            int damageBonus = damageEquation.Evaluate(this.MyCharacter);
+
+            if (damageBonus < 0) { return weapon.Damage + " - " + Math.Abs(damageBonus); }
+            else { return weapon.Damage + " + " + damageBonus;  }
         }
 
         private string LoadCritical(Weapon weapon)
