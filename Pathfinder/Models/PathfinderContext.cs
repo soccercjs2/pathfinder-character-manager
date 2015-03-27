@@ -12,6 +12,7 @@ namespace Pathfinder.Models
         public DbSet<Class> Classes { get; set; }
         public DbSet<Skill> Skills { get; set; }
         //public DbSet<Tag> Tags { get; set; }
+        public DbSet<AbilityCategory> AbilityCategories { get; set; }
         public DbSet<EquationCategory> EquationCategories { get; set; }
         public DbSet<Equation> Equations { get; set; }
         public DbSet<Attack> Attacks { get; set; }

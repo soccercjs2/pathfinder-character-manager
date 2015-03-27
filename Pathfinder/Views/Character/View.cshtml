@@ -198,9 +198,9 @@
                 <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
                 <tr><td>@Html.ActionLink("Manage Skills", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
                 <tr><td>@Html.ActionLink("Manage Attacks", "Index", "Attack", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                <tr><td><a href="">Manage Class Abilities</a></td></tr>
-                <tr><td><a href="">Manage Racial Abilities</a></td></tr>
-                <tr><td><a href="">Manage Feats</a></td></tr>
+                <tr><td>@Html.ActionLink("Manage Racial Abilities", "RacialAbilities", "Abilities", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                <tr><td>@Html.ActionLink("Manage Class Abilities", "ClassAbilities", "Abilities", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                <tr><td>@Html.ActionLink("Manage Feats", "Feats", "Abilities", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
                 <tr><td>@Html.ActionLink("Manage Equations", "Index", "Equation", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
             </table>
         </div>
