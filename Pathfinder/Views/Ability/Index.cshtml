@@ -1,0 +1,45 @@
+﻿@model Pathfinder.ViewModels.AbilityViewer
+
+@{
+    ViewBag.Title = "Abilities";
+}
+
+<h2>Abilities</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(m => m.TypeId, new SelectList(Model.Types, "AbilityTypeId", "Name"),
+        new { @class = "form-control", @onchange = "this.form.submit();" })<br />
+
+    @Html.HiddenFor(m => m.CharacterId)
+
+    foreach (var typeAbilities in Model.Abilities)
+    {
+        <h3>Title</h3>
+        <table class="section full noclick">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td>Conditional</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            @foreach (var ability in typeAbilities)
+            {
+                <tr>
+                    <td>@ability.Name</td>
+                    <td>@ability.Description</td>
+                    <td>@ability.IsConditional</td>
+                    <td>@Html.ActionLink("Edit", "EditAbility", new { Id = ability.AbilityId }, null)</td>
+                    <td>@Html.ActionLink("Delete", "DeleteAbility", new { Id = ability.AbilityId }, null)</td>
+                </tr>
+            }
+        </table><br />
+    }
+
+    @Html.ActionLink("+ [New Ability]", "CreateAbility", new { Id = Model.CharacterId })<br />
+    @Html.ActionLink("+ [New Ability Type]", "CreateAbilityType", new { Id = Model.CharacterId })
+}
+

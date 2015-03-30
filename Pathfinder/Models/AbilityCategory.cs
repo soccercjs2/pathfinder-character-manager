@@ -5,9 +5,10 @@ using System.Web;
 
 namespace Pathfinder.Models
 {
-    public class AbilityCategory
+    public class AbilityType
     {
-        public int AbilityCategoryId { get; set; }
+        public int AbilityTypeId { get; set; }
+        public int CharacterId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -9,12 +9,12 @@ namespace Pathfinder.Models
     {
         public int SubAttackId { get; set; }
         public int AttackId { get; set; }
-        public int EquationId { get; set; }
+        public int AttackEquationId { get; set; }
 
         public Equation GetEquation()
         {
             PathfinderContext db = new PathfinderContext();
-            return db.Equations.Find(this.EquationId);
+            return db.Equations.Find(this.AttackEquationId);
         }
     }
 }

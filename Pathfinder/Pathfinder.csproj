@@ -162,6 +162,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AbilityController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttackController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ability.cs" />
     <Compile Include="Models\AbilityCategory.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Armor.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\EquationCategory.cs" />
     <Compile Include="Models\Weapon.cs" />
+    <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
     <Compile Include="ViewModels\PlayerCharacter.cs" />
@@ -278,6 +281,7 @@
     <Content Include="Views\Attack\SubAttack.cshtml" />
     <Content Include="Views\Attack\CreateSubAttack.cshtml" />
     <Content Include="Views\Attack\Edit.cshtml" />
+    <Content Include="Views\Ability\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,9 +14,12 @@ namespace Pathfinder.Models
             List<Class> classes = GetClassList();
             List<Skill> skills = GetSkillList();
             List<Weapon> weapons = GetWeaponList();
+            List<Attack> attacks = GetAttackList();
+            List<SubAttack> subAttacks = GetSubAttackList();
             List<Equation> equations = GetEquationList();
             List<EquationCategory> equationCategories = GetEquationCategoryList();
-            //List<Tag> tags = GetTagList();
+            List<AbilityType> abilityTypes = GetAbilityTypeList();
+            List<Ability> abilities = GetAbilityList();
 
             foreach (Character character in characters)
             {
@@ -38,6 +41,16 @@ namespace Pathfinder.Models
                 context.Weapons.Add(weapon);
             }
 
+            foreach (Attack attack in attacks)
+            {
+                context.Attacks.Add(attack);
+            }
+
+            foreach (SubAttack subAttack in subAttacks)
+            {
+                context.SubAttacks.Add(subAttack);
+            }
+
             foreach (Equation equation in equations)
             {
                 context.Equations.Add(equation);
@@ -48,10 +61,15 @@ namespace Pathfinder.Models
                 context.EquationCategories.Add(equationCategory);
             }
 
-            //foreach (Tag tag in tags)
-            //{
-            //    context.Tags.Add(tag);
-            //}
+            foreach (AbilityType type in abilityTypes)
+            {
+                context.AbilityTypes.Add(type);
+            }
+
+            foreach (Ability ability in abilities)
+            {
+                context.Abilities.Add(ability);
+            }
 
             context.SaveChanges();
         }
@@ -136,6 +154,27 @@ namespace Pathfinder.Models
             return weapons;
         }
 
+        private List<Attack> GetAttackList()
+        {
+            List<Attack> attacks = new List<Attack>
+            {
+                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 18 }
+            };
+
+            return attacks;
+        }
+
+        private List<SubAttack> GetSubAttackList()
+        {
+            List<SubAttack> subAttacks = new List<SubAttack>
+            {
+                new SubAttack{ AttackId = 1, AttackEquationId = 16 },
+                new SubAttack{ AttackId = 1, AttackEquationId = 16 }
+            };
+
+            return subAttacks;
+        }
+
         private List<Equation> GetEquationList()
         {
             List<Equation> equations = new List<Equation>
@@ -176,35 +215,31 @@ namespace Pathfinder.Models
             return categories;
         }
 
-        //private List<Tag> GetTagList()
-        //{
-        //    List<Tag> tags = new List<Tag>
-        //    {
-        //        new Tag{ CharacterId = 1, Name = "Strength", Value = "[STRENGTH]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Dexterity", Value = "[DEXTERITY]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Constitution", Value = "[CONSTITUTION]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Intelligence", Value = "[INTELLIGENCE]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Wisdom", Value = "[WISDOM]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Charisma", Value = "[CHARISMA]", TagCategoryId = 1 },
-        //        new Tag{ CharacterId = 1, Name = "Strength Modifier", Value = "[STR]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Dexterity Modifier", Value = "[DEX]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Constitution Modifier", Value = "[CON]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Intelligence Modifier", Value = "[INT]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Wisdom Modifier", Value = "[WIS]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Charisma Modifier", Value = "[CHA]", TagCategoryId = 2 },
-        //        new Tag{ CharacterId = 1, Name = "Base Attack Bonus", Value = "[BAB]", TagCategoryId = 3 },
-        //        new Tag{ CharacterId = 1, Name = "Combat Maneuver Bonus", Value = "[CMB]", TagCategoryId = 3 },
-        //        new Tag{ CharacterId = 1, Name = "Combat Maneuver Defense", Value = "[CMD]", TagCategoryId = 3 },
-        //        new Tag{ CharacterId = 1, Name = "Armor Class", Value = "[AC]", TagCategoryId = 4 },
-        //        new Tag{ CharacterId = 1, Name = "Touch Armor Class", Value = "[TAC]", TagCategoryId = 4 },
-        //        new Tag{ CharacterId = 1, Name = "Flat Footed Armor Class", Value = "[FFAC]", TagCategoryId = 4 },
-        //        new Tag{ CharacterId = 1, Name = "Fortitude Save", Value = "[FORT]", TagCategoryId = 5 },
-        //        new Tag{ CharacterId = 1, Name = "Reflex Save", Value = "[REF]", TagCategoryId = 5 },
-        //        new Tag{ CharacterId = 1, Name = "Will Save", Value = "[WILL]", TagCategoryId = 5 },
-        //        new Tag{ CharacterId = 1, Name = "Move Speed", Value = "[MOVESPEED]", TagCategoryId = 6 }
-        //    };
+        public List<AbilityType> GetAbilityTypeList()
+        {
+            List<AbilityType> types = new List<AbilityType>
+            {
+                new AbilityType{ CharacterId = 1, Name = "Class Ability" },
+                new AbilityType{ CharacterId = 1, Name = "Racial Ability" },
+                new AbilityType{ CharacterId = 1, Name = "Feat" }
+            };
 
-        //    return tags;
-        //}
+            return types;
+        }
+
+        public List<Ability> GetAbilityList()
+        {
+            List<Ability> abilities = new List<Ability>
+            {
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Fast Movement", Description = "+10 move speed.", IsConditional = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Skilled", Description = "Gain bonus skill points.", IsConditional = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Stealthy", Description = "+2 to stealth.", IsConditional = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... it's hard", IsConditional = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You don't know the meaning of tired.", IsConditional = false }
+            };
+
+            return abilities;
+        }
     }
 }

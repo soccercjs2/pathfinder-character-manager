@@ -21,8 +21,14 @@ namespace Pathfinder
 
             routes.MapRoute(
                 name: "Roller",
-                url: "{controller}/{action}/{name}/{value}",
-                defaults: new { controller = "Character", action = "Roller", name = UrlParameter.Optional, value = UrlParameter.Optional }
+                url: "Character/Roller/{name}/{value}",
+                defaults: new { controller = "Character", action = "Roller", name = "", value = 0 }
+            );
+
+            routes.MapRoute(
+                name: "Ability",
+                url: "Ability/{action}/{id},{type}",
+                defaults: new { controller = "Ability", action = "Index", id = UrlParameter.Optional, type = UrlParameter.Optional }
             );
         }
     }

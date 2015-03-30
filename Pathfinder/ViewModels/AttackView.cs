@@ -60,7 +60,7 @@ namespace Pathfinder.ViewModels
 
             foreach (SubAttack subAttack in attacks)
             {
-                Equation equation = db.Equations.Find(subAttack.EquationId);
+                Equation equation = db.Equations.Find(subAttack.AttackEquationId);
 
                 if (attack != "") { attack += "/"; }
                 attack += "+" + equation.Evaluate(this.MyCharacter);
