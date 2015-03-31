@@ -19,6 +19,12 @@ namespace Pathfinder.Controllers
             return View(new AbilityViewer(id));
         }
 
+        [HttpPost]
+        public ActionResult Index(AbilityViewer viewer)
+        {
+            return View(new AbilityViewer(viewer.CharacterId, viewer.TypeId));
+        }
+
         public ActionResult CreateAbility(int id)
         {
             Ability ability = new Ability();
