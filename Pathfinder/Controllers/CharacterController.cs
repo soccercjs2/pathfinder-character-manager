@@ -48,26 +48,20 @@ namespace Pathfinder.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateAbility(PlayerCharacter character)
+        public ActionResult UpdateAbility(Ability ability)
         {
             if (ModelState.IsValid)
             {
-                foreach (AbilityTypeViewer viewer in character.AbilityViewer.Abilities)
-                {
-                    foreach (Ability ability in viewer.Abilities)
-                    {
-                        db.Abilities.Attach(ability);
-                        db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
-                    }
-                }
-
+                db.Abilities.Attach(ability);
+                db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
+                
                 db.SaveChanges();
 
-                return RedirectToAction("ViewCharacter", "Character", new { Id = character.MyCharacter.CharacterId });
+                return RedirectToAction("ViewCharacter", "Character", new { Id = ability.CharacterId });
             }
             else
             {
-                return View(character);
+                return RedirectToAction("ViewCharacter", "Character", new { Id = ability.CharacterId });
             }
         }
 

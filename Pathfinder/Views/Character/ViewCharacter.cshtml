@@ -8,6 +8,21 @@
     {
         document.forms[0].submit();
     }
+
+    function UpdateAbility()
+    {
+        var ability = {
+            AbilityId: 1,
+            CharacterId: 1,
+            AbilityTypeId: 1,
+            Name: "Ability",
+            Description: "Descr",
+            IsConditional: true,
+            Active: false
+        }
+
+        alert(ability.AbilityId + "," + ability.CharacterId + "," + ability.AbilityTypeId + "," + ability.Name + "," + ability.Description + "," + ability.IsConditional + "," + ability.Active);
+    }
 </script>
 
 @{
@@ -184,7 +199,15 @@
                             <td align="right" style="vertical-align: central;">
                                 @if (ability.IsConditional)
                                 { 
-                                    @Html.EditorFor(m => ability.Active, new { htmlAttributes = new { @class = "form-control", @onclick = "this.form.submit();" } });
+                                    @Html.EditorFor(m => ability.Active, 
+                                        new { htmlAttributes = new { @class = "form-control", 
+                                            @onclick = "UpdateAbility(" + ability.AbilityId + ","
+                                                                        + ability.CharacterId + ","
+                                                                        + ability.AbilityTypeId + ","
+                                                                        + ability.Name + ","
+                                                                        + ability.Description + ","
+                                                                        + ability.IsConditional + ","
+                                                                        + ability.Active + ")" } });
                                 }
                             </td>
                         </tr>
