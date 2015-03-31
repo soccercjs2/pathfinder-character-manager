@@ -12,6 +12,7 @@ namespace Pathfinder.ViewModels
         public List<Class> Classes { get; set; }
         public List<AttackView> Attacks { get; set; }
         public List<SkillView> Skills { get; set; }
+        public AbilityViewer AbilityViewer { get; set; }
 
         public int Level { get; set; }
         public int Experience { get; set; }
@@ -56,6 +57,7 @@ namespace Pathfinder.ViewModels
         {
             this.MyCharacter = LoadCharacter(characterId);
             this.Classes = LoadClasses(characterId);
+            this.AbilityViewer = new AbilityViewer(characterId);
             
             CalculateModifiers();
             CalculateBaseStats();

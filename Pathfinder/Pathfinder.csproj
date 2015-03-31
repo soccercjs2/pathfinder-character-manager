@@ -176,7 +176,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Ability.cs" />
-    <Compile Include="Models\AbilityCategory.cs" />
+    <Compile Include="Models\AbilityType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Armor.cs" />
     <Compile Include="Models\Attack.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\EquationCategory.cs" />
     <Compile Include="Models\Weapon.cs" />
+    <Compile Include="ViewModels\AbilityBonusViewer.cs" />
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
@@ -282,6 +283,10 @@
     <Content Include="Views\Attack\CreateSubAttack.cshtml" />
     <Content Include="Views\Attack\Edit.cshtml" />
     <Content Include="Views\Ability\Index.cshtml" />
+    <Content Include="Views\Ability\CreateAbility.cshtml" />
+    <Content Include="Views\Ability\EditAbility.cshtml" />
+    <Content Include="Views\Ability\CreateAbilityType.cshtml" />
+    <Content Include="Views\Ability\AbilityBonuses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -168,8 +168,8 @@
             </table>
         </div>
 
-        <div id="divClassAbilities" class="inline float-left">
-            <table id="tblClassAbilities" class="section">
+        <div id="divAbilities" class="inline float-left">
+            @*<table id="tblClassAbilities" class="section">
                 <thead onclick="ToggleRowsVisible('tblClassAbilities')"><tr><td>Class Abilities</td></tr></thead>
                 <tr><td>Fast Movement</td></tr>
                 <tr><td>Rage</td></tr>
@@ -181,17 +181,30 @@
                 <thead onclick="ToggleRowsVisible('tblRacialAbilities')"><tr><td>Racial Abilities</td></tr></thead>
                 <tr><td>Stealthy</td></tr>
                 <tr><td>Skilled</td></tr>
-            </table>
+            </table>*@
+
+            @foreach (var type in Model.AbilityViewer.Abilities)
+            {
+                <table id="@("tbl" + type.Name.Replace(" ",""))" class="section">
+                    <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td>@type.Name</td></tr></thead>
+                    @foreach (var ability in type.Abilities)
+                    {
+                        <tr>
+                            <td>@ability.Name</td>
+                        </tr>
+                    }
+                </table>
+            }
         </div>
 
         <div id="divFeats" class="inline float-right">
-            <table id="tblFeats" class="section">
+            @*<table id="tblFeats" class="section">
                 <thead onclick="ToggleRowsVisible('tblFeats')"><tr><td>Feats</td></tr></thead>
                 <tr><td>Diehard</td></tr>
                 <tr><td>Endurance</td></tr>
                 <tr><td>Power Attack</td></tr>
                 <tr><td>Weapon Focus (Claws)</td></tr>
-            </table>
+            </table>*@
 
             <table id="tblManage" class="section">
                 <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>

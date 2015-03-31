@@ -29,8 +29,8 @@
             <td>@item.Critical</td>
             <td>@item.Range</td>
             <td>@item.Type</td>
-            <td>@Html.ActionLink("Edit", "Edit", new { Id = item.AttackId })</td>
             <td>@Html.ActionLink("Sub Attacks", "SubAttack", new { Id = item.AttackId })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { Id = item.AttackId })</td>
             <td>@Html.ActionLink("Delete", "Delete", new { Id = item.AttackId })</td>
         </tr>
     }

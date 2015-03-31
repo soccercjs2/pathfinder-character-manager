@@ -14,6 +14,7 @@ namespace Pathfinder.Models
         public int EquationCategoryId { get; set; }
         public string Name { get; set; }
         public string Formula { get; set; }
+        public int AbilityId { get; set; }
 
         public int Evaluate(PlayerCharacter character)
         {

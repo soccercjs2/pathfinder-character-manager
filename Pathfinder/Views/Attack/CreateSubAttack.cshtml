@@ -17,10 +17,10 @@
         @Html.HiddenFor(m => m.AttackId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EquationId, "Equation", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AttackEquationId, "Equation", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.EquationId, (SelectList)ViewBag.Equations, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EquationId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => m.AttackEquationId, (SelectList)ViewBag.Equations, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AttackEquationId, "", new { @class = "text-danger" })
             </div>
         </div>
 

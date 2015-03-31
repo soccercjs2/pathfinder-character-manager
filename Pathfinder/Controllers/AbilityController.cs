@@ -27,9 +27,12 @@ namespace Pathfinder.Controllers
 
         public ActionResult CreateAbility(int id)
         {
+            List<AbilityType> types = db.AbilityTypes.Where(m => m.CharacterId == id).ToList<AbilityType>();
+            ViewBag.AbilityTypes = new SelectList(types, "AbilityTypeId", "Name");
+            
             Ability ability = new Ability();
             ability.CharacterId = id;
-            return View();
+            return View(ability);
         }
 
         [HttpPost]
@@ -40,7 +43,7 @@ namespace Pathfinder.Controllers
                 db.Abilities.Add(ability);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Abilities", new { Id = ability.CharacterId });
+                return RedirectToAction("Index", "Ability", new { Id = ability.CharacterId });
             }
             else
             {
@@ -50,7 +53,11 @@ namespace Pathfinder.Controllers
 
         public ActionResult EditAbility(int id)
         {
-            return View();
+            Ability ability = db.Abilities.Find(id);
+            List<AbilityType> types = db.AbilityTypes.Where(m => m.CharacterId == ability.CharacterId).ToList<AbilityType>();
+            ViewBag.AbilityTypes = new SelectList(types, "AbilityTypeId", "Name");
+
+            return View(ability);
         }
 
         [HttpPost]
@@ -62,7 +69,7 @@ namespace Pathfinder.Controllers
                 db.Entry(ability).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Abilities", new { Id = ability.CharacterId });
+                return RedirectToAction("Index", "Ability", new { Id = ability.CharacterId });
             }
             else
             {
@@ -79,6 +86,34 @@ namespace Pathfinder.Controllers
         public ActionResult DeleteAbility(Ability ability)
         {
             return View();
+        }
+
+        public ActionResult CreateAbilityType(int id)
+        {
+            AbilityType type = new AbilityType();
+            type.CharacterId = id;
+            return View(type);
+        }
+
+        [HttpPost]
+        public ActionResult CreateAbilityType(AbilityType abilityType)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AbilityTypes.Add(abilityType);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Ability", new { Id = abilityType.CharacterId });
+            }
+            else
+            {
+                return View(abilityType);
+            }
+        }
+
+        public ActionResult AbilityBonuses(int id)
+        {
+            return View(new AbilityBonusViewer(id));
         }
     }
 }

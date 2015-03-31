@@ -1,0 +1,27 @@
+﻿@model Pathfinder.ViewModels.AbilityBonusViewer
+
+@{
+    ViewBag.Title = Model.Ability.Name;
+}
+
+<h2>@Model.Ability.Name</h2>
+
+<table class="section full noclick">
+    <thead>
+        <tr>
+            <td>Bonus</td>
+            <td>Value</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Bonuses)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Formula</td>
+            <td>@Html.ActionLink("Edit", "Edit", "Equation", new { Id = item.EquationId }, null)</td>
+            <td>@Html.ActionLink("Delete", "Delete", "Equation", new { Id = item.EquationId }, null)</td>
+        </tr>
+    }
+</table>
