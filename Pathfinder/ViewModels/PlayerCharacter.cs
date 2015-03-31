@@ -1,4 +1,5 @@
 ﻿using Pathfinder.Models;
+using Pathfinder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,7 @@ namespace Pathfinder.ViewModels
 
         private PathfinderContext db = new PathfinderContext();
 
+        public PlayerCharacter() { }
         public PlayerCharacter(int characterId)
         {
             this.MyCharacter = LoadCharacter(characterId);
@@ -152,13 +154,6 @@ namespace Pathfinder.ViewModels
             this.IntelligenceMod = db.Equations.Where(m => m.Name == "INT").FirstOrDefault<Equation>().Evaluate(this);
             this.WisdomMod = db.Equations.Where(m => m.Name == "WIS").FirstOrDefault<Equation>().Evaluate(this);
             this.CharismaMod = db.Equations.Where(m => m.Name == "CHA").FirstOrDefault<Equation>().Evaluate(this);
-
-            //this.StrengthMod = (this.Strength - 10) / 2;
-            //this.DexterityMod = (this.Dexterity - 10) / 2;
-            //this.ConstitutionMod = (this.Constitution - 10) / 2;
-            //this.IntelligenceMod = (this.Intelligence - 10) / 2;
-            //this.WisdomMod = (this.Wisdom - 10) / 2;
-            //this.CharismaMod = (this.Charisma - 10) / 2;
         }
 
         private void CalculateBaseStats()

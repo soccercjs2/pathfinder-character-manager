@@ -18,6 +18,6 @@ namespace Pathfinder.Models
         public DbSet<Attack> Attacks { get; set; }
         public DbSet<SubAttack> SubAttacks { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
-        //public DbSet<Armor> Armors { get; set; }
+        public DbSet<Armor> Armors { get; set; }
     }
 }

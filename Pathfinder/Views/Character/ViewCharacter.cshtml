@@ -1,7 +1,10 @@
 ﻿@model Pathfinder.ViewModels.PlayerCharacter
 
+@using Pathfinder.Models;
+@using Pathfinder.ViewModels;
+
 <script type="text/javascript">
-    function GoTORoller()
+    function GoToRoller()
     {
         document.forms[0].submit();
     }
@@ -11,10 +14,10 @@
     ViewBag.Title = Model.Name;
 }
 
-@using (Html.BeginForm("Roller", "Character", FormMethod.Post, new { target = "_blank", width = 400, height = 400 }))
-{
-    <h1>@Model.Name</h1>
+<h1>@Model.Name</h1>
 
+@using (Html.BeginForm())
+{
     <div id="divBaseStats" class="inline float-left">
         <table id="tblAbilityScores" class="section">
             <tr ondblclick="@("GoToRoller('Strength Check','" + @Model.StrengthMod + "')");">
@@ -169,43 +172,36 @@
         </div>
 
         <div id="divAbilities" class="inline float-left">
-            @*<table id="tblClassAbilities" class="section">
-                <thead onclick="ToggleRowsVisible('tblClassAbilities')"><tr><td>Class Abilities</td></tr></thead>
-                <tr><td>Fast Movement</td></tr>
-                <tr><td>Rage</td></tr>
-                <tr><td>Rage Power</td></tr>
-                <tr><td>Damage Reduction</td></tr>
-            </table>
-
-            <table id="tblRacialAbilities" class="section">
-                <thead onclick="ToggleRowsVisible('tblRacialAbilities')"><tr><td>Racial Abilities</td></tr></thead>
-                <tr><td>Stealthy</td></tr>
-                <tr><td>Skilled</td></tr>
-            </table>*@
-
-            @foreach (var type in Model.AbilityViewer.Abilities)
+            @Html.HiddenFor(m => m.AbilityViewer)
+            @foreach (AbilityTypeViewer type in Model.AbilityViewer.Abilities)
             {
                 <table id="@("tbl" + type.Name.Replace(" ",""))" class="section">
-                    <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td>@type.Name</td></tr></thead>
-                    @foreach (var ability in type.Abilities)
+                    <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td colspan="2">@type.Name</td></tr></thead>
+                    @foreach (Ability ability in type.Abilities)
                     {
                         <tr>
                             <td>@ability.Name</td>
+                            <td align="right" style="vertical-align: central;">
+                                @if (ability.IsConditional)
+                                { 
+                                    @Html.EditorFor(m => ability.Active, new { htmlAttributes = new { @class = "form-control", @onclick = "this.form.submit();" } });
+                                }
+                            </td>
                         </tr>
+                        @Html.HiddenFor(m => ability.AbilityId)
+                        @Html.HiddenFor(m => ability.AbilityTypeId)
+                        @Html.HiddenFor(m => ability.CharacterId)
+                        @Html.HiddenFor(m => ability.Name)
+                        @Html.HiddenFor(m => ability.Description)
+                        @Html.HiddenFor(m => ability.IsConditional)
                     }
                 </table>
+                @Html.HiddenFor(m => type.AbilityTypeId)
+                @Html.HiddenFor(m => type.Name)
             }
         </div>
 
         <div id="divFeats" class="inline float-right">
-            @*<table id="tblFeats" class="section">
-                <thead onclick="ToggleRowsVisible('tblFeats')"><tr><td>Feats</td></tr></thead>
-                <tr><td>Diehard</td></tr>
-                <tr><td>Endurance</td></tr>
-                <tr><td>Power Attack</td></tr>
-                <tr><td>Weapon Focus (Claws)</td></tr>
-            </table>*@
-
             <table id="tblManage" class="section">
                 <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>
                 <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>

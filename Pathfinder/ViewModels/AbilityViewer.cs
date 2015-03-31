@@ -62,11 +62,4 @@ namespace Pathfinder.ViewModels
             return abilitieByType;
         }
     }
-
-    public class AbilityTypeViewer
-    {
-        public int AbilityTypeId { get; set; }
-        public string Name { get; set; }
-        public List<Ability> Abilities { get; set; }
-    }
 }

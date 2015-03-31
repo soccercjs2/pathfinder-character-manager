@@ -186,17 +186,22 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "WIS", Formula = "(Wisdom - 10) / 2", EquationCategoryId = 1 },
                 new Equation{ CharacterId = 1, Name = "CHA", Formula = "(Charisma - 10) / 2", EquationCategoryId = 1 },
                 new Equation{ CharacterId = 1, Name = "BAB", Formula = "Classes.BaseAttackBonus", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "CMB", Formula = "BAB + STR", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "CMD", Formula = "10 + BAB + STR + DEX", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "AC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEX + DODGE + DEFLECT", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "TAC", Formula = "10 + DEX + DODGE + DEFLECT", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "FFAC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEFLECT", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "FORT", Formula = "Classes.FortitudeSave + CON", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "REF", Formula = "Classes.ReflexSave + DEX", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "WILL", Formula = "Classes.WillSave + WIS", EquationCategoryId = 2 },
-                new Equation{ CharacterId = 1, Name = "MELEE_ATTACK", Formula = "BAB + STR", EquationCategoryId = 3 },
-                new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 3 },
-                new Equation{ CharacterId = 1, Name = "One-Handed Damage", Formula = "STR", EquationCategoryId = 4 }
+                new Equation{ CharacterId = 1, Name = "CMB", Formula = "BAB + STR", EquationCategoryId = 3 },
+                new Equation{ CharacterId = 1, Name = "CMD", Formula = "10 + BAB + STR + DEX", EquationCategoryId = 3 },
+                new Equation{ CharacterId = 1, Name = "ARMOR", Formula = "", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "SHIELD", Formula = "", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "NATURAL", Formula = "", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "DODGE", Formula = "", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "DEFLECT", Formula = "", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "AC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEX + DODGE + DEFLECT", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "TAC", Formula = "10 + DEX + DODGE + DEFLECT", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "FFAC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEFLECT", EquationCategoryId = 4 },
+                new Equation{ CharacterId = 1, Name = "FORT", Formula = "Classes.FortitudeSave + CON", EquationCategoryId = 5 },
+                new Equation{ CharacterId = 1, Name = "REF", Formula = "Classes.ReflexSave + DEX", EquationCategoryId = 5 },
+                new Equation{ CharacterId = 1, Name = "WILL", Formula = "Classes.WillSave + WIS", EquationCategoryId = 5 },
+                new Equation{ CharacterId = 1, Name = "MELEE_ATTACK", Formula = "BAB + STR", EquationCategoryId = 6 },
+                new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 6 },
+                new Equation{ CharacterId = 1, Name = "One-Handed Damage", Formula = "STR", EquationCategoryId = 7 }
             };
 
             return equations;
@@ -208,6 +213,9 @@ namespace Pathfinder.Models
             {
                 new EquationCategory{ CharacterId = 1, Name = "Ability Modifier" },
                 new EquationCategory{ CharacterId = 1, Name = "Base Stats" },
+                new EquationCategory{ CharacterId = 1, Name = "Maneuvers" },
+                new EquationCategory{ CharacterId = 1, Name = "Armor" },
+                new EquationCategory{ CharacterId = 1, Name = "Saves" },
                 new EquationCategory{ CharacterId = 1, Name = "Attacks" },
                 new EquationCategory{ CharacterId = 1, Name = "Damage"}
             };

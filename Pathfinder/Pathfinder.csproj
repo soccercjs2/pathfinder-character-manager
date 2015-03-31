@@ -194,6 +194,7 @@
     <Compile Include="Models\EquationCategory.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="ViewModels\AbilityBonusViewer.cs" />
+    <Compile Include="ViewModels\AbilityTypeViewer.cs" />
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
@@ -262,7 +263,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Character\Index.cshtml" />
-    <Content Include="Views\Character\View.cshtml" />
+    <Content Include="Views\Character\ViewCharacter.cshtml" />
     <Content Include="Views\Character\Create.cshtml" />
     <Content Include="Views\Character\Skills.cshtml" />
     <Content Include="Views\Character\Roller.cshtml" />

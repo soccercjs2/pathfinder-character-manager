@@ -33,7 +33,7 @@ namespace Pathfinder.Controllers
                 db.Characters.Add(newCharacter);
                 db.SaveChanges();
 
-                return RedirectToAction("View", "Character", new { Id = newCharacter.CharacterId });
+                return RedirectToAction("ViewCharacter", "Character", new { Id = newCharacter.CharacterId });
             }
             else
             {
@@ -41,10 +41,34 @@ namespace Pathfinder.Controllers
             }
         }
 
-        public ActionResult View(int id)
+        public ActionResult ViewCharacter(int id)
         {
             PlayerCharacter playerCharacter = new PlayerCharacter(id);
             return View(playerCharacter);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateAbility(PlayerCharacter character)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (AbilityTypeViewer viewer in character.AbilityViewer.Abilities)
+                {
+                    foreach (Ability ability in viewer.Abilities)
+                    {
+                        db.Abilities.Attach(ability);
+                        db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
+                    }
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("ViewCharacter", "Character", new { Id = character.MyCharacter.CharacterId });
+            }
+            else
+            {
+                return View(character);
+            }
         }
 
         public ActionResult Roller(string name, string value)

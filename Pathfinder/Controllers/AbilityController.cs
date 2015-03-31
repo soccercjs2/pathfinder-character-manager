@@ -32,6 +32,7 @@ namespace Pathfinder.Controllers
             
             Ability ability = new Ability();
             ability.CharacterId = id;
+            ability.Active = true;
             return View(ability);
         }
 
