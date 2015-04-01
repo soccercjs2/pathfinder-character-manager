@@ -158,7 +158,7 @@ namespace Pathfinder.Models
         {
             List<Attack> attacks = new List<Attack>
             {
-                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 18 }
+                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 23 }
             };
 
             return attacks;
@@ -168,8 +168,8 @@ namespace Pathfinder.Models
         {
             List<SubAttack> subAttacks = new List<SubAttack>
             {
-                new SubAttack{ AttackId = 1, AttackEquationId = 16 },
-                new SubAttack{ AttackId = 1, AttackEquationId = 16 }
+                new SubAttack{ AttackId = 1, AttackEquationId = 21 },
+                new SubAttack{ AttackId = 1, AttackEquationId = 21 }
             };
 
             return subAttacks;

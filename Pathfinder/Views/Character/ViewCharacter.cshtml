@@ -4,24 +4,24 @@
 @using Pathfinder.ViewModels;
 
 <script type="text/javascript">
-    function GoToRoller()
-    {
-        document.forms[0].submit();
-    }
-
-    function UpdateAbility()
+    function UpdateAbility(abilityId, characterId, abilityTypeId, name, description, isConditional, active)
     {
         var ability = {
-            AbilityId: 1,
-            CharacterId: 1,
-            AbilityTypeId: 1,
-            Name: "Ability",
-            Description: "Descr",
-            IsConditional: true,
-            Active: false
+            AbilityId: abilityId,
+            CharacterId: characterId,
+            AbilityTypeId: abilityTypeId,
+            Name: name,
+            Description: description,
+            IsConditional: isConditional,
+            Active: active
         }
 
-        alert(ability.AbilityId + "," + ability.CharacterId + "," + ability.AbilityTypeId + "," + ability.Name + "," + ability.Description + "," + ability.IsConditional + "," + ability.Active);
+        $.ajax({
+            type: 'POST',
+            dataType: 'text',
+            url: "/Character/UpdateAbility",
+            data: ability
+        });
     }
 </script>
 
@@ -203,24 +203,18 @@
                                         new { htmlAttributes = new { @class = "form-control", 
                                             @onclick = "UpdateAbility(" + ability.AbilityId + ","
                                                                         + ability.CharacterId + ","
-                                                                        + ability.AbilityTypeId + ","
-                                                                        + ability.Name + ","
-                                                                        + ability.Description + ","
-                                                                        + ability.IsConditional + ","
-                                                                        + ability.Active + ")" } });
+                                                                        + ability.AbilityTypeId + ",'"
+                                                                        + ability.Name + "','"
+                                                                        + ability.Description + "','"
+                                                                        + ability.IsConditional + "','"
+                                                                        + !ability.Active + "')"
+                                        }
+                                        });
                                 }
                             </td>
                         </tr>
-                        @Html.HiddenFor(m => ability.AbilityId)
-                        @Html.HiddenFor(m => ability.AbilityTypeId)
-                        @Html.HiddenFor(m => ability.CharacterId)
-                        @Html.HiddenFor(m => ability.Name)
-                        @Html.HiddenFor(m => ability.Description)
-                        @Html.HiddenFor(m => ability.IsConditional)
                     }
                 </table>
-                @Html.HiddenFor(m => type.AbilityTypeId)
-                @Html.HiddenFor(m => type.Name)
             }
         </div>
 
