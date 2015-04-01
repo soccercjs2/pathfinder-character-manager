@@ -158,7 +158,7 @@ namespace Pathfinder.Models
         {
             List<Attack> attacks = new List<Attack>
             {
-                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 23 }
+                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 24 }
             };
 
             return attacks;
@@ -168,8 +168,8 @@ namespace Pathfinder.Models
         {
             List<SubAttack> subAttacks = new List<SubAttack>
             {
-                new SubAttack{ AttackId = 1, AttackEquationId = 21 },
-                new SubAttack{ AttackId = 1, AttackEquationId = 21 }
+                new SubAttack{ AttackId = 1, AttackEquationId = 22 },
+                new SubAttack{ AttackId = 1, AttackEquationId = 22 }
             };
 
             return subAttacks;
@@ -188,11 +188,11 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "BAB", Formula = "Classes.BaseAttackBonus", EquationCategoryId = 2, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "CMB", Formula = "BAB + STR", EquationCategoryId = 3, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "CMD", Formula = "10 + BAB + STR + DEX", EquationCategoryId = 3, ShowFormula = true },
-                new Equation{ CharacterId = 1, Name = "ARMOR", Formula = "", EquationCategoryId = 4, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "SHIELD", Formula = "", EquationCategoryId = 4, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "NATURAL", Formula = "", EquationCategoryId = 4, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "DODGE", Formula = "", EquationCategoryId = 4, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "DEFLECT", Formula = "", EquationCategoryId = 4, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "ARMOR", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "SHIELD", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "NATURAL", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "DODGE", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "DEFLECT", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "AC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEX + DODGE + DEFLECT", EquationCategoryId = 4, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "TAC", Formula = "10 + DEX + DODGE + DEFLECT", EquationCategoryId = 4, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "FFAC", Formula = "10 + ARMOR + SHIELD + NATURAL + DEFLECT", EquationCategoryId = 4, ShowFormula = true },

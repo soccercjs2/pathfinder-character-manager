@@ -63,7 +63,7 @@ namespace Pathfinder.ViewModels
                 Equation equation = db.Equations.Find(subAttack.AttackEquationId);
 
                 if (attack != "") { attack += "/"; }
-                attack += "+" + equation.Evaluate(this.MyCharacter);
+                attack += "+" + this.MyCharacter.EquationResults[equation.Name];
             }
             
             return attack;
@@ -72,7 +72,7 @@ namespace Pathfinder.ViewModels
         private string LoadDamage(Weapon weapon, Attack attack)
         {
             Equation damageEquation = db.Equations.Find(attack.DamageEquationId);
-            int damageBonus = damageEquation.Evaluate(this.MyCharacter);
+            int damageBonus = this.MyCharacter.EquationResults[damageEquation.Name];
 
             if (damageBonus < 0) { return weapon.Damage + " - " + Math.Abs(damageBonus); }
             else { return weapon.Damage + " + " + damageBonus;  }

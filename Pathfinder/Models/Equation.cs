@@ -30,24 +30,16 @@ namespace Pathfinder.Models
             replacedEquation = replacedEquation.Replace("Intelligence", character.Intelligence.ToString());
             replacedEquation = replacedEquation.Replace("Wisdom", character.Wisdom.ToString());
             replacedEquation = replacedEquation.Replace("Charisma", character.Charisma.ToString());
-            
-            replacedEquation = replacedEquation.Replace("STR", character.StrengthMod.ToString());
-            replacedEquation = replacedEquation.Replace("DEX", character.DexterityMod.ToString());
-            replacedEquation = replacedEquation.Replace("CON", character.ConstitutionMod.ToString());
-            replacedEquation = replacedEquation.Replace("INT", character.IntelligenceMod.ToString());
-            replacedEquation = replacedEquation.Replace("WIS", character.WisdomMod.ToString());
-            replacedEquation = replacedEquation.Replace("CHA", character.CharismaMod.ToString());
 
-            replacedEquation = replacedEquation.Replace("BAB", character.BaseAttackBonus.ToString());
-
-            replacedEquation = replacedEquation.Replace("ARMOR", character.ArmorBonus.ToString());
-            replacedEquation = replacedEquation.Replace("SHIELD", character.ShieldBonus.ToString());
-            replacedEquation = replacedEquation.Replace("NATURAL", character.NaturalArmorBonus.ToString());
-            replacedEquation = replacedEquation.Replace("DEFLECT", character.DeflectionBonus.ToString());
-            replacedEquation = replacedEquation.Replace("DODGE", character.DodgeBonus.ToString());
+            if (character.EquationResults != null)
+            {
+                foreach (string key in character.EquationResults.Keys)
+                {
+                    replacedEquation = replacedEquation.Replace(key, character.EquationResults[key].ToString());
+                }
+            }
 
             replacedEquation = EvaluateClasses(replacedEquation, character);
-            replacedEquation = EvaluateBonusTypes(replacedEquation, character);
 
             Expression expression = new Expression(replacedEquation);
             return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
@@ -95,11 +87,6 @@ namespace Pathfinder.Models
             {
                 return replacedEquation;
             }
-        }
-
-        public string EvaluateBonusTypes(string replacedEquation, PlayerCharacter character)
-        {
-            return "";
         }
     }
 }

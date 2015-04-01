@@ -15,6 +15,7 @@ namespace Pathfinder.ViewModels
         public List<SkillView> Skills { get; set; }
         public AbilityViewer AbilityViewer { get; set; }
 
+        public Dictionary<string, int> BonusResults { get; set; }
         public Dictionary<string, int> EquationResults { get; set; }
 
         public int Level { get; set; }
@@ -64,8 +65,13 @@ namespace Pathfinder.ViewModels
             this.AbilityViewer = new AbilityViewer(characterId);
 
             this.EquationResults = new Dictionary<string, int>();
-            CalculateModifiers();
-            CalculateBaseStats();
+            EvaluateEquations(characterId);
+
+            this.BonusResults = new Dictionary<string, int>();
+            EvaluateBonuses(characterId);
+
+            CalculateModifiers(this.EquationResults);
+            CalculateBaseStats(this.EquationResults);
 
             this.Skills = LoadSkills(characterId);
             this.Attacks = LoadAttacks(characterId);
@@ -149,39 +155,92 @@ namespace Pathfinder.ViewModels
             return attackViews;
         }
 
-        private void CalculateModifiers()
+        private void CalculateModifiers(Dictionary<string, int> equationResults)
         {
-            this.StrengthMod = EvaluateAndKeepTrackOfEquation("STR");
-            this.DexterityMod = EvaluateAndKeepTrackOfEquation("DEX");
-            this.ConstitutionMod = EvaluateAndKeepTrackOfEquation("CON");
-            this.IntelligenceMod = EvaluateAndKeepTrackOfEquation("INT");
-            this.WisdomMod = EvaluateAndKeepTrackOfEquation("WIS");
-            this.CharismaMod = EvaluateAndKeepTrackOfEquation("CHA");
+            this.StrengthMod = equationResults["STR"];
+            this.DexterityMod = equationResults["DEX"];
+            this.ConstitutionMod = equationResults["CON"];
+            this.IntelligenceMod = equationResults["INT"];
+            this.WisdomMod = equationResults["WIS"];
+            this.CharismaMod = equationResults["CHA"];
         }
 
-        private void CalculateBaseStats()
+        private void CalculateBaseStats(Dictionary<string, int> equationResults)
         {
-            this.MoveSpeed = EvaluateAndKeepTrackOfEquation("MOVESPEED");
-            this.BaseAttackBonus = EvaluateAndKeepTrackOfEquation("BAB");
-            this.CombatManeuverBonus = EvaluateAndKeepTrackOfEquation("CMB");
-            this.CombatManeuverDefense = EvaluateAndKeepTrackOfEquation("CMD");
-            this.ArmorClass = EvaluateAndKeepTrackOfEquation("AC");
-            this.TouchArmorClass = EvaluateAndKeepTrackOfEquation("TAC");
-            this.FlatFootedArmorClass = EvaluateAndKeepTrackOfEquation("FFAC");
-            this.FortitudeSave = EvaluateAndKeepTrackOfEquation("FORT");
-            this.ReflexSave = EvaluateAndKeepTrackOfEquation("REF");
-            this.WillSave = EvaluateAndKeepTrackOfEquation("WILL");
+            this.MoveSpeed = equationResults["MOVESPEED"];
+            this.BaseAttackBonus = equationResults["BAB"];
+            this.CombatManeuverBonus = equationResults["CMB"];
+            this.CombatManeuverDefense = equationResults["CMD"];
+            this.ArmorClass = equationResults["AC"];
+            this.TouchArmorClass = equationResults["TAC"];
+            this.FlatFootedArmorClass = equationResults["FFAC"];
+            this.FortitudeSave = equationResults["FORT"];
+            this.ReflexSave = equationResults["REF"];
+            this.WillSave = equationResults["WILL"];
         }
 
-        private int EvaluateAndKeepTrackOfEquation(string equationName)
+        private void EvaluateEquations(int characterId)
         {
-            int value = db.Equations
-                .Where(m => m.Name == equationName)
-                .FirstOrDefault<Equation>()
-                .Evaluate(this);
+            List<Equation> equations = db.Equations
+                .Where(m => m.CharacterId == characterId
+                    && m.BonusType == null
+                    && m.AbilityId == 0)
+                .ToList<Equation>();
 
-            this.EquationResults.Add(equationName, value);
-            return value;
+            foreach (Equation equation in equations)
+            {
+                this.EquationResults.Add(equation.Name, equation.Evaluate(this));
+            }
+        }
+
+        private void EvaluateBonuses(int characterId)
+        {
+            List<Equation> equations = db.Equations
+                .Where(m => m.CharacterId == characterId
+                    && m.BonusType != null
+                    && m.AbilityId > 0)
+                .ToList<Equation>();
+
+            foreach (Equation equation in equations)
+            {
+                Ability ability = db.Abilities.Find(equation.AbilityId);
+
+                if (ability.Active)
+                {
+                    if (this.BonusResults.Keys.Contains(equation.BonusType))
+                    {
+                        this.BonusResults[equation.BonusType] += equation.Evaluate(this);
+                    }
+                    else
+                    {
+                        this.BonusResults.Add(equation.BonusType, equation.Evaluate(this));
+                    }
+                }
+            }
+
+            ApplyBonuses(characterId);
+        }
+
+        private void ApplyBonuses(int characterId)
+        {
+            foreach (string equationName in this.EquationResults.Keys)
+            {
+                Equation equation = db.Equations
+                    .Where(m => m.CharacterId == characterId && m.Name == equationName)
+                    .FirstOrDefault<Equation>();
+
+                EquationCategory equationCategory = db.EquationCategories.Find(equation.EquationCategoryId);
+
+                if (this.BonusResults.Keys.Contains(equationName))
+                {
+                    this.EquationResults[equationName] += this.BonusResults[equationName];
+                }
+                
+                if (this.BonusResults.Keys.Contains(equationCategory.Name))
+                {
+                    this.EquationResults[equationName] += this.BonusResults[equationCategory.Name];
+                }
+            }
         }
     }
 
