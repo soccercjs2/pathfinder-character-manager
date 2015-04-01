@@ -15,6 +15,8 @@ namespace Pathfinder.ViewModels
         public List<SkillView> Skills { get; set; }
         public AbilityViewer AbilityViewer { get; set; }
 
+        public Dictionary<string, int> EquationResults { get; set; }
+
         public int Level { get; set; }
         public int Experience { get; set; }
         public int MoveSpeed { get; set; }
@@ -60,7 +62,8 @@ namespace Pathfinder.ViewModels
             this.MyCharacter = LoadCharacter(characterId);
             this.Classes = LoadClasses(characterId);
             this.AbilityViewer = new AbilityViewer(characterId);
-            
+
+            this.EquationResults = new Dictionary<string, int>();
             CalculateModifiers();
             CalculateBaseStats();
 
@@ -148,26 +151,37 @@ namespace Pathfinder.ViewModels
 
         private void CalculateModifiers()
         {
-            this.StrengthMod = db.Equations.Where(m => m.Name == "STR").FirstOrDefault<Equation>().Evaluate(this);
-            this.DexterityMod = db.Equations.Where(m => m.Name == "DEX").FirstOrDefault<Equation>().Evaluate(this);
-            this.ConstitutionMod = db.Equations.Where(m => m.Name == "CON").FirstOrDefault<Equation>().Evaluate(this);
-            this.IntelligenceMod = db.Equations.Where(m => m.Name == "INT").FirstOrDefault<Equation>().Evaluate(this);
-            this.WisdomMod = db.Equations.Where(m => m.Name == "WIS").FirstOrDefault<Equation>().Evaluate(this);
-            this.CharismaMod = db.Equations.Where(m => m.Name == "CHA").FirstOrDefault<Equation>().Evaluate(this);
+            this.StrengthMod = EvaluateAndKeepTrackOfEquation("STR");
+            this.DexterityMod = EvaluateAndKeepTrackOfEquation("DEX");
+            this.ConstitutionMod = EvaluateAndKeepTrackOfEquation("CON");
+            this.IntelligenceMod = EvaluateAndKeepTrackOfEquation("INT");
+            this.WisdomMod = EvaluateAndKeepTrackOfEquation("WIS");
+            this.CharismaMod = EvaluateAndKeepTrackOfEquation("CHA");
         }
 
         private void CalculateBaseStats()
         {
-            this.MoveSpeed = 30;
-            this.BaseAttackBonus = db.Equations.Where(m => m.Name == "BAB").FirstOrDefault<Equation>().Evaluate(this);
-            this.CombatManeuverBonus = db.Equations.Where(m => m.Name == "CMB").FirstOrDefault<Equation>().Evaluate(this);
-            this.CombatManeuverDefense = db.Equations.Where(m => m.Name == "CMD").FirstOrDefault<Equation>().Evaluate(this);
-            this.ArmorClass = db.Equations.Where(m => m.Name == "AC").FirstOrDefault<Equation>().Evaluate(this);
-            this.TouchArmorClass = db.Equations.Where(m => m.Name == "TAC").FirstOrDefault<Equation>().Evaluate(this);
-            this.FlatFootedArmorClass = db.Equations.Where(m => m.Name == "FFAC").FirstOrDefault<Equation>().Evaluate(this);
-            this.FortitudeSave = db.Equations.Where(m => m.Name == "FORT").FirstOrDefault<Equation>().Evaluate(this);
-            this.ReflexSave = db.Equations.Where(m => m.Name == "REF").FirstOrDefault<Equation>().Evaluate(this);
-            this.WillSave = db.Equations.Where(m => m.Name == "WILL").FirstOrDefault<Equation>().Evaluate(this);
+            this.MoveSpeed = EvaluateAndKeepTrackOfEquation("MOVESPEED");
+            this.BaseAttackBonus = EvaluateAndKeepTrackOfEquation("BAB");
+            this.CombatManeuverBonus = EvaluateAndKeepTrackOfEquation("CMB");
+            this.CombatManeuverDefense = EvaluateAndKeepTrackOfEquation("CMD");
+            this.ArmorClass = EvaluateAndKeepTrackOfEquation("AC");
+            this.TouchArmorClass = EvaluateAndKeepTrackOfEquation("TAC");
+            this.FlatFootedArmorClass = EvaluateAndKeepTrackOfEquation("FFAC");
+            this.FortitudeSave = EvaluateAndKeepTrackOfEquation("FORT");
+            this.ReflexSave = EvaluateAndKeepTrackOfEquation("REF");
+            this.WillSave = EvaluateAndKeepTrackOfEquation("WILL");
+        }
+
+        private int EvaluateAndKeepTrackOfEquation(string equationName)
+        {
+            int value = db.Equations
+                .Where(m => m.Name == equationName)
+                .FirstOrDefault<Equation>()
+                .Evaluate(this);
+
+            this.EquationResults.Add(equationName, value);
+            return value;
         }
     }
 

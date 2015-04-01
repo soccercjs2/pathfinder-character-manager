@@ -56,7 +56,7 @@ namespace Pathfinder.ViewModels
             if (categoryId == 0)
             {
                 equations = (from equation in db.Equations
-                        where equation.CharacterId == characterId
+                        where equation.CharacterId == characterId && equation.ShowFormula
                         select equation).ToList<Equation>();
             }
             else
@@ -64,6 +64,7 @@ namespace Pathfinder.ViewModels
                 equations = (from equation in db.Equations
                         where equation.CharacterId == characterId
                         && equation.EquationCategoryId == categoryId
+                        && equation.ShowFormula
                              select equation).ToList<Equation>();
             }
 

@@ -24,4 +24,6 @@
             <td>@Html.ActionLink("Delete", "Delete", "Equation", new { Id = item.EquationId }, null)</td>
         </tr>
     }
-</table>
+</table><br />
+
+@Html.ActionLink("+ [New Bonus]", "CreateAbilityEquation", new { Id = Model.Ability.CharacterId })

@@ -15,6 +15,10 @@ namespace Pathfinder.Models
         public string Name { get; set; }
         public string Formula { get; set; }
         public int AbilityId { get; set; }
+        public bool ShowFormula { get; set; }
+        public string BonusType { get; set; }
+
+        private PathfinderContext db = new PathfinderContext();
 
         public int Evaluate(PlayerCharacter character)
         {
@@ -43,6 +47,7 @@ namespace Pathfinder.Models
             replacedEquation = replacedEquation.Replace("DODGE", character.DodgeBonus.ToString());
 
             replacedEquation = EvaluateClasses(replacedEquation, character);
+            replacedEquation = EvaluateBonusTypes(replacedEquation, character);
 
             Expression expression = new Expression(replacedEquation);
             return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
@@ -90,6 +95,11 @@ namespace Pathfinder.Models
             {
                 return replacedEquation;
             }
+        }
+
+        public string EvaluateBonusTypes(string replacedEquation, PlayerCharacter character)
+        {
+            return "";
         }
     }
 }

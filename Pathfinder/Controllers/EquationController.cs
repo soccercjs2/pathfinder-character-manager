@@ -32,6 +32,9 @@ namespace Pathfinder.Controllers
             
             Equation equation = new Equation();
             equation.CharacterId = id;
+            equation.AbilityId = 0;
+            equation.ShowFormula = true;
+
             return View(equation);
         }
 
@@ -44,6 +47,35 @@ namespace Pathfinder.Controllers
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
+            }
+            else
+            {
+                return View(equation);
+            }
+        }
+
+        public ActionResult CreateAbilityEquation(int id)
+        {
+            Ability ability = db.Abilities.Find(id);
+            
+            Equation equation = new Equation();
+            equation.CharacterId = ability.CharacterId;
+            equation.EquationCategoryId = 0;
+            equation.AbilityId = id;
+            equation.ShowFormula = false;
+
+            return View(equation);
+        }
+
+        [HttpPost]
+        public ActionResult CreateAbilityEquation(Equation equation)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Equations.Add(equation);
+                db.SaveChanges();
+
+                return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
             }
             else
             {
