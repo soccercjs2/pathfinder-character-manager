@@ -20,7 +20,11 @@
             type: 'POST',
             dataType: 'text',
             url: "/Character/UpdateAbility",
-            data: ability
+            data: ability,
+            dataType: 'json',
+            success: function (response) {
+                window.location.href = response.Url;
+            }
         });
     }
 </script>

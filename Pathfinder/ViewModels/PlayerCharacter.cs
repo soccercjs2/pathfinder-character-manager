@@ -62,6 +62,7 @@ namespace Pathfinder.ViewModels
         {
             this.MyCharacter = LoadCharacter(characterId);
             this.Classes = LoadClasses(characterId);
+
             this.AbilityViewer = new AbilityViewer(characterId);
 
             this.BonusResults = new Dictionary<string, int>();
@@ -69,7 +70,7 @@ namespace Pathfinder.ViewModels
 
             this.EquationResults = new Dictionary<string, int>();
             EvaluateEquations(characterId);
-
+            
             EvaluateBonuses(characterId, false);
 
             CalculateModifiers(this.EquationResults);
@@ -188,7 +189,7 @@ namespace Pathfinder.ViewModels
                     && m.BonusType == null
                     && m.AbilityId == 0)
                 .ToList<Equation>();
-
+            
             foreach (Equation equation in equations)
             {
                 this.EquationResults.Add(equation.Name, equation.Evaluate(this));
@@ -229,32 +230,38 @@ namespace Pathfinder.ViewModels
         private void ApplyAbilityScoreBonuses(int characterId)
         {
             if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
-            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Strength += this.BonusResults["Dexterity"]; }
-            if (this.BonusResults.Keys.Contains("Constitution")) { this.Strength += this.BonusResults["Constitution"]; }
-            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Strength += this.BonusResults["Intelligence"]; }
-            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Strength += this.BonusResults["Wisdom"]; }
-            if (this.BonusResults.Keys.Contains("Charisma")) { this.Strength += this.BonusResults["Charisma"]; }
+            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
+            if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += this.BonusResults["Constitution"]; }
+            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += this.BonusResults["Intelligence"]; }
+            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += this.BonusResults["Wisdom"]; }
+            if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += this.BonusResults["Charisma"]; }
         }
 
         private void ApplyEquationBonuses(int characterId)
         {
-            List<string> equationNames = this.EquationResults.Keys.ToList<string>();
-            foreach (string equationName in equationNames)
+            double start = DateTime.Now.TimeOfDay.TotalMilliseconds;
+
+            List<Equation> equations = db.Equations
+                .Where(m => m.CharacterId == characterId
+                    && this.EquationResults.Keys.Contains(m.Name))
+                .ToList<Equation>();
+
+            List<EquationCategory> equationCategories = db.EquationCategories.Where(m => m.CharacterId == characterId).ToList<EquationCategory>();
+
+            foreach (Equation equation in equations)
             {
-                Equation equation = db.Equations
-                    .Where(m => m.CharacterId == characterId && m.Name == equationName)
-                    .FirstOrDefault<Equation>();
+                EquationCategory equationCategory = equationCategories
+                    .Where(m => m.EquationCategoryId == equation.EquationCategoryId)
+                    .FirstOrDefault<EquationCategory>();
 
-                EquationCategory equationCategory = db.EquationCategories.Find(equation.EquationCategoryId);
-
-                if (this.BonusResults.Keys.Contains(equationName))
+                if (this.BonusResults.Keys.Contains(equation.Name))
                 {
-                    this.EquationResults[equationName] += this.BonusResults[equationName];
+                    this.EquationResults[equation.Name] += this.BonusResults[equation.Name];
                 }
                 
                 if (this.BonusResults.Keys.Contains(equationCategory.Name))
                 {
-                    this.EquationResults[equationName] += this.BonusResults[equationCategory.Name];
+                    this.EquationResults[equation.Name] += this.BonusResults[equationCategory.Name];
                 }
             }
         }

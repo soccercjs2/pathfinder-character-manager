@@ -30,7 +30,7 @@ namespace Pathfinder.Models
             replacedEquation = replacedEquation.Replace("Intelligence", character.Intelligence.ToString());
             replacedEquation = replacedEquation.Replace("Wisdom", character.Wisdom.ToString());
             replacedEquation = replacedEquation.Replace("Charisma", character.Charisma.ToString());
-
+            
             if (character.EquationResults != null)
             {
                 foreach (string key in character.EquationResults.Keys)
@@ -38,10 +38,10 @@ namespace Pathfinder.Models
                     replacedEquation = replacedEquation.Replace(key, character.EquationResults[key].ToString());
                 }
             }
-
+            
             replacedEquation = EvaluateClasses(replacedEquation, character);
 
-            Expression expression = new Expression(replacedEquation);
+            Expression expression = new Expression(replacedEquation, EvaluateOptions.NoCache);
             return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
         }
 
