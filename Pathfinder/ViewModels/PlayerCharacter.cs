@@ -64,11 +64,13 @@ namespace Pathfinder.ViewModels
             this.Classes = LoadClasses(characterId);
             this.AbilityViewer = new AbilityViewer(characterId);
 
+            this.BonusResults = new Dictionary<string, int>();
+            EvaluateBonuses(characterId, true);
+
             this.EquationResults = new Dictionary<string, int>();
             EvaluateEquations(characterId);
 
-            this.BonusResults = new Dictionary<string, int>();
-            EvaluateBonuses(characterId);
+            EvaluateBonuses(characterId, false);
 
             CalculateModifiers(this.EquationResults);
             CalculateBaseStats(this.EquationResults);
@@ -193,12 +195,14 @@ namespace Pathfinder.ViewModels
             }
         }
 
-        private void EvaluateBonuses(int characterId)
+        private void EvaluateBonuses(int characterId, bool findAbilityBonuses)
         {
+            string[] abilityScores = { "Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma" };
             List<Equation> equations = db.Equations
                 .Where(m => m.CharacterId == characterId
                     && m.BonusType != null
-                    && m.AbilityId > 0)
+                    && m.AbilityId > 0
+                    && abilityScores.Contains(m.BonusType) == findAbilityBonuses)
                 .ToList<Equation>();
 
             foreach (Equation equation in equations)
@@ -218,12 +222,24 @@ namespace Pathfinder.ViewModels
                 }
             }
 
-            ApplyBonuses(characterId);
+            if (findAbilityBonuses) { ApplyAbilityScoreBonuses(characterId); }
+            else { ApplyEquationBonuses(characterId); }
         }
 
-        private void ApplyBonuses(int characterId)
+        private void ApplyAbilityScoreBonuses(int characterId)
         {
-            foreach (string equationName in this.EquationResults.Keys)
+            if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
+            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Strength += this.BonusResults["Dexterity"]; }
+            if (this.BonusResults.Keys.Contains("Constitution")) { this.Strength += this.BonusResults["Constitution"]; }
+            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Strength += this.BonusResults["Intelligence"]; }
+            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Strength += this.BonusResults["Wisdom"]; }
+            if (this.BonusResults.Keys.Contains("Charisma")) { this.Strength += this.BonusResults["Charisma"]; }
+        }
+
+        private void ApplyEquationBonuses(int characterId)
+        {
+            List<string> equationNames = this.EquationResults.Keys.ToList<string>();
+            foreach (string equationName in equationNames)
             {
                 Equation equation = db.Equations
                     .Where(m => m.CharacterId == characterId && m.Name == equationName)

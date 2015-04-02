@@ -62,6 +62,7 @@ namespace Pathfinder.Controllers
             equation.CharacterId = ability.CharacterId;
             equation.EquationCategoryId = 0;
             equation.AbilityId = id;
+            equation.Name = ability.Name + " Bonus";
             equation.ShowFormula = false;
 
             return View(equation);
@@ -73,6 +74,28 @@ namespace Pathfinder.Controllers
             if (ModelState.IsValid)
             {
                 db.Equations.Add(equation);
+                db.SaveChanges();
+
+                return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+            }
+            else
+            {
+                return View(equation);
+            }
+        }
+
+        public ActionResult EditAbilityEquation(int id)
+        {
+            return View(db.Equations.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditAbilityEquation(Equation equation)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Equations.Attach(equation);
+                db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });

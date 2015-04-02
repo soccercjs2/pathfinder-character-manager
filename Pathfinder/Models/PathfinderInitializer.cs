@@ -241,12 +241,12 @@ namespace Pathfinder.Models
         {
             List<Ability> abilities = new List<Ability>
             {
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Fast Movement", Description = "+10 move speed.", IsConditional = false },
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Skilled", Description = "Gain bonus skill points.", IsConditional = false },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Stealthy", Description = "+2 to stealth.", IsConditional = false },
-                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... it's hard", IsConditional = false },
-                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You don't know the meaning of tired.", IsConditional = false }
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Fast Movement", Description = "+10 move speed.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Skilled", Description = "Gain bonus skill points.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Stealthy", Description = "+2 to stealth.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... it's hard", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You don't know the meaning of tired.", IsConditional = false, Active = true }
             };
 
             return abilities;
