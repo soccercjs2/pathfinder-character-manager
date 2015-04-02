@@ -92,6 +92,8 @@ namespace Pathfinder.Models
             {
                 new Class{ CharacterId = 1, Name = "Barbarian", Levels = 2, SkillPoints = 2, BaseAttackBonus = 2, ForitudeSave = 3, ReflexSave = 0, WillSave = 0},
                 new Class{ CharacterId = 1, Name = "Fighter (Unbreakable)", Levels = 2, SkillPoints = 2, BaseAttackBonus = 2, ForitudeSave = 3, ReflexSave = 0, WillSave = 0},
+                new Class{ CharacterId = 1, Name = "Samurai", Levels = 1, SkillPoints = 4, BaseAttackBonus = 1, ForitudeSave = 2, ReflexSave = 0, WillSave = 0},
+                new Class{ CharacterId = 1, Name = "Ranger (Woodland Skirmisher)", Levels = 1, SkillPoints = 6, BaseAttackBonus = 1, ForitudeSave = 2, ReflexSave = 2, WillSave = 0},
                 new Class{ CharacterId = 2, Name = "Sorcerer", Levels = 7, SkillPoints = 2, BaseAttackBonus = 3, ForitudeSave = 2, ReflexSave = 2, WillSave = 5},
                 new Class{ CharacterId = 2, Name = "Dragon Disciple", Levels = 8, SkillPoints = 2, BaseAttackBonus = 6, ForitudeSave = 4, ReflexSave = 3, WillSave = 4},
                 new Class{ CharacterId = 3, Name = "Fighter (Two Weapon)", Levels = 15, SkillPoints = 2, BaseAttackBonus = 15, ForitudeSave = 9, ReflexSave = 5, WillSave = 5}
@@ -202,7 +204,9 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "MOVESPEED", Formula = "0", EquationCategoryId = 6, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "MELEE_ATTACK", Formula = "BAB + STR", EquationCategoryId = 7, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 7, ShowFormula = true },
-                new Equation{ CharacterId = 1, Name = "ONE_HANDED_DAMAGE", Formula = "STR", EquationCategoryId = 8, ShowFormula = true }
+                new Equation{ CharacterId = 1, Name = "ONE_HANDED_DAMAGE", Formula = "STR", EquationCategoryId = 8, ShowFormula = true },
+
+                new Equation{ CharacterId = 1, Name = "ONE_HANDED_DAMAGE", Formula = "STR", BonusType = "", AbilityId = 0, EquationCategoryId = 8, ShowFormula = true }
             };
 
             return equations;
@@ -243,8 +247,22 @@ namespace Pathfinder.Models
             {
                 new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Fast Movement", Description = "+10 move speed.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Skilled", Description = "Gain bonus skill points.", IsConditional = false, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Stealthy", Description = "+2 to stealth.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Uncanny Dodge", Description = "I'm always ready.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Armor Ripper", Description = "You tear through armor while angry.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Challenge", Description = "Mono e mono.", IsConditional = true, Active = true },
+
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Defensive Training", Description = "Bonus to Armor Class.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Lesser Defensive Training", Description = "Bonus to Armor Class against humans.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Natural Armor", Description = "Bonus to Natural Armor.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Improved Natural Armor", Description = "Bonus to Natural Armor.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Hardy", Description = "Bonus to Saves against poison, spells, and spell-like abilities.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Lucky", Description = "Bonus to Saves.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Spell Resistance", Description = "Gain spell resistance.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Fast Healing", Description = "Regain hit points each round.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Damage Reduction", Description = "Ignore physical damage on each hit.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Mishapened", Description = "Armor costs double.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Scent", Description = "Track with scent.", IsConditional = false, Active = true },
+
                 new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... it's hard", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You don't know the meaning of tired.", IsConditional = false, Active = true }
             };
