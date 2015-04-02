@@ -160,7 +160,7 @@ namespace Pathfinder.Models
         {
             List<Attack> attacks = new List<Attack>
             {
-                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 24 }
+                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 25 }
             };
 
             return attacks;
@@ -170,8 +170,8 @@ namespace Pathfinder.Models
         {
             List<SubAttack> subAttacks = new List<SubAttack>
             {
-                new SubAttack{ AttackId = 1, AttackEquationId = 22 },
-                new SubAttack{ AttackId = 1, AttackEquationId = 22 }
+                new SubAttack{ AttackId = 1, AttackEquationId = 24 },
+                new SubAttack{ AttackId = 1, AttackEquationId = 24 }
             };
 
             return subAttacks;
@@ -189,7 +189,7 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "CHA", Formula = "(Charisma - 10) / 2", EquationCategoryId = 1, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "BAB", Formula = "Classes.BaseAttackBonus", EquationCategoryId = 2, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "CMB", Formula = "BAB + STR", EquationCategoryId = 3, ShowFormula = true },
-                new Equation{ CharacterId = 1, Name = "CMD", Formula = "10 + BAB + STR + DEX", EquationCategoryId = 3, ShowFormula = true },
+                new Equation{ CharacterId = 1, Name = "CMD", Formula = "10 + BAB + STR + DEX + DODGE + DEFLECT", EquationCategoryId = 3, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "ARMOR", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "SHIELD", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "NATURAL", Formula = "0", EquationCategoryId = 4, ShowFormula = false },
@@ -204,9 +204,33 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "MOVESPEED", Formula = "0", EquationCategoryId = 6, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "MELEE_ATTACK", Formula = "BAB + STR", EquationCategoryId = 7, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "RANGED_ATTACK", Formula = "BAB + DEX", EquationCategoryId = 7, ShowFormula = true },
+                new Equation{ CharacterId = 1, Name = "CLAW_ATTACK", Formula = "BAB + STR", EquationCategoryId = 7, ShowFormula = true },
                 new Equation{ CharacterId = 1, Name = "ONE_HANDED_DAMAGE", Formula = "STR", EquationCategoryId = 8, ShowFormula = true },
 
-                new Equation{ CharacterId = 1, Name = "ONE_HANDED_DAMAGE", Formula = "STR", BonusType = "", AbilityId = 0, EquationCategoryId = 8, ShowFormula = true }
+                new Equation{ CharacterId = 1, Name = "Will Bonus", BonusType = "WILL", Formula = "1", AbilityId = 1, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Movespeed Bonus", BonusType = "MOVESPEED", Formula = "10", AbilityId = 2, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Strength Bonus", BonusType = "Strength", Formula = "4", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Constitution Bonus", BonusType = "Constitution", Formula = "4", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "WILL Bonus", BonusType = "WILL", Formula = "2", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Armor Classes Bonus", BonusType = "Armor Classes", Formula = "-2", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "CMB Bonus", BonusType = "CMB", Formula = "2", AbilityId = 5, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "1", AbilityId = 6, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Armor Classes Bonus", BonusType = "Armor Classes", Formula = "-2", AbilityId = 6, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Attacks Bonus", BonusType = "Attacks", Formula = "2", AbilityId = 10, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "2", AbilityId = 10, EquationCategoryId = 0, ShowFormula = false },
+
+                new Equation{ CharacterId = 1, Name = "Dodge Bonus", BonusType = "DODGE", Formula = "2", AbilityId = 11, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Dodge Bonus", BonusType = "DODGE", Formula = "4", AbilityId = 12, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Natural Armor Bonus", BonusType = "NATURAL", Formula = "1", AbilityId = 13, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Natural Armor Bonus", BonusType = "NATURAL", Formula = "1", AbilityId = 14, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Saves Bonus", BonusType = "Saves", Formula = "2", AbilityId = 15, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Saves Bonus", BonusType = "Saves", Formula = "2", AbilityId = 16, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Saves Bonus", BonusType = "Saves", Formula = "1", AbilityId = 17, EquationCategoryId = 0, ShowFormula = false },
+
+                new Equation{ CharacterId = 1, Name = "Attacks Bonus", BonusType = "Attacks", Formula = "-1", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "2", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Claw Attack Bonus", BonusType = "CLAW_ATTACK", Formula = "1", AbilityId = 26, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Maneuvers Bonus", BonusType = "Maneuvers", Formula = "2", AbilityId = 27, EquationCategoryId = 0, ShowFormula = false }
             };
 
             return equations;
@@ -245,26 +269,36 @@ namespace Pathfinder.Models
         {
             List<Ability> abilities = new List<Ability>
             {
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Unflinching", Description = "Im strong minded.", IsConditional = true, Active = false },
                 new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Fast Movement", Description = "+10 move speed.", IsConditional = false, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Uncanny Dodge", Description = "I'm always ready.", IsConditional = true, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Armor Ripper", Description = "You tear through armor while angry.", IsConditional = true, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Challenge", Description = "Mono e mono.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Rage", Description = "Get angry. Get strong.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Uncanny Dodge", Description = "Im always ready.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Armor Ripper", Description = "You tear through armor while angry.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Challenge", Description = "Mono e mono.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Resolve", Description = "Fatigue no more.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Forest Ghost", Description = "The forest is my home.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Track", Description = "Master tracker.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 1, Name = "Favored Enemy (human)", Description = "Humans dont like me.", IsConditional = true, Active = false },
 
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Defensive Training", Description = "Bonus to Armor Class.", IsConditional = false, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Lesser Defensive Training", Description = "Bonus to Armor Class against humans.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Lesser Defensive Training", Description = "Bonus to Armor Class against humans.", IsConditional = true, Active = false },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Natural Armor", Description = "Bonus to Natural Armor.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Improved Natural Armor", Description = "Bonus to Natural Armor.", IsConditional = false, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Hardy", Description = "Bonus to Saves against poison, spells, and spell-like abilities.", IsConditional = true, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Hardy", Description = "Bonus to Saves against poison, spells, and spell-like abilities.", IsConditional = true, Active = false },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Lucky", Description = "Bonus to Saves.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Lesser Lucky", Description = "Bonus to Saves.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Greater Spell Resistance", Description = "Gain spell resistance.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Fast Healing", Description = "Regain hit points each round.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Damage Reduction", Description = "Ignore physical damage on each hit.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Mishapened", Description = "Armor costs double.", IsConditional = false, Active = true },
                 new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Scent", Description = "Track with scent.", IsConditional = false, Active = true },
 
-                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... it's hard", IsConditional = false, Active = true },
-                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You don't know the meaning of tired.", IsConditional = false, Active = true }
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Diehard", Description = "Making you die... its hard.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Endurance", Description = "You dont know the meaning of tired.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Power Attack", Description = "All I need is damage.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Weapon Focus (Claws)", Description = "My claws are lethal.", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Improved Sunder", Description = "Armor, whats armor?", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Snow Tiger Berserker", Description = "Pounce bitches.", IsConditional = false, Active = true }
             };
 
             return abilities;

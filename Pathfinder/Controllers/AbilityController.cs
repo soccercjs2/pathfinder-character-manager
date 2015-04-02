@@ -32,7 +32,6 @@ namespace Pathfinder.Controllers
             
             Ability ability = new Ability();
             ability.CharacterId = id;
-            ability.Active = true;
             return View(ability);
         }
 
@@ -41,6 +40,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                ability.Active = !ability.IsConditional;
                 db.Abilities.Add(ability);
                 db.SaveChanges();
 

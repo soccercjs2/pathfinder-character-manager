@@ -196,14 +196,14 @@ namespace Pathfinder.ViewModels
             }
         }
 
-        private void EvaluateBonuses(int characterId, bool findAbilityBonuses)
+        private void EvaluateBonuses(int characterId, bool findBaseStats)
         {
-            string[] abilityScores = { "Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma" };
+            string[] abilityScores = { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma", "ARMOR", "SHIELD", "NATURAL", "DODGE", "DEFLECT" };
             List<Equation> equations = db.Equations
                 .Where(m => m.CharacterId == characterId
                     && m.BonusType != null
                     && m.AbilityId > 0
-                    && abilityScores.Contains(m.BonusType) == findAbilityBonuses)
+                    && abilityScores.Contains(m.BonusType) == findBaseStats)
                 .ToList<Equation>();
 
             foreach (Equation equation in equations)
@@ -223,11 +223,11 @@ namespace Pathfinder.ViewModels
                 }
             }
 
-            if (findAbilityBonuses) { ApplyAbilityScoreBonuses(characterId); }
+            if (findBaseStats) { ApplyBaseStatBonuses(characterId); }
             else { ApplyEquationBonuses(characterId); }
         }
 
-        private void ApplyAbilityScoreBonuses(int characterId)
+        private void ApplyBaseStatBonuses(int characterId)
         {
             if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
             if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
@@ -239,8 +239,6 @@ namespace Pathfinder.ViewModels
 
         private void ApplyEquationBonuses(int characterId)
         {
-            double start = DateTime.Now.TimeOfDay.TotalMilliseconds;
-
             List<Equation> equations = db.Equations
                 .Where(m => m.CharacterId == characterId
                     && this.EquationResults.Keys.Contains(m.Name))
