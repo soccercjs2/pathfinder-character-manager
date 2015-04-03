@@ -66,12 +66,12 @@ namespace Pathfinder.ViewModels
             this.AbilityViewer = new AbilityViewer(characterId);
 
             this.BonusResults = new Dictionary<string, int>();
-            EvaluateBonuses(characterId, true);
+            EvaluateBonuses(characterId);
+
+            ApplyBaseStatBonuses(characterId);
 
             this.EquationResults = new Dictionary<string, int>();
             EvaluateEquations(characterId);
-            
-            EvaluateBonuses(characterId, false);
 
             CalculateModifiers(this.EquationResults);
             CalculateBaseStats(this.EquationResults);
@@ -182,28 +182,22 @@ namespace Pathfinder.ViewModels
             this.WillSave = equationResults["WILL"];
         }
 
-        private void EvaluateEquations(int characterId)
+        private void ApplyBaseStatBonuses(int characterId)
         {
-            List<Equation> equations = db.Equations
-                .Where(m => m.CharacterId == characterId
-                    && m.BonusType == null
-                    && m.AbilityId == 0)
-                .ToList<Equation>();
-            
-            foreach (Equation equation in equations)
-            {
-                this.EquationResults.Add(equation.Name, equation.Evaluate(this));
-            }
+            if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
+            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
+            if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += this.BonusResults["Constitution"]; }
+            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += this.BonusResults["Intelligence"]; }
+            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += this.BonusResults["Wisdom"]; }
+            if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += this.BonusResults["Charisma"]; }
         }
 
-        private void EvaluateBonuses(int characterId, bool findBaseStats)
+        private void EvaluateBonuses(int characterId)
         {
-            string[] abilityScores = { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma", "ARMOR", "SHIELD", "NATURAL", "DODGE", "DEFLECT" };
             List<Equation> equations = db.Equations
                 .Where(m => m.CharacterId == characterId
                     && m.BonusType != null
-                    && m.AbilityId > 0
-                    && abilityScores.Contains(m.BonusType) == findBaseStats)
+                    && m.AbilityId > 0)
                 .ToList<Equation>();
 
             foreach (Equation equation in equations)
@@ -222,47 +216,79 @@ namespace Pathfinder.ViewModels
                     }
                 }
             }
-
-            if (findBaseStats) { ApplyBaseStatBonuses(characterId); }
-            else { ApplyEquationBonuses(characterId); }
         }
 
-        private void ApplyBaseStatBonuses(int characterId)
+        private void EvaluateEquations(int characterId)
         {
-            if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
-            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
-            if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += this.BonusResults["Constitution"]; }
-            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += this.BonusResults["Intelligence"]; }
-            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += this.BonusResults["Wisdom"]; }
-            if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += this.BonusResults["Charisma"]; }
-        }
-
-        private void ApplyEquationBonuses(int characterId)
-        {
+            //load equations
             List<Equation> equations = db.Equations
                 .Where(m => m.CharacterId == characterId
-                    && this.EquationResults.Keys.Contains(m.Name))
+                    && m.BonusType == null
+                    && m.AbilityId == 0)
                 .ToList<Equation>();
 
-            List<EquationCategory> equationCategories = db.EquationCategories.Where(m => m.CharacterId == characterId).ToList<EquationCategory>();
-
+            //evaluate each equation and apply bonuses
             foreach (Equation equation in equations)
             {
-                EquationCategory equationCategory = equationCategories
-                    .Where(m => m.EquationCategoryId == equation.EquationCategoryId)
-                    .FirstOrDefault<EquationCategory>();
-
-                if (this.BonusResults.Keys.Contains(equation.Name))
-                {
-                    this.EquationResults[equation.Name] += this.BonusResults[equation.Name];
-                }
+                //load the equations category
+                EquationCategory category = db.EquationCategories.Find(equation.EquationCategoryId);
                 
-                if (this.BonusResults.Keys.Contains(equationCategory.Name))
+                //evaluate the equation and apply equation specific bonuses
+                this.EquationResults.Add(equation.Name, equation.Evaluate(this));
+                if (this.BonusResults.Keys.Contains(equation.Name)) { this.EquationResults[equation.Name] += this.BonusResults[equation.Name]; }
+
+                //apply bonuses applied to the equations category if the category exists
+                if (category != null)
                 {
-                    this.EquationResults[equation.Name] += this.BonusResults[equationCategory.Name];
+                    if (this.BonusResults.Keys.Contains(category.Name))
+                    {
+                        this.EquationResults[equation.Name] += this.BonusResults[category.Name];
+                    }
                 }
             }
         }
+
+        //private void ApplyBonuses(int characterId)
+        //{
+
+        //}
+
+        //private void ApplyBaseStatBonuses(int characterId)
+        //{
+        //    if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
+        //    if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
+        //    if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += this.BonusResults["Constitution"]; }
+        //    if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += this.BonusResults["Intelligence"]; }
+        //    if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += this.BonusResults["Wisdom"]; }
+        //    if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += this.BonusResults["Charisma"]; }
+        //}
+
+        //private void ApplyEquationBonuses(int characterId)
+        //{
+        //    List<Equation> equations = db.Equations
+        //        .Where(m => m.CharacterId == characterId
+        //            && this.EquationResults.Keys.Contains(m.Name))
+        //        .ToList<Equation>();
+
+        //    List<EquationCategory> equationCategories = db.EquationCategories.Where(m => m.CharacterId == characterId).ToList<EquationCategory>();
+
+        //    foreach (Equation equation in equations)
+        //    {
+        //        EquationCategory equationCategory = equationCategories
+        //            .Where(m => m.EquationCategoryId == equation.EquationCategoryId)
+        //            .FirstOrDefault<EquationCategory>();
+
+        //        if (this.BonusResults.Keys.Contains(equation.Name))
+        //        {
+        //            this.EquationResults[equation.Name] += this.BonusResults[equation.Name];
+        //        }
+                
+        //        if (this.BonusResults.Keys.Contains(equationCategory.Name))
+        //        {
+        //            this.EquationResults[equation.Name] += this.BonusResults[equationCategory.Name];
+        //        }
+        //    }
+        //}
     }
 
     public class SkillView

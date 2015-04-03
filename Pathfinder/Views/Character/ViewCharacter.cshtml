@@ -4,8 +4,7 @@
 @using Pathfinder.ViewModels;
 
 <script type="text/javascript">
-    function UpdateAbility(abilityId, characterId, abilityTypeId, name, description, isConditional, active)
-    {
+    function UpdateAbility(abilityId, characterId, abilityTypeId, name, description, isConditional, active) {
         var ability = {
             AbilityId: abilityId,
             CharacterId: characterId,
@@ -26,7 +25,7 @@
                 window.location.href = response.Url;
             }
         });
-    }
+    };
 </script>
 
 @{
@@ -75,17 +74,14 @@
             <tr id="trBab">
                 <td>BAB</td>
                 <td class="numberCell">@Model.BaseAttackBonus</td>
-                <td class="numberCell">&nbsp;</td>
             </tr>
             <tr id="trCmb" ondblclick="@("GoToRoller('Combat Maneuver','" + @Model.CombatManeuverBonus + "')");">
                 <td>CMB</td>
                 <td class="numberCell">@Model.CombatManeuverBonus</td>
-                <td class="numberCell">[+]</td>
             </tr>
             <tr id="trCmd">
                 <td>CMD</td>
                 <td class="numberCell">@Model.CombatManeuverDefense</td>
-                <td class="numberCell">[+]</td>
             </tr>
         </table>
 
@@ -93,17 +89,14 @@
             <tr id="trArmorClass">
                 <td>AC</td>
                 <td class="numberCell">@Model.ArmorClass</td>
-                <td class="numberCell">[+]</td>
             </tr>
             <tr id="trTouchArmorClass">
                 <td>Touch AC</td>
                 <td class="numberCell">@Model.TouchArmorClass</td>
-                <td>[+]</td>
             </tr>
             <tr id="trFlatFootedArmorClass">
                 <td>Flat-Footed AC</td>
                 <td class="numberCell">@Model.FlatFootedArmorClass</td>
-                <td class="numberCell">[+]</td>
             </tr>
         </table>
 
@@ -111,17 +104,14 @@
             <tr id="trFortitude" ondblclick="@("GoToRoller('Fortitude Save','" + @Model.FortitudeSave + "')");">
                 <td>Fortitude</td>
                 <td class="numberCell">@Model.FortitudeSave</td>
-                <td class="numberCell">[+]</td>
             </tr>
             <tr id="trReflex" ondblclick="@("GoToRoller('Reflex Save','" + @Model.ReflexSave + "')");">
                 <td>Reflex</td>
                 <td class="numberCell">@Model.ReflexSave</td>
-                <td class="numberCell">[+]</td>
             </tr>
             <tr id="trWill" ondblclick="@("GoToRoller('Will Save','" + @Model.WillSave + "')");">
                 <td>Will</td>
                 <td class="numberCell">@Model.WillSave</td>
-                <td class="numberCell">[+]</td>
             </tr>
         </table>
 
@@ -190,47 +180,52 @@
             </table>
         </div>
 
-        <div id="divAbilities" class="inline float-left">
+        <div id="divAbilities" class="js-masonry inline float-left full" data-masonry-options='{ "columnWidth": 285, "itemSelector": ".masonry-box" }'>
             @Html.HiddenFor(m => m.AbilityViewer)
             @foreach (AbilityTypeViewer type in Model.AbilityViewer.Abilities)
             {
-                <table id="@("tbl" + type.Name.Replace(" ",""))" class="section">
-                    <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td colspan="2">@type.Name</td></tr></thead>
-                    @foreach (Ability ability in type.Abilities)
-                    {
-                        <tr>
-                            <td>@ability.Name</td>
-                            <td align="right" style="vertical-align: central;">
-                                @if (ability.IsConditional)
-                                { 
-                                    @Html.EditorFor(m => ability.Active, 
-                                        new { htmlAttributes = new { @class = "form-control", 
-                                            @onclick = "UpdateAbility(" + ability.AbilityId + ","
-                                                                        + ability.CharacterId + ","
-                                                                        + ability.AbilityTypeId + ",'"
-                                                                        + ability.Name + "','"
-                                                                        + ability.Description + "','"
-                                                                        + ability.IsConditional + "','"
-                                                                        + !ability.Active + "')"
-                                        }
-                                        });
-                                }
-                            </td>
-                        </tr>
-                    }
-                </table>
+                <div id="@("div" + type.Name.Replace(" ",""))" class="inline masonry-box">
+                    <table id="@("tbl" + type.Name.Replace(" ",""))" class="section">
+                        <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td colspan="2">@type.Name</td></tr></thead>
+                        @foreach (Ability ability in type.Abilities)
+                        {
+                            <tr>
+                                <td>@ability.Name</td>
+                                <td align="right" style="vertical-align: central;">
+                                    @if (ability.IsConditional)
+                                    {
+                                        @Html.EditorFor(m => ability.Active, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control",
+                                           @onclick = "UpdateAbility(" + ability.AbilityId + ","
+                                                                       + ability.CharacterId + ","
+                                                                       + ability.AbilityTypeId + ",'"
+                                                                       + ability.Name + "','"
+                                                                       + ability.Description + "','"
+                                                                       + ability.IsConditional + "','"
+                                                                       + !ability.Active + "')"
+                                       }
+                                   });
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
             }
-        </div>
 
-        <div id="divFeats" class="inline float-right">
-            <table id="tblManage" class="section">
-                <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>
-                <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                <tr><td>@Html.ActionLink("Manage Skills", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                <tr><td>@Html.ActionLink("Manage Attacks", "Index", "Attack", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                <tr><td>@Html.ActionLink("Manage Abilities", "Index", "Ability", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                <tr><td>@Html.ActionLink("Manage Equations", "Index", "Equation", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-            </table>
+            <div id="divManage" class="inline float-right masonry-box">
+                <table id="tblManage" class="section">
+                    <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>
+                    <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                    <tr><td>@Html.ActionLink("Manage Skills", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                    <tr><td>@Html.ActionLink("Manage Attacks", "Index", "Attack", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                    <tr><td>@Html.ActionLink("Manage Abilities", "Index", "Ability", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                    <tr><td>@Html.ActionLink("Manage Equations", "Index", "Equation", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
+                </table>
+            </div>
         </div>
     </div>
 
