@@ -45,10 +45,68 @@ namespace Pathfinder.Models
                 }
             }
             
+            replacedEquation = EvaluateClass(replacedEquation, character);
             replacedEquation = EvaluateClasses(replacedEquation, character);
 
             Expression expression = new Expression(replacedEquation, EvaluateOptions.NoCache);
             return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
+        }
+
+        public string EvaluateClass(string replacedEquation, PlayerCharacter character)
+        {
+            //see if evaluation is needed
+            if (replacedEquation.Contains("Class."))
+            {
+                //get start of class name
+                int start = replacedEquation.IndexOf("Class.[") + "Class.[".Length;
+
+                //get end of class name
+                int classNameEnd = replacedEquation.IndexOf("]");
+
+                //get class name
+                string className = replacedEquation.Substring(start, classNameEnd - start);
+                int value = 0;
+
+                //load class based on class name
+                Class playerClass = db.Classes
+                    .Where(m => m.Name == className && m.CharacterId == character.MyCharacter.CharacterId)
+                    .FirstOrDefault<Class>();
+
+                //find end of class attribute
+                int classAttributeEnd = classNameEnd + 3;
+                while (classAttributeEnd < replacedEquation.Length 
+                    && Char.IsLetter(replacedEquation[classAttributeEnd])) { classAttributeEnd++; }
+
+                //get class attribute
+                string classAttribute = replacedEquation.Substring(classNameEnd + 2, classAttributeEnd - (classNameEnd + 2));
+
+                //if a valid class is found
+                if (playerClass != null)
+                {
+                    value = ReplaceClassAttribute(classAttribute, playerClass);
+                }
+
+                //get stuff before this section started
+                string prefix = "";
+                if (start - "Class.[".Length > 0)
+                {
+                    prefix = replacedEquation.Substring(0, Math.Max(start - "Class:[".Length, 0));
+                }
+
+                //evaluate the stuff after the stuff we just evaluated
+                string suffix = "";
+                if (classAttributeEnd < replacedEquation.Length)
+                {
+                    suffix = EvaluateClass(replacedEquation.Substring(classAttributeEnd + 1), character);
+                }
+
+                //put equation back together
+                return prefix + value + suffix;
+            }
+            else
+            {
+                return replacedEquation;
+            }
         }
 
         public string EvaluateClasses(string replacedEquation, PlayerCharacter character)
@@ -64,15 +122,7 @@ namespace Pathfinder.Models
                 
                 foreach(Class playerClass in character.Classes)
                 {
-                    switch (classAttribute)
-                    {
-                        case "Level": value += playerClass.Levels; break;
-                        case "BaseAttackBonus": value += playerClass.BaseAttackBonus; break;
-                        case "FortitudeSave": value += playerClass.ForitudeSave; break;
-                        case "ReflexSave": value += playerClass.ReflexSave; break;
-                        case "WillSave": value += playerClass.WillSave; break;
-                        default: value += 0; break;
-                    }
+                    value += ReplaceClassAttribute(classAttribute, playerClass);
                 }
 
                 string prefix = "";
@@ -84,7 +134,7 @@ namespace Pathfinder.Models
                 string suffix = "";
                 if (end < replacedEquation.Length)
                 {
-                    suffix = replacedEquation.Substring(end + 1);
+                    suffix = EvaluateClasses(replacedEquation.Substring(end + 1), character);
                 }
 
                 return prefix + value + suffix;
@@ -92,6 +142,19 @@ namespace Pathfinder.Models
             else
             {
                 return replacedEquation;
+            }
+        }
+
+        private int ReplaceClassAttribute(string classAttribute, Class playerClass)
+        {
+            switch (classAttribute)
+            {
+                case "Level": return playerClass.Levels;
+                case "BaseAttackBonus": return playerClass.BaseAttackBonus;
+                case "FortitudeSave": return playerClass.ForitudeSave;
+                case "ReflexSave": return playerClass.ReflexSave;
+                case "WillSave": return playerClass.WillSave;
+                default: return 0;
             }
         }
     }

@@ -214,7 +214,7 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "WILL Bonus", BonusType = "WILL", Formula = "2", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Armor Classes Bonus", BonusType = "Armor Classes", Formula = "-2", AbilityId = 3, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "CMB Bonus", BonusType = "CMB", Formula = "2", AbilityId = 5, EquationCategoryId = 0, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "1", AbilityId = 6, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "Class.[Samurai].Level", AbilityId = 6, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Armor Classes Bonus", BonusType = "Armor Classes", Formula = "-2", AbilityId = 6, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Attacks Bonus", BonusType = "Attacks", Formula = "2", AbilityId = 10, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "2", AbilityId = 10, EquationCategoryId = 0, ShowFormula = false },
