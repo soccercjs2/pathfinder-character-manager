@@ -122,8 +122,13 @@ namespace Pathfinder.ViewModels
                     SkillView skillView = new SkillView();
                     skillView.Name = skill.Name;
                     if (skill.Type != null) { skillView.Name += " (" + skill.Type + ")"; }
+                    string skillBonusString = "Skills.[" + skillView.Name + "]";
+
                     skillView.Bonus = skill.Ranks + LoadAbilityModifierFromTag(skill.Ability);
+
                     if (skill.Ranks > 0 && skill.ClassSkill) { skillView.Bonus += 3; }
+                    if (this.BonusResults.Keys.Contains(skillBonusString)) { skillView.Bonus += this.BonusResults[skillBonusString]; }
+
                     skillViews.Add(skillView);
                 }
             }
