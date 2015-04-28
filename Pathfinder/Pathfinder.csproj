@@ -171,7 +171,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
-    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,7 +189,6 @@
     <Compile Include="Models\Roller.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\SubAttack.cs" />
-    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\EquationCategory.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="ViewModels\AbilityBonusViewer.cs" />
@@ -268,8 +266,6 @@
     <Content Include="Views\Character\Create.cshtml" />
     <Content Include="Views\Character\Skills.cshtml" />
     <Content Include="Views\Character\Roller.cshtml" />
-    <Content Include="Views\Tag\Index.cshtml" />
-    <Content Include="Views\Tag\Create.cshtml" />
     <Content Include="Views\Class\Index.cshtml" />
     <Content Include="Views\Class\Create.cshtml" />
     <Content Include="Views\Class\Edit.cshtml" />

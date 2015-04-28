@@ -3,31 +3,6 @@
 @using Pathfinder.Models;
 @using Pathfinder.ViewModels;
 
-<script type="text/javascript">
-    function UpdateAbility(abilityId, characterId, abilityTypeId, name, description, isConditional, active) {
-        var ability = {
-            AbilityId: abilityId,
-            CharacterId: characterId,
-            AbilityTypeId: abilityTypeId,
-            Name: name,
-            Description: description,
-            IsConditional: isConditional,
-            Active: active
-        }
-
-        $.ajax({
-            type: 'POST',
-            dataType: 'text',
-            url: "/Character/UpdateAbility",
-            data: ability,
-            dataType: 'json',
-            success: function (response) {
-                window.location.href = response.Url;
-            }
-        });
-    };
-</script>
-
 @{
     ViewBag.Title = Model.Name;
 }
