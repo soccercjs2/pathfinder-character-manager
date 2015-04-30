@@ -65,5 +65,31 @@ namespace Pathfinder.Controllers
                 return View(skill);
             }
         }
+
+        public ActionResult Edit(int id)
+        {
+            EquationCategory abilityCategory = db.EquationCategories
+                .Where(m => m.Name == "Ability Modifier" && m.CharacterId == id).FirstOrDefault<EquationCategory>();
+            ViewBag.Abilities = db.Equations.Where(m => m.EquationCategoryId == abilityCategory.EquationCategoryId);
+
+            return View(db.Skills.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Skill skill)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Skills.Attach(skill);
+                db.Entry(skill).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Skill", new { Id = skill.CharacterId });
+            }
+            else
+            {
+                return View(skill);
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Pathfinder.Controllers
         public ActionResult Index()
         {
             List<Character> characters = db.Characters.ToList();
-
+            Session.Clear();
             return View(characters);
         }
 
@@ -44,6 +44,7 @@ namespace Pathfinder.Controllers
         public ActionResult ViewCharacter(int id)
         {
             PlayerCharacter playerCharacter = new PlayerCharacter(id);
+            Session["CharacterId"] = playerCharacter.MyCharacter.CharacterId;
             return View(playerCharacter);
         }
 

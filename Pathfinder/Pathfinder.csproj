@@ -286,6 +286,8 @@
     <Content Include="Views\Ability\CreateAbilityType.cshtml" />
     <Content Include="Views\Ability\AbilityBonuses.cshtml" />
     <Content Include="Views\Equation\CreateAbilityEquation.cshtml" />
+    <Content Include="Views\Skill\Edit.cshtml" />
+    <Content Include="Views\Attack\EditSubAttack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

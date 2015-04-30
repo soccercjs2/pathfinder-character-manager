@@ -125,5 +125,38 @@ namespace Pathfinder.Controllers
                 return View(subAttack);
             }
         }
+
+        public ActionResult EditSubAttack(int id)
+        {
+            Attack attack = db.Attacks.Where(m => m.AttackId == id).FirstOrDefault<Attack>();
+            EquationCategory attackCategory = db.EquationCategories
+                .Where(m => m.CharacterId == attack.CharacterId
+                    && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
+
+            List<Equation> equations = db.Equations
+                .Where(m => m.CharacterId == attack.CharacterId
+                    && m.EquationCategoryId == attackCategory.EquationCategoryId).ToList<Equation>();
+
+            ViewBag.Equations = new SelectList(equations, "EquationId", "Name");
+
+            return View(db.SubAttacks.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditSubAttack(SubAttack subAttack)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SubAttacks.Attach(subAttack);
+                db.Entry(subAttack).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackId });
+            }
+            else
+            {
+                return View(subAttack);
+            }
+        }
     }
 }

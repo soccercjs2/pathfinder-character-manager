@@ -8,20 +8,24 @@
 
 @using (Html.BeginForm())
 {
-    <table class="section">
+    <table class="section noclick full">
         <thead>
             <tr>
                 <td>Skill</td>
                 <td>Rank</td>
                 <td>CS</td>
+                <td></td>
+                <td></td>
             </tr>
         </thead>
         @for (int i = 0; i < Model.Skills.Count; i++)
         {
             <tr>
                 <td>@(Model.Skills[i].Type == null ? Model.Skills[i].Name : Model.Skills[i].Name + " (" + Model.Skills[i].Type + ")")</td>
-                <td>@Html.EditorFor(m => Model.Skills[i].Ranks, new { htmlAttributes = new { @class = "form-control numberText" } })</td>
-                <td>@Html.EditorFor(m => Model.Skills[i].ClassSkill, new { htmlAttributes = new { @class = "input-group" } })</td>
+                <td width="50">@Html.EditorFor(m => Model.Skills[i].Ranks, new { htmlAttributes = new { @class = "form-control numberText" } })</td>
+                <td width="30">@Html.EditorFor(m => Model.Skills[i].ClassSkill, new { htmlAttributes = new { @class = "input-group" } })</td>
+                <td width="50">@Html.ActionLink("Edit", "Edit", new { Id = Model.Skills[i].SkillId })</td>
+                <td width="50">@Html.ActionLink("Delete", "Delete", new { Id = Model.Skills[i].SkillId })</td>
                 @Html.HiddenFor(m => Model.Skills[i].SkillId)
                 @Html.HiddenFor(m => Model.Skills[i].CharacterId)
                 @Html.HiddenFor(m => Model.Skills[i].Name)

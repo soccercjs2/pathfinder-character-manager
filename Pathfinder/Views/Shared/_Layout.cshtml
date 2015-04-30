@@ -24,10 +24,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (Url.RequestContext.RouteData.Values["Id"] != null)
+                    @if (Session["CharacterId"] != null)
                     {
-                        <li>@Html.ActionLink("Character", "ViewCharacter", "Character", new { Id = Url.RequestContext.RouteData.Values["Id"] }, null)</li>
-                        <li>@Html.ActionLink("Tags", "Index", "Tag", new { Id = Url.RequestContext.RouteData.Values["Id"] }, null)</li>
+                        <li>@Html.ActionLink("Character", "ViewCharacter", "Character", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Tags", "Index", "Tag", new { Id = Session["CharacterId"] }, null)</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

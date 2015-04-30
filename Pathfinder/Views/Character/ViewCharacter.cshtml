@@ -155,7 +155,7 @@
             </table>
         </div>
 
-        <div id="divAbilities" class="js-masonry inline float-left full" data-masonry-options='{ "columnWidth": 285, "itemSelector": ".masonry-box" }'>
+        <div id="divAbilities" class="js-masonry inline full" data-masonry-options='{ "columnWidth": 280, "gutter": 10, "itemSelector": ".masonry-box" }'>
             @Html.HiddenFor(m => m.AbilityViewer)
             @foreach (AbilityTypeViewer type in Model.AbilityViewer.Abilities)
             {
