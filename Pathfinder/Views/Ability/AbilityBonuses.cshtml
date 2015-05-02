@@ -26,4 +26,8 @@
     }
 </table><br />
 
-@Html.ActionLink("+ [New Bonus]", "CreateAbilityEquation", "Equation", new { Id = Model.Ability.AbilityId }, null)
+@Html.ActionLink("+ [New Bonus]", "CreateAbilityEquation", "Equation", new { Id = Model.Ability.AbilityId }, null)<br /><br />
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { Id = Session["CharacterId"] })
+</div>

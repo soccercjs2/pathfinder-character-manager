@@ -27,7 +27,7 @@
                     @if (Session["CharacterId"] != null)
                     {
                         <li>@Html.ActionLink("Character", "ViewCharacter", "Character", new { Id = Session["CharacterId"] }, null)</li>
-                        <li>@Html.ActionLink("Tags", "Index", "Tag", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Inventory", "Index", "Inventory", new { Id = Session["CharacterId"] }, null)</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
