@@ -8,6 +8,7 @@ namespace Pathfinder.Models
     public class Armor
     {
         public int ArmorId { get; set; }
+        public int CharacterId { get; set; }
         public string Name { get; set; }
         public int EnhancementBonus { get; set; }
         public int ArmorBonus { get; set; }

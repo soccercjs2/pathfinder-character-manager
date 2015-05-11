@@ -169,6 +169,7 @@
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\EquationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
     <Compile Include="Global.asax.cs">
@@ -182,6 +183,7 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Equation.cs" />
+    <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PathfinderContext.cs" />
@@ -190,11 +192,13 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\SubAttack.cs" />
     <Compile Include="Models\EquationCategory.cs" />
+    <Compile Include="Models\MagicItem.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="ViewModels\AbilityBonusViewer.cs" />
     <Compile Include="ViewModels\AbilityTypeViewer.cs" />
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
+    <Compile Include="ViewModels\InventoryViewer.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
     <Compile Include="ViewModels\PlayerCharacter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -292,6 +296,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
+    <Folder Include="Views\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
