@@ -93,7 +93,7 @@ namespace Pathfinder.Models
                 new Class{ CharacterId = 1, Name = "Barbarian", Levels = 2, SkillPoints = 2, BaseAttackBonus = 2, ForitudeSave = 3, ReflexSave = 0, WillSave = 0},
                 new Class{ CharacterId = 1, Name = "Fighter (Unbreakable)", Levels = 2, SkillPoints = 2, BaseAttackBonus = 2, ForitudeSave = 3, ReflexSave = 0, WillSave = 0},
                 new Class{ CharacterId = 1, Name = "Samurai", Levels = 1, SkillPoints = 4, BaseAttackBonus = 1, ForitudeSave = 2, ReflexSave = 0, WillSave = 0},
-                new Class{ CharacterId = 1, Name = "Ranger (Woodland Skirmisher)", Levels = 1, SkillPoints = 6, BaseAttackBonus = 1, ForitudeSave = 2, ReflexSave = 2, WillSave = 0},
+                new Class{ CharacterId = 1, Name = "Ranger (Woodland Skirmisher)", Levels = 2, SkillPoints = 6, BaseAttackBonus = 2, ForitudeSave = 3, ReflexSave = 3, WillSave = 0},
                 new Class{ CharacterId = 2, Name = "Sorcerer", Levels = 7, SkillPoints = 2, BaseAttackBonus = 3, ForitudeSave = 2, ReflexSave = 2, WillSave = 5},
                 new Class{ CharacterId = 2, Name = "Dragon Disciple", Levels = 8, SkillPoints = 2, BaseAttackBonus = 6, ForitudeSave = 4, ReflexSave = 3, WillSave = 4},
                 new Class{ CharacterId = 3, Name = "Fighter (Two Weapon)", Levels = 15, SkillPoints = 2, BaseAttackBonus = 15, ForitudeSave = 9, ReflexSave = 5, WillSave = 5}
@@ -150,7 +150,7 @@ namespace Pathfinder.Models
         {
             List<Weapon> weapons = new List<Weapon>
             {
-                new Weapon{ CharacterId = 1, Name = "Claw", EnhancementBonus = 0, Damage = "1d4", CriticalMinimum = 20, CriticalMaximum = 20, CriticalModifier = 2, Range = 0, Type = "S" }
+                new Weapon{ CharacterId = 1, Name = "Claw", EnhancementBonus = 0, Damage = "1d6", CriticalMinimum = 20, CriticalMaximum = 20, CriticalModifier = 2, Range = 0, Type = "S" }
             };
 
             return weapons;
@@ -228,10 +228,17 @@ namespace Pathfinder.Models
                 new Equation{ CharacterId = 1, Name = "Saves Bonus", BonusType = "Saves", Formula = "1", AbilityId = 17, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Movespeed Bonus", BonusType = "MOVESPEED", Formula = "30", AbilityId = 29, EquationCategoryId = 0, ShowFormula = false },
 
-                new Equation{ CharacterId = 1, Name = "Attacks Bonus", BonusType = "Attacks", Formula = "-1", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "2", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Attacks Bonus", BonusType = "Attacks", Formula = "-2", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Damage Bonus", BonusType = "Damage", Formula = "4", AbilityId = 25, EquationCategoryId = 0, ShowFormula = false },
                 new Equation{ CharacterId = 1, Name = "Claw Attack Bonus", BonusType = "CLAW_ATTACK", Formula = "1", AbilityId = 26, EquationCategoryId = 0, ShowFormula = false },
-                new Equation{ CharacterId = 1, Name = "Maneuvers Bonus", BonusType = "Maneuvers", Formula = "2", AbilityId = 27, EquationCategoryId = 0, ShowFormula = false }
+                new Equation{ CharacterId = 1, Name = "Maneuvers Bonus", BonusType = "Maneuvers", Formula = "2", AbilityId = 27, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Maneuvers Bonus", BonusType = "Maneuvers", Formula = "2", AbilityId = 30, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Armor Bonus", BonusType = "ARMOR", Formula = "9", AbilityId = 31, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Claw Attack Bonus", BonusType = "CLAW_ATTACK", Formula = "1", AbilityId = 32, EquationCategoryId = 0, ShowFormula = false },
+
+                new Equation{ CharacterId = 1, Name = "Attack Bonus", BonusType = "Attacks", Formula = "1", AbilityId = 33, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Dodge Bonus", BonusType = "DODGE", Formula = "1", AbilityId = 33, EquationCategoryId = 0, ShowFormula = false },
+                new Equation{ CharacterId = 1, Name = "Reflex Bonus", BonusType = "REF", Formula = "1", AbilityId = 33, EquationCategoryId = 0, ShowFormula = false }
             };
 
             return equations;
@@ -301,7 +308,11 @@ namespace Pathfinder.Models
                 new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Improved Sunder", Description = "Armor, whats armor?", IsConditional = true, Active = false },
                 new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Snow Tiger Berserker", Description = "Pounce bitches.", IsConditional = false, Active = true },
 
-                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Base Movement Speed", Description = "Base Movement Speed", IsConditional = false, Active = true }
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Base Movement Speed", Description = "Base Movement Speed", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 3, Name = "Greater Sunder", Description = "Now with less armor.", IsConditional = true, Active = false },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "+2 Full Plate", Description = "Armor goes here for now...", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Masterwork Claws", Description = "Masterwork Claws", IsConditional = false, Active = true },
+                new Ability{ CharacterId = 1, AbilityTypeId = 2, Name = "Celerity", Description = "Like Haste", IsConditional = true, Active = false }
             };
 
             return abilities;

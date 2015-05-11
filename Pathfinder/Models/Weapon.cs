@@ -17,5 +17,7 @@ namespace Pathfinder.Models
         public int CriticalModifier { get; set; }
         public int Range { get; set; }
         public string Type { get; set; }
+        public bool Masterwork { get; set; }
+        public int Weight { get; set; }
     }
 }
