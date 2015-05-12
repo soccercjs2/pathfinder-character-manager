@@ -5,11 +5,12 @@ using System.Web;
 
 namespace Pathfinder.Models
 {
-    public class Equipment
+    public abstract class Equipment
     {
         public int EquipmentId { get; set; }
         public int CharacterId { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
+        public bool Equipped { get; set; }
     }
 }

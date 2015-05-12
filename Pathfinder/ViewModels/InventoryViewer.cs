@@ -15,7 +15,8 @@ namespace Pathfinder.ViewModels
         public List<MagicItem> Scrolls { get; set; }
         public List<MagicItem> Rods { get; set; }
         public List<MagicItem> Potions { get; set; }
-        public List<MagicItem> WondrousItems { get; set; }
+        public List<MagicItem> EquippedWondrousItems { get; set; }
+        public List<MagicItem> UnequippedWondrousItems { get; set; }
         public List<Equipment> Equipment { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
@@ -31,7 +32,9 @@ namespace Pathfinder.ViewModels
             this.Scrolls = LoadMagicItems(characterId, "scroll");
             this.Rods = LoadMagicItems(characterId, "rod");
             this.Potions = LoadMagicItems(characterId, "potion");
-            this.WondrousItems = LoadMagicItems(characterId, "wondrous");
+            this.EquippedWondrousItems = LoadMagicItems(characterId, "wondrous").Where(m => m.Equipped == true ).ToList<MagicItem>();
+            this.UnequippedWondrousItems = LoadMagicItems(characterId, "wondrous").Where(m => m.Equipped == false).ToList<MagicItem>();
+            this.Equipment = LoadEquipment(characterId);
         }
 
         public List<Weapon> LoadWeapons(int characterId)
@@ -49,6 +52,13 @@ namespace Pathfinder.ViewModels
             return db.MagicItems
                 .Where(m => m.CharacterId == characterId && m.Type == type)
                 .ToList<MagicItem>();
+        }
+
+        public List<Equipment> LoadEquipment(int characterId)
+        {
+            return db.Equipments
+                .Where(m => m.CharacterId == characterId)
+                .ToList<Equipment>();
         }
     }
 }

@@ -292,11 +292,11 @@
     <Content Include="Views\Equation\CreateAbilityEquation.cshtml" />
     <Content Include="Views\Skill\Edit.cshtml" />
     <Content Include="Views\Attack\EditSubAttack.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
-    <Folder Include="Views\Inventory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

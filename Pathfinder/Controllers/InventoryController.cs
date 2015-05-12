@@ -1,4 +1,5 @@
 ﻿using Pathfinder.Models;
+using Pathfinder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

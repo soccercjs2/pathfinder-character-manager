@@ -1,0 +1,106 @@
+﻿@model Pathfinder.ViewModels.InventoryViewer
+
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h2>Inventory</h2>
+
+<div class="inline float-left half-column">
+    <table id="tblWeapons" class="section full">
+        <thead><tr><td>Weapons</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+    <table id="tblArmors" class="section full">
+        <thead><tr><td>Armors</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+    <table id="tblPotions" class="section full">
+        <thead><tr><td>Potions</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+    <table id="tblScrolls" class="section full">
+        <thead><tr><td>Scrolls</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+    <table id="tblWands" class="section full">
+        <thead><tr><td>Wands</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+    <table id="tblRods" class="section full">
+        <thead><tr><td>Rods</td></tr></thead>
+        @foreach (var item in @Model.Rods)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="inline float-right half-column">
+    <table id="tblEquippedWondrous" class="section full">
+        <thead>
+            <tr>
+                <td>Equipped Wondrous Items</td>
+                <td>Slot</td>
+            </tr>
+        </thead>
+        @foreach (var item in @Model.EquippedWondrousItems)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Slot</td>
+            </tr>
+        }
+    </table>
+    <table id="tblUnequippedWondrous" class="section full">
+        <thead>
+            <tr>
+                <td>Unequipped Wondrous Items</td>
+                <td>Slot</td>
+            </tr>
+        </thead>
+        @foreach (var item in @Model.UnequippedWondrousItems)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Slot</td>
+            </tr>
+        }
+    </table>
+    <table id="tblEquipment" class="section full">
+        <thead><tr><td>Equipment</td></tr></thead>
+        @foreach (var item in @Model.Equipment)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>
+</div>

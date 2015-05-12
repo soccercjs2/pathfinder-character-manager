@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Pathfinder.Models
 {
-    public class Weapon
+    [Table("Weapons")]
+    public class Weapon : Equipment
     {
         public int WeaponId { get; set; }
-        public int CharacterId { get; set; }
-        public string Name { get; set; }
         public int EnhancementBonus { get; set; }
         public string Damage { get; set; }
         public int CriticalMinimum { get; set; }
@@ -18,6 +18,5 @@ namespace Pathfinder.Models
         public int Range { get; set; }
         public string Type { get; set; }
         public bool Masterwork { get; set; }
-        public int Weight { get; set; }
     }
 }
