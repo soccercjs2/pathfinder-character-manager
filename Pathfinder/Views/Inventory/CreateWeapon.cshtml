@@ -1,0 +1,132 @@
+﻿@model Pathfinder.Models.Weapon
+
+@{
+    ViewBag.Title = "CreateWeapon";
+}
+
+<h2>CreateWeapon</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Weapon</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CharacterId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CharacterId)
+                @Html.ValidationMessageFor(model => model.CharacterId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weight, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weight)
+                @Html.ValidationMessageFor(model => model.Weight)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Equipped, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Equipped)
+                @Html.ValidationMessageFor(model => model.Equipped)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WeaponId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeaponId)
+                @Html.ValidationMessageFor(model => model.WeaponId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnhancementBonus, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EnhancementBonus)
+                @Html.ValidationMessageFor(model => model.EnhancementBonus)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Damage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Damage)
+                @Html.ValidationMessageFor(model => model.Damage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CriticalMinimum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CriticalMinimum)
+                @Html.ValidationMessageFor(model => model.CriticalMinimum)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CriticalMaximum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CriticalMaximum)
+                @Html.ValidationMessageFor(model => model.CriticalMaximum)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CriticalModifier, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CriticalModifier)
+                @Html.ValidationMessageFor(model => model.CriticalModifier)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Range, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Range)
+                @Html.ValidationMessageFor(model => model.Range)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Type)
+                @Html.ValidationMessageFor(model => model.Type)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Masterwork, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Masterwork)
+                @Html.ValidationMessageFor(model => model.Masterwork)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

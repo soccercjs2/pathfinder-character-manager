@@ -184,6 +184,7 @@
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Equation.cs" />
     <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\Gear.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PathfinderContext.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Skill\Edit.cshtml" />
     <Content Include="Views\Attack\EditSubAttack.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Inventory\CreateWeapon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

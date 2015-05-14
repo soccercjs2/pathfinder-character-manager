@@ -8,7 +8,7 @@
 
 <div class="inline float-left half-column">
     <table id="tblWeapons" class="section full">
-        <thead><tr><td>Weapons</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblWeapons')"><tr><td>Weapons</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -17,7 +17,7 @@
         }
     </table>
     <table id="tblArmors" class="section full">
-        <thead><tr><td>Armors</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblArmors')"><tr><td>Armors</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -26,7 +26,7 @@
         }
     </table>
     <table id="tblPotions" class="section full">
-        <thead><tr><td>Potions</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblPotions')"><tr><td>Potions</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -35,7 +35,7 @@
         }
     </table>
     <table id="tblScrolls" class="section full">
-        <thead><tr><td>Scrolls</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblScrolls')"><tr><td>Scrolls</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -44,7 +44,7 @@
         }
     </table>
     <table id="tblWands" class="section full">
-        <thead><tr><td>Wands</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblWands')"><tr><td>Wands</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -53,7 +53,7 @@
         }
     </table>
     <table id="tblRods" class="section full">
-        <thead><tr><td>Rods</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblRods')"><tr><td>Rods</td></tr></thead>
         @foreach (var item in @Model.Rods)
         {
             <tr>
@@ -65,7 +65,7 @@
 
 <div class="inline float-right half-column">
     <table id="tblEquippedWondrous" class="section full">
-        <thead>
+        <thead onclick="ToggleRowsVisible('tblEquippedWondrous')">
             <tr>
                 <td>Equipped Wondrous Items</td>
                 <td>Slot</td>
@@ -80,7 +80,7 @@
         }
     </table>
     <table id="tblUnequippedWondrous" class="section full">
-        <thead>
+        <thead onclick="ToggleRowsVisible('tblUnequippedWondrous')">
             <tr>
                 <td>Unequipped Wondrous Items</td>
                 <td>Slot</td>
@@ -95,12 +95,20 @@
         }
     </table>
     <table id="tblEquipment" class="section full">
-        <thead><tr><td>Equipment</td></tr></thead>
+        <thead onclick="ToggleRowsVisible('tblEquipment')"><tr><td>Equipment</td></tr></thead>
         @foreach (var item in @Model.Equipment)
         {
             <tr>
                 <td>@item.Name</td>
             </tr>
         }
+    </table>
+
+    <table id="tblManage" class="section full">
+        <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Add Items</td></tr></thead>
+        <tr><td>@Html.ActionLink("Add Weapon", "CreateWeapon", new { Id = Model.CharacterId }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Armor", "CreateArmor", new { Id = Model.CharacterId }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Magic Item", "CreateMagicItem", new { Id = Model.CharacterId }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Adventuring Gear", "CreateGear", new { Id = Model.CharacterId }, null)</td></tr>
     </table>
 </div>
