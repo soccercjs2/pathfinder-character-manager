@@ -297,6 +297,7 @@
     <Content Include="Views\Inventory\CreateWeapon.cshtml" />
     <Content Include="Views\Inventory\CreateArmor.cshtml" />
     <Content Include="Views\Inventory\CreateGear.cshtml" />
+    <Content Include="Views\Inventory\CreateMagicItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

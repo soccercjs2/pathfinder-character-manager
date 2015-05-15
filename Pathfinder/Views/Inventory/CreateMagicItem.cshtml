@@ -1,0 +1,93 @@
+﻿@model Pathfinder.Models.MagicItem
+
+@{
+    ViewBag.Title = "CreateMagicItem";
+}
+
+<h2>CreateMagicItem</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.CharacterId)
+        @Html.HiddenFor(m => m.EquipmentId)
+        @Html.HiddenFor(m => m.MagicItemId)
+        @Html.HiddenFor(m => m.Type)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        @if (Model.Type == "wands" || Model.Type == "rods" || Model.Type == "wondrous")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Charges, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Charges)
+                    @Html.ValidationMessageFor(model => model.Charges)
+                </div>
+            </div>   
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.Charges)
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CasterLevel, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CasterLevel)
+                @Html.ValidationMessageFor(model => model.CasterLevel)
+            </div>
+        </div>
+
+        @if (Model.Type == "wondrous")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Slot, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Slot)
+                    @Html.ValidationMessageFor(model => model.Slot)
+                </div>
+            </div>   
+        }
+
+        @if (Model.Type == "rod" || Model.Type == "wondrous")
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weight, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weight)
+                @Html.ValidationMessageFor(model => model.Weight)
+            </div>
+        </div>
+
+        @if (Model.Type == "wondrous")
+        {
+            <div class="form-group">
+            @Html.LabelFor(model => model.Equipped, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Equipped)
+                @Html.ValidationMessageFor(model => model.Equipped)
+            </div>
+        </div>   
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

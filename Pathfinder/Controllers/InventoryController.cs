@@ -110,6 +110,7 @@ namespace Pathfinder.Controllers
         {
             MagicItem magicItem = new MagicItem();
             magicItem.CharacterId = id;
+            magicItem.Type = type;
 
             if (type == "potion" || type == "scroll") { magicItem.Charges = 1; }
 
