@@ -106,10 +106,13 @@ namespace Pathfinder.Controllers
         }
 
         //magic items
-        public ActionResult CreateMagicItem(int id)
+        public ActionResult CreateMagicItem(int id, string type)
         {
             MagicItem magicItem = new MagicItem();
             magicItem.CharacterId = id;
+
+            if (type == "potion" || type == "scroll") { magicItem.Charges = 1; }
+
             return View(magicItem);
         }
 

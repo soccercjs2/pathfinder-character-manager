@@ -27,7 +27,7 @@ namespace Pathfinder
 
             routes.MapRoute(
                 name: "Ability",
-                url: "Ability/{action}/{id},{type}",
+                url: "Ability/{action}/{id}/{type}",
                 defaults: new { controller = "Ability", action = "Index", id = UrlParameter.Optional, type = UrlParameter.Optional }
             );
         }
