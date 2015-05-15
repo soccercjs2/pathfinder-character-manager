@@ -9,7 +9,7 @@
 <div class="inline float-left half-column">
     <table id="tblWeapons" class="section full">
         <thead onclick="ToggleRowsVisible('tblWeapons')"><tr><td>Weapons</td></tr></thead>
-        @foreach (var item in @Model.Rods)
+        @foreach (var item in @Model.Weapons)
         {
             <tr>
                 <td>@item.Name</td>
@@ -18,7 +18,7 @@
     </table>
     <table id="tblArmors" class="section full">
         <thead onclick="ToggleRowsVisible('tblArmors')"><tr><td>Armors</td></tr></thead>
-        @foreach (var item in @Model.Rods)
+        @foreach (var item in @Model.Armors)
         {
             <tr>
                 <td>@item.Name</td>
@@ -27,7 +27,7 @@
     </table>
     <table id="tblPotions" class="section full">
         <thead onclick="ToggleRowsVisible('tblPotions')"><tr><td>Potions</td></tr></thead>
-        @foreach (var item in @Model.Rods)
+        @foreach (var item in @Model.Potions)
         {
             <tr>
                 <td>@item.Name</td>
@@ -36,7 +36,7 @@
     </table>
     <table id="tblScrolls" class="section full">
         <thead onclick="ToggleRowsVisible('tblScrolls')"><tr><td>Scrolls</td></tr></thead>
-        @foreach (var item in @Model.Rods)
+        @foreach (var item in @Model.Scrolls)
         {
             <tr>
                 <td>@item.Name</td>
@@ -45,7 +45,7 @@
     </table>
     <table id="tblWands" class="section full">
         <thead onclick="ToggleRowsVisible('tblWands')"><tr><td>Wands</td></tr></thead>
-        @foreach (var item in @Model.Rods)
+        @foreach (var item in @Model.Wands)
         {
             <tr>
                 <td>@item.Name</td>
@@ -96,7 +96,7 @@
     </table>
     <table id="tblEquipment" class="section full">
         <thead onclick="ToggleRowsVisible('tblEquipment')"><tr><td>Equipment</td></tr></thead>
-        @foreach (var item in @Model.Equipment)
+        @foreach (var item in @Model.Gears)
         {
             <tr>
                 <td>@item.Name</td>

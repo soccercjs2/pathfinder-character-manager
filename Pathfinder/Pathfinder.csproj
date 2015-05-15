@@ -295,6 +295,7 @@
     <Content Include="Views\Attack\EditSubAttack.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Inventory\CreateWeapon.cshtml" />
+    <Content Include="Views\Inventory\CreateArmor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
