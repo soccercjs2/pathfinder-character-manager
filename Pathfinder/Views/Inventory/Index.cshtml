@@ -108,7 +108,11 @@
         <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Add Items</td></tr></thead>
         <tr><td>@Html.ActionLink("Add Weapon", "CreateWeapon", new { Id = Model.CharacterId }, null)</td></tr>
         <tr><td>@Html.ActionLink("Add Armor", "CreateArmor", new { Id = Model.CharacterId }, null)</td></tr>
-        <tr><td>@Html.ActionLink("Add Magic Item", "CreateMagicItem", new { Id = Model.CharacterId }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Potion", "CreateMagicItem", new { Id = Model.CharacterId, Value = "potion" }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Scroll", "CreateMagicItem", new { Id = Model.CharacterId, Value = "scroll" }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Wand", "CreateMagicItem", new { Id = Model.CharacterId, Value = "wand" }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Rod", "CreateMagicItem", new { Id = Model.CharacterId, Value = "rod" }, null)</td></tr>
+        <tr><td>@Html.ActionLink("Add Wondrous Item", "CreateMagicItem", new { Id = Model.CharacterId, Value = "wondrous" }, null)</td></tr>
         <tr><td>@Html.ActionLink("Add Adventuring Gear", "CreateGear", new { Id = Model.CharacterId }, null)</td></tr>
     </table>
 </div>
