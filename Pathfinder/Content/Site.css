@@ -79,7 +79,6 @@ input[type=button] {
     /*padding-left: 5px;
     padding-right: 5px;*/
     padding: 5px;
-    font-size: large;
 }
 
 .section tbody tr:nth-child(even):hover td {
@@ -182,4 +181,9 @@ input[type=button] {
     margin-left: 5px;
     margin-right: 5px;
     width: 570px;
+}
+
+.single_roll_selected td {
+    border-top: 1px solid #1f5fc4;
+    border-bottom: 1px solid #1f5fc4;
 }

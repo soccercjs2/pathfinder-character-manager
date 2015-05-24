@@ -50,9 +50,9 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
         url: "/Character/UpdateAbility",
         data: ability,
         dataType: 'json',
-        success: function (response) {
-            window.location.href = response.Url;
-        }
+        //success: function (response) {
+        //    window.location.href = response.Url;
+        //}
     });
 };
 
