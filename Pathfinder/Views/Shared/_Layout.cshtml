@@ -6,10 +6,11 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/jquery-2.1.4.min.js")
     @Scripts.Render("~/Scripts/jquery.masonry.min.js")
+    @Scripts.Render("~/Scripts/hammer.min.js")
     @Scripts.Render("~/Scripts/pathfinder.js")
-
+    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,9 +28,9 @@
                     @if (Session["CharacterId"] != null)
                     {
                         <li>@Html.ActionLink("Character", "ViewCharacter", "Character", new { Id = Session["CharacterId"] }, null)</li>
-                        <li>@Html.ActionLink("Ability", "Index", "Abilities", new { Id = Session["CharacterId"] }, null)</li>
-                        <li>@Html.ActionLink("Attack", "Index", "Attacks", new { Id = Session["CharacterId"] }, null)</li>
-                        <li>@Html.ActionLink("Spell", "Index", "Spells", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Abilities", "Index", "Ability", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Attacks", "Index", "Attack", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Spells", "Index", "Spell", new { Id = Session["CharacterId"] }, null)</li>
                         <li>@Html.ActionLink("Inventory", "Index", "Inventory", new { Id = Session["CharacterId"] }, null)</li>
                     }
                 </ul>

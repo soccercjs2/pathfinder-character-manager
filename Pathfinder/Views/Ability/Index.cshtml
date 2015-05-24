@@ -20,22 +20,35 @@
             <thead>
                 <tr>
                     <td>Name</td>
-                    <td>Description</td>
-                    <td>Conditional</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td class="hidden-xs">Description</td>
+                    <td>Active</td>
                 </tr>
             </thead>
             @foreach (var ability in abilityType.Abilities)
             {
                 <tr>
                     <td>@ability.Name</td>
-                    <td>@ability.Description</td>
-                    <td>@ability.IsConditional</td>
-                    <td>@Html.ActionLink("Bonuses", "AbilityBonuses", new { Id = ability.AbilityId }, null)</td>
-                    <td>@Html.ActionLink("Edit", "EditAbility", new { Id = ability.AbilityId }, null)</td>
-                    <td>@Html.ActionLink("Delete", "DeleteAbility", new { Id = ability.AbilityId }, null)</td>
+                    <td class="hidden-xs">@ability.Description</td>
+                    <td align="right" style="vertical-align: central;">
+                        @if (ability.IsConditional)
+                        {
+                            @Html.EditorFor(m => ability.Active, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control",
+                                           @onclick = "UpdateAbility(" + ability.AbilityId + ","
+                                                                       + ability.CharacterId + ","
+                                                                       + ability.AbilityTypeId + ",'"
+                                                                       + ability.Name + "','"
+                                                                       + ability.Description + "','"
+                                                                       + ability.IsConditional + "','"
+                                                                       + !ability.Active + "')"
+                                       }
+                                   });
+                        }
+                    </td>
+
                 </tr>
             }
         </table>

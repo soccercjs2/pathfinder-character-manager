@@ -55,3 +55,4 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
         }
     });
 };
+

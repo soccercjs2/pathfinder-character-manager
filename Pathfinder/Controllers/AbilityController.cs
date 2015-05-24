@@ -116,5 +116,25 @@ namespace Pathfinder.Controllers
         {
             return View(new AbilityBonusViewer(id));
         }
+
+        [HttpPost]
+        public ActionResult UpdateAbility(Ability ability)
+        {
+            string redirectUrl = new UrlHelper(Request.RequestContext).Action("Index", "Ability", new { Id = ability.CharacterId });
+
+            if (ModelState.IsValid)
+            {
+                db.Abilities.Attach(ability);
+                db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+
+                return Json(new { Url = redirectUrl });
+            }
+            else
+            {
+                return Json(new { Url = redirectUrl });
+            }
+        }
     }
 }

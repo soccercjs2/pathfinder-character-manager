@@ -13,11 +13,8 @@
             <td>Attacks</td>
             <td>Damage</td>
             <td>Critical</td>
-            <td>Range</td>
-            <td>Type</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="hidden-xs">Range</td>
+            <td class="hidden-xs">Type</td>
         </tr>
     </thead>
     @foreach (var item in Model.Attacks)
@@ -27,11 +24,8 @@
             <td>@item.AttackBonuses</td>
             <td>@item.Damage</td>
             <td>@item.Critical</td>
-            <td>@item.Range</td>
-            <td>@item.Type</td>
-            <td>@Html.ActionLink("Sub Attacks", "SubAttack", new { Id = item.AttackId })</td>
-            <td>@Html.ActionLink("Edit", "Edit", new { Id = item.AttackId })</td>
-            <td>@Html.ActionLink("Delete", "Delete", new { Id = item.AttackId })</td>
+            <td class="hidden-xs">@item.Range</td>
+            <td class="hidden-xs">@item.Type</td>
         </tr>
     }
 </table><br />
