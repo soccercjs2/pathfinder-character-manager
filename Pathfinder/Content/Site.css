@@ -66,6 +66,7 @@ input[type=button] {
     margin-bottom: 10px;
     text-align: left;
     /*padding: 5px;*/
+    -webkit-user-select: none;
 }
 
 .section thead tr td {
