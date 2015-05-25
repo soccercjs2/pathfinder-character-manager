@@ -39,24 +39,34 @@
             })(Hammer.Manager.prototype.emit);
         }));
 
-        $('.single_roll').on('mousedown', function () {
+        $('.single_roll').on('mousedown', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             $(this).addClass('single_roll_selected');
         });
 
-        $('.single_roll').hammer().on('press', function () {
+        $('.single_roll').hammer().on('press', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             GoToRoller($(this).data('name'), $(this).data('value'));
             $(this).removeClass('single_roll_selected');
         });
 
-        $('.single_roll').hammer().on('doubletap', function () {
+        $('.single_roll').hammer().on('doubletap', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             GoToRoller($(this).data('name'), $(this).data('value'));
         });
 
-        $('.single_roll').on('mouseup', function () {
+        $('.single_roll').on('mouseup', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             $(this).removeClass('single_roll_selected');
         });
 
-        $('#btnRoll').click(function () {
+        $('#btnRoll').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             $('#rollResult').text(Roll($(this).data('value')));
         });
     }
