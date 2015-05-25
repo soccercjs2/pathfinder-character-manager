@@ -1,6 +1,20 @@
 ﻿function GoToRoller(name, value) {
-    var url = '/Character/Roller/' + name + '/\'1d20\'p' + value;
-    window.open(url, '_blank', 'width=400,height=140,resizable=1');
+    //var url = '/Character/Roller/' + name + '/\'1d20\'p' + value;
+
+    var result = Math.floor((Math.random() * 20) + 1) + value;
+
+    $('#rollTitle').text(name);
+    $('#rollBonus').text(value);
+    $('#btnRoll').data('value', value);
+    $('#rollResult').text(Roll(value));
+    $('#singleD20Roll').modal('show');
+
+    //window.open(url, '_blank', 'width=400,height=140,resizable=1');
+}
+
+function Roll(value)
+{
+    return Math.floor((Math.random() * 20) + 1) + value;
 }
 
 function ToggleVision(id, visibleStyle) {

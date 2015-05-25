@@ -45,6 +45,7 @@
 
         $('.single_roll').hammer().on('press', function () {
             GoToRoller($(this).data('name'), $(this).data('value'));
+            $(this).removeClass('single_roll_selected');
         });
 
         $('.single_roll').hammer().on('doubletap', function () {
@@ -53,6 +54,10 @@
 
         $('.single_roll').on('mouseup', function () {
             $(this).removeClass('single_roll_selected');
+        });
+
+        $('#btnRoll').click(function () {
+            $('#rollResult').text(Roll($(this).data('value')));
         });
     }
 </script>
