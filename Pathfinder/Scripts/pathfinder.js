@@ -2,13 +2,28 @@
     $('#rollTitle').text(name);
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);
-    $('#rollResult').text(Roll(value));
+
+    var roll = Roll(value);
+
+    $('#rollResult').text(roll + value);
+    $('#rollString').text(RollString(roll, value));
     $('#singleD20Roll').modal('show');
 }
 
-function Roll(value)
+function Roll()
 {
-    return Math.floor((Math.random() * 20) + 1) + value;
+    return Math.floor((Math.random() * 20) + 1);
+}
+
+function RollString(roll, value)
+{
+    var operator = '+';
+    if (value < 0) { operator = '-' }
+
+    var rollString = '1d20 ' + operator + ' ' + Math.abs(value);
+    rollString += ' = (' + roll + ') ' + operator + ' ' + Math.abs(value);
+    rollString += ' = ' + (roll + value);
+    return rollString;
 }
 
 function ToggleVision(id, visibleStyle) {

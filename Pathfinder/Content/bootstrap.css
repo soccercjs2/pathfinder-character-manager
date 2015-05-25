@@ -5607,8 +5607,7 @@ button.close {
 body.modal-open,
 .modal-open .navbar-fixed-top,
 .modal-open .navbar-fixed-bottom {
-    /*canged to 0 so the page doesn't shift for scroll bar*/
-    margin-right: 0px;
+  margin-right: 15px;
 }
 
 .modal {
@@ -5619,9 +5618,8 @@ body.modal-open,
   left: 0;
   z-index: 1040;
   display: none;
-  overflow: hidden;
-  overflow-y: hidden;
-  /*canged to hidden so the page doesn't shift for scroll bar*/
+  overflow: auto;
+  overflow-y: scroll;
 }
 
 .modal.fade .modal-dialog {
@@ -5697,7 +5695,7 @@ body.modal-open,
 
 .modal-body {
   position: relative;
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 .modal-footer {
