@@ -3,11 +3,31 @@
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);
 
-    var roll = Roll(value);
-
-    $('#rollResult').text(roll + value);
-    $('#rollString').text(RollString(roll, value));
+    //var roll = Roll();
+    //if (roll == 20) { $('#rollResult').addClass('critical'); } else { $('#rollResult').removeClass('critical'); }
+    //$('#rollResult').text(roll + value);
+    //$('#rollString').text(RollString(roll, value));
+    UpdateRoller($('#rollResult'), $('#rollString'), Roll(), value);
     $('#singleD20Roll').modal('show');
+}
+
+function UpdateRoller(lblResult, lblMath, roll, value) {
+    if (roll == 20) {
+        lblResult.removeClass('critical-failure');
+        lblResult.addClass('critical');
+    }
+    else if (roll == 1) {
+        lblResult.removeClass('critical');
+        lblResult.addClass('critical-failure');
+    }
+    else {
+        lblResult.removeClass('critical');
+        lblResult.removeClass('critical-failure');
+    }
+
+    lblResult.text(roll + value);
+    lblMath.text(RollString(roll, value));
+
 }
 
 function Roll()

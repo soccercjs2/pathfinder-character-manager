@@ -67,10 +67,10 @@
         $('#btnRoll').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var roll = Roll(value);
-            $('#rollResult').fadeOut(function () { $('#rollResult').text(roll); });
-            $('#rollResult').fadeIn();
-            $('#rollString').text(RollString(roll, $('#btnRoll').data('value')));
+            var value = $('#btnRoll').data('value')
+            
+            $('#rollResult').fadeOut(200, function () { UpdateRoller($('#rollResult'), $('#rollString'), Roll(), value); });
+            $('#rollResult').fadeIn(200);
         });
     }
 </script>
