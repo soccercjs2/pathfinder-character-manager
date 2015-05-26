@@ -9,7 +9,7 @@
 <table class="section">
     @foreach (var item in Model.SkillItems)
     {
-        <tr ondblclick="@("GoToRoller('" + item.TrimmedName + "','" + item.Value + "')");">
+        <tr ondblclick="@("SingleD20Roll('" + item.TrimmedName + "','" + item.Value + "')");">
             <td>@item.SkillName</td>
             <td style="text-align: right;" colspan="2">@item.Value</td>
         </tr>

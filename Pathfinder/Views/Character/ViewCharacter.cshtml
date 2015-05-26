@@ -40,36 +40,26 @@
         }));
 
         $('.single_roll').on('mousedown', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
             $(this).addClass('single_roll_selected');
         });
 
         $('.single_roll').hammer().on('press', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            GoToRoller($(this).data('name'), $(this).data('value'));
+            SingleD20Roll($(this).data('name'), $(this).data('value'));
             $(this).removeClass('single_roll_selected');
         });
 
         $('.single_roll').hammer().on('doubletap', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            GoToRoller($(this).data('name'), $(this).data('value'));
+            SingleD20Roll($(this).data('name'), $(this).data('value'));
         });
 
         $('.single_roll').on('mouseup', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
             $(this).removeClass('single_roll_selected');
         });
 
         $('#btnRoll').click(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
             var value = $('#btnRoll').data('value')
             
-            $('#rollResult').fadeOut(200, function () { UpdateRoller($('#rollResult'), $('#rollString'), Roll(), value); });
+            $('#rollResult').fadeOut(200, function () { UpdateRoller($('#rollResult'), $('#rollString'), Roll('1d20'), value); });
             $('#rollResult').fadeIn(200);
         });
     }

@@ -4,6 +4,64 @@
     ViewBag.Title = "Attacks";
 }
 
+<script type="text/javascript">
+    window.onload = function () {
+        (function (factory) {
+            if (typeof define === 'function' && define.amd) {
+                define(['jquery', 'hammerjs'], factory);
+            } else if (typeof exports === 'object') {
+                factory(require('jquery'), require('hammerjs'));
+            } else {
+                factory(jQuery, Hammer);
+            }
+        }(function ($, Hammer) {
+            function hammerify(el, options) {
+                var $el = $(el);
+                if (!$el.data("hammer")) {
+                    $el.data("hammer", new Hammer($el[0], options));
+                }
+            }
+
+            $.fn.hammer = function (options) {
+                return this.each(function () {
+                    hammerify(this, options);
+                });
+            };
+
+            // extend the emit method to also trigger jQuery events
+            Hammer.Manager.prototype.emit = (function (originalEmit) {
+                return function (type, data) {
+                    originalEmit.call(this, type, data);
+                    $(this.element).trigger({
+                        type: type,
+                        gesture: data
+                    });
+                };
+            })(Hammer.Manager.prototype.emit);
+        }));
+
+        $('.single_roll').hammer().on('press', function (e) {
+            AttackRoller('Roll Attacks', $(this).data('weapon'), $(this).data('bonuses'), $(this).data('damage'));
+        });
+
+        $('.single_roll').hammer().on('doubletap', function (e) {
+            AttackRoller('Roll Attacks', $(this).data('weapon'), $(this).data('bonuses'), $(this).data('damage'));;
+        });
+
+        $('#tblAttacks').on('click', 'button', function () {
+            var equation = $(this).data('equation');
+            var splitEquation = equation.split(' ');
+            for (i = 0; i < splitEquation.length; i++) {
+                if (splitEquation[i].indexOf('d') > -1) {
+                    equation = equation.replace(splitEquation[i], Roll(splitEquation[i]));
+                }
+            }
+            var result = eval(equation);
+            $(this).text(result);
+        });
+    }
+</script>
+
 <h2>Attacks</h2>
 
 <table class="section noclick full">
@@ -19,7 +77,7 @@
     </thead>
     @foreach (var item in Model.Attacks)
     {
-        <tr>
+        <tr class="single_roll" data-weapon="@item.WeaponName" data-bonuses="@item.AttackBonuses" data-damage="@item.Damage">
             <td>@item.WeaponName</td>
             <td>@item.AttackBonuses</td>
             <td>@item.Damage</td>
@@ -30,4 +88,23 @@
     }
 </table><br />
 @Html.ActionLink("+ [New Attack]", "Create", new { Id = Model.MyCharacter.CharacterId })
+
+<!-- Attack Roller -->
+<div class="modal fade" id="attackRoller" tabindex="-1" role="dialog" aria-labelledby="attackerTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="attackerTitle"></h3>
+            </div>
+            <div class="modal-body">
+                <table id="tblAttacks" class="attack-roller"></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnRollAll" class="btn btn-primary">Roll All</button>
+            </div>
+        </div>
+    </div>
+</div>
 

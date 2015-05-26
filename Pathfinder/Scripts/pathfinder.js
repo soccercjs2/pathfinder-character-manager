@@ -1,14 +1,39 @@
-﻿function GoToRoller(name, value) {
+﻿function SingleD20Roll(name, value) {
     $('#rollTitle').text(name);
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);
 
-    //var roll = Roll();
-    //if (roll == 20) { $('#rollResult').addClass('critical'); } else { $('#rollResult').removeClass('critical'); }
-    //$('#rollResult').text(roll + value);
-    //$('#rollString').text(RollString(roll, value));
-    UpdateRoller($('#rollResult'), $('#rollString'), Roll(), value);
+    UpdateRoller($('#rollResult'), $('#rollString'), Roll('1d20'), value);
     $('#singleD20Roll').modal('show');
+}
+
+function AttackRoller(title, weapon, bonuses, damage) {
+    $('#attackerTitle').text(title);
+    FillAttackTable($('#tblAttacks')[0], weapon, bonuses, damage);
+    $('#attackRoller').modal('show');
+}
+
+function FillAttackTable(table, weapon, bonuses, damage) {
+    bonuses = bonuses.replace(/\+/g, '');
+    var array = bonuses.split('/');
+
+    while (table.rows[0]) table.deleteRow(0);
+    for (i = 0; i < array.length; i++) {
+        AddRow(table, weapon, array[i], damage);
+    }
+}
+
+function AddRow(table, weapon, bonus, damage) {
+    var row = table.insertRow(table.rows.length);
+    var weaponCell = row.insertCell(row.cells.length);
+    var attackCell = row.insertCell(row.cells.length);
+    var damageCell = row.insertCell(row.cells.length);
+
+    weaponCell.innerHTML = weapon;
+    attackCell.innerHTML = '<button type="button" class="btn btn-default" data-equation="' + damage + '">Attack</button>';
+    attackCell.setAttribute('class', 'attack-roll-column');
+    damageCell.innerHTML = '<button type="button" class="btn btn-default" data-equation="1d20 + ' + bonus + '">Damage</button>';
+    damageCell.setAttribute('class', 'attack-roll-column');
 }
 
 function UpdateRoller(lblResult, lblMath, roll, value) {
@@ -30,9 +55,18 @@ function UpdateRoller(lblResult, lblMath, roll, value) {
 
 }
 
-function Roll()
+function Roll(roll)
 {
-    return Math.floor((Math.random() * 20) + 1);
+    roll = roll.split('d');
+    var result = 0
+    var count = roll[0];
+    var sides = roll[1];
+
+    for (i = 0; i < count; i++) {
+        result += Math.floor((Math.random() * sides) + 1);
+    }
+
+    return result;
 }
 
 function RollString(roll, value)
