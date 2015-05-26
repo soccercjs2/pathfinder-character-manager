@@ -26,6 +26,10 @@ body.modal-open,
     overflow-y: auto;
 }
 
+.modal-body {
+    line-height: 1;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
