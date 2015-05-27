@@ -229,8 +229,9 @@ input[type=button] {
 }
 
 .attack-roll-column {
-    width: 70px;
-    line-height: 70px;
-    border: 1px solid black;
+    width: 80px;
+    line-height: 50px;
+    border: 2px dashed #428bca;
     text-align: center;
+    cursor: pointer;
 }

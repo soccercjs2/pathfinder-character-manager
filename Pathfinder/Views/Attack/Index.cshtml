@@ -49,7 +49,7 @@
         });
 
         $('#tblAttacks').on('click', '.attack-roll-column', function () {
-            var equation = $(this).data('equation');
+            var equation = $(this).find('span').data('equation');
             var splitEquation = equation.split(' ');
             for (i = 0; i < splitEquation.length; i++) {
                 if (splitEquation[i].indexOf('d') > -1) {
@@ -58,7 +58,7 @@
             }
             var result = eval(equation);
 
-            $(this).fadeOut(200, function () { $(this).text(result); });
+            $(this).fadeOut(200, function () { $(this).find('span').text(result); });
             $(this).fadeIn(200);
         });
     }

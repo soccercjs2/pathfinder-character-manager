@@ -217,6 +217,7 @@
     <Content Include="References\NCalc.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\pathfindercharacters - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\pathfindercharacters.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\hammer.min.js" />
