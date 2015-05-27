@@ -30,10 +30,12 @@ function AddRow(table, weapon, bonus, damage) {
     var damageCell = row.insertCell(row.cells.length);
 
     weaponCell.innerHTML = weapon;
-    attackCell.innerHTML = '<span data-equation="1d20 + ' + bonus + '">Attack</span>';
-    damageCell.innerHTML = '<span data-equation="' + damage + '">Damage</span>';
-    attackCell.setAttribute('class', 'attack-roll-column');
-    damageCell.setAttribute('class', 'attack-roll-column');
+    attackCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-equation="1d20 + ' + bonus + '"><i class="sprite sprite-attack"></i></button>';
+    damageCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-equation="' + damage + '"><i class="sprite sprite-damage"></i></button>';
+    attackCell.setAttribute('class', 'min');
+    damageCell.setAttribute('class', 'min');
+    //attackCell.setAttribute('class', 'attack-roll-column');
+    //damageCell.setAttribute('class', 'attack-roll-column');
 }
 
 function UpdateRoller(lblResult, lblMath, roll, value) {

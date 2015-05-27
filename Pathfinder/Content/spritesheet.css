@@ -1,0 +1,18 @@
+﻿.sprite {
+    background-image: url("../icons/spritesheet.png");
+    background-repeat: no-repeat;
+    display: block;
+    margin: auto;
+}
+
+.sprite-attack {
+    width: 16px;
+    height: 16px;
+    background-position: -5px -5px;
+}
+
+.sprite-damage {
+    width: 16px;
+    height: 16px;
+    background-position: -31px -5px;
+}

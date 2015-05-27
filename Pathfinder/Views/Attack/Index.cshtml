@@ -48,8 +48,8 @@
             AttackRoller('Roll Attacks', $(this).data('weapon'), $(this).data('bonuses'), $(this).data('damage'));;
         });
 
-        $('#tblAttacks').on('click', '.attack-roll-column', function () {
-            var equation = $(this).find('span').data('equation');
+        $('#tblAttacks').on('click', 'button', function () {
+            var equation = $(this).data('equation');
             var splitEquation = equation.split(' ');
             for (i = 0; i < splitEquation.length; i++) {
                 if (splitEquation[i].indexOf('d') > -1) {
@@ -58,7 +58,7 @@
             }
             var result = eval(equation);
 
-            $(this).fadeOut(200, function () { $(this).find('span').text(result); });
+            $(this).fadeOut(200, function () { $(this).text(result); });
             $(this).fadeIn(200);
         });
     }
@@ -88,7 +88,7 @@
             <td class="hidden-xs">@item.Type</td>
         </tr>
     }
-</table><br />
+</table>
 @Html.ActionLink("+ [New Attack]", "Create", new { Id = Model.MyCharacter.CharacterId })
 
 <!-- Attack Roller -->
@@ -100,7 +100,10 @@
                 <h3 class="modal-title" id="attackerTitle"></h3>
             </div>
             <div class="modal-body">
-                <table id="tblAttacks" class="attack-roller"></table>
+                <table id="tblAttacks" class="attack-roller section"></table>
+            </div>
+            <div class="modal-body">
+                <span id="rollString" style="padding-left: 10px; font-size: medium; color: darkgray;"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

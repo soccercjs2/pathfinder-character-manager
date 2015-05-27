@@ -148,7 +148,10 @@ input[type=button] {
 
 .full {
     width: 100%;
-    /*font-size: small;*/
+}
+
+.min {
+    width: 1%;
 }
 
 .half-column {
@@ -228,10 +231,7 @@ input[type=button] {
     font-size: large;
 }
 
-.attack-roll-column {
-    width: 80px;
-    line-height: 50px;
-    border: 2px dashed #428bca;
-    text-align: center;
-    cursor: pointer;
+.attack-roller-button {
+    width: 50px;
+    height: 32px;
 }
