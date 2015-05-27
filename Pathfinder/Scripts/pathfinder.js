@@ -30,9 +30,9 @@ function AddRow(table, weapon, bonus, damage) {
     var damageCell = row.insertCell(row.cells.length);
 
     weaponCell.innerHTML = weapon;
-    attackCell.innerHTML = '<button type="button" class="btn btn-default" data-equation="1d20 + ' + bonus + '">Attack</button>';
+    attackCell.innerHTML = '<span data-equation="1d20 + ' + bonus + '">Attack</span>';
+    damageCell.innerHTML = '<span data-equation="' + damage + '">Damage</span>';
     attackCell.setAttribute('class', 'attack-roll-column');
-    damageCell.innerHTML = '<button type="button" class="btn btn-default" data-equation="' + damage + '">Damage</button>';
     damageCell.setAttribute('class', 'attack-roll-column');
 }
 

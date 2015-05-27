@@ -48,7 +48,7 @@
             AttackRoller('Roll Attacks', $(this).data('weapon'), $(this).data('bonuses'), $(this).data('damage'));;
         });
 
-        $('#tblAttacks').on('click', 'button', function () {
+        $('#tblAttacks').on('click', '.attack-roll-column', function () {
             var equation = $(this).data('equation');
             var splitEquation = equation.split(' ');
             for (i = 0; i < splitEquation.length; i++) {
@@ -57,7 +57,9 @@
                 }
             }
             var result = eval(equation);
-            $(this).text(result);
+
+            $(this).fadeOut(200, function () { $(this).text(result); });
+            $(this).fadeIn(200);
         });
     }
 </script>

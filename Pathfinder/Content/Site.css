@@ -228,10 +228,9 @@ input[type=button] {
     font-size: large;
 }
 
-.attack-roller td {
-    padding: 10px;
-}
-
 .attack-roll-column {
-    width: 50px;
+    width: 70px;
+    line-height: 70px;
+    border: 1px solid black;
+    text-align: center;
 }
