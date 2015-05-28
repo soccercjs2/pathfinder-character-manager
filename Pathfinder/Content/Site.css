@@ -28,6 +28,12 @@ body.modal-open,
 
 .modal-body {
     line-height: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.modal-footer {
+    margin-top: 0px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -220,10 +226,14 @@ input[type=button] {
 
 .critical {
     color: green;
+    border-color: green;
+    border-width: 1px;
 }
 
 .critical-failure {
     color: red;
+    border-color: red;
+    border-width: 1px;
 }
 
 .attack-roller {

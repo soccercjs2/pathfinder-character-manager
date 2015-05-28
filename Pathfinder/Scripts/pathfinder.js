@@ -3,39 +3,37 @@
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);
 
-    UpdateRoller($('#rollResult'), $('#rollString'), Roll('1d20'), value);
+    UpdateRoller($('#rollResult'), $('#singleD20RollString'), Roll('1d20'), value);
     $('#singleD20Roll').modal('show');
 }
 
-function AttackRoller(title, weapon, bonuses, damage) {
+function AttackRoller(title, weapon, bonuses, damage, critical) {
     $('#attackerTitle').text(title);
-    FillAttackTable($('#tblAttacks')[0], weapon, bonuses, damage);
+    FillAttackTable($('#tblAttacks')[0], weapon, bonuses, damage, critical);
     $('#attackRoller').modal('show');
 }
 
-function FillAttackTable(table, weapon, bonuses, damage) {
+function FillAttackTable(table, weapon, bonuses, damage, critical) {
     bonuses = bonuses.replace(/\+/g, '');
     var array = bonuses.split('/');
 
     while (table.rows[0]) table.deleteRow(0);
     for (i = 0; i < array.length; i++) {
-        AddRow(table, weapon, array[i], damage);
+        AddRow(table, weapon, array[i], damage, critical);
     }
 }
 
-function AddRow(table, weapon, bonus, damage) {
+function AddRow(table, weapon, bonus, damage, critical) {
     var row = table.insertRow(table.rows.length);
     var weaponCell = row.insertCell(row.cells.length);
     var attackCell = row.insertCell(row.cells.length);
     var damageCell = row.insertCell(row.cells.length);
 
     weaponCell.innerHTML = weapon;
-    attackCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-equation="1d20 + ' + bonus + '"><i class="sprite sprite-attack"></i></button>';
-    damageCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-equation="' + damage + '"><i class="sprite sprite-damage"></i></button>';
+    attackCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-type="attack" data-equation="1d20 + ' + bonus + '" data-critical="' + critical + '"><i class="sprite sprite-attack"></i></button>';
+    damageCell.innerHTML = '<button class="btn btn-default attack-roller-button" data-type="damage" data-equation="' + damage + '"><i class="sprite sprite-damage"></i></button>';
     attackCell.setAttribute('class', 'min');
     damageCell.setAttribute('class', 'min');
-    //attackCell.setAttribute('class', 'attack-roll-column');
-    //damageCell.setAttribute('class', 'attack-roll-column');
 }
 
 function UpdateRoller(lblResult, lblMath, roll, value) {
@@ -54,7 +52,6 @@ function UpdateRoller(lblResult, lblMath, roll, value) {
 
     lblResult.text(roll + value);
     lblMath.text(RollString(roll, value));
-
 }
 
 function Roll(roll)
@@ -64,7 +61,7 @@ function Roll(roll)
     var count = roll[0];
     var sides = roll[1];
 
-    for (i = 0; i < count; i++) {
+    for (j = 0; j < count; j++) {
         result += Math.floor((Math.random() * sides) + 1);
     }
 

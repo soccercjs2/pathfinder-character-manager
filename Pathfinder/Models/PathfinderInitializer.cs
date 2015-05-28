@@ -150,7 +150,7 @@ namespace Pathfinder.Models
         {
             List<Weapon> weapons = new List<Weapon>
             {
-                new Weapon{ CharacterId = 1, Name = "Claw", EnhancementBonus = 0, Damage = "1d6", CriticalMinimum = 20, CriticalMaximum = 20, CriticalModifier = 2, Range = 0, Type = "S" }
+                new Weapon{ CharacterId = 1, Name = "Claw", EnhancementBonus = 0, Damage = "1d6", CriticalMinimum = 20, CriticalModifier = 2, Range = 0, Type = "S" }
             };
 
             return weapons;

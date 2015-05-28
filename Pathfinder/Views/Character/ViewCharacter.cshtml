@@ -59,7 +59,7 @@
         $('#btnRoll').click(function (e) {
             var value = $('#btnRoll').data('value')
             
-            $('#rollResult').fadeOut(200, function () { UpdateRoller($('#rollResult'), $('#rollString'), Roll('1d20'), value); });
+            $('#rollResult').fadeOut(200, function () { UpdateRoller($('#rollResult'), $('#singleD20RollString'), Roll('1d20'), value); });
             $('#rollResult').fadeIn(200);
         });
     }

@@ -82,8 +82,8 @@ namespace Pathfinder.ViewModels
         {
             string critical = "";
 
-            if (weapon.CriticalMinimum < weapon.CriticalMaximum) { critical += weapon.CriticalMinimum + "-"; }
-            critical += weapon.CriticalMaximum;
+            if (weapon.CriticalMinimum < 20) { critical = weapon.CriticalMinimum + "-"; }
+            critical += "20";
             critical += "/x" + weapon.CriticalModifier;
             return critical;
         }

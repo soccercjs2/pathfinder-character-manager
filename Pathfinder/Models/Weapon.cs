@@ -13,7 +13,7 @@ namespace Pathfinder.Models
         public int EnhancementBonus { get; set; }
         public string Damage { get; set; }
         public int CriticalMinimum { get; set; }
-        public int CriticalMaximum { get; set; }
+        //public int CriticalMaximum { get; set; }
         public int CriticalModifier { get; set; }
         public int Range { get; set; }
         public string Type { get; set; }
