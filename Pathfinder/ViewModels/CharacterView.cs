@@ -72,6 +72,7 @@ namespace Pathfinder.ViewModels
         {
             Character character = db.Characters.Find(characterId);
 
+            this.CharacterId = character.CharacterId;
             this.Name = character.Name;
             this.Experience = character.Experience;
             this.Strength = character.Strength;

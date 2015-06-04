@@ -33,7 +33,9 @@ namespace Pathfinder.Controllers
                 db.Characters.Add(newCharacter);
                 db.SaveChanges();
 
-                return RedirectToAction("ViewCharacter", "Character", new { Id = newCharacter.CharacterId });
+                newCharacter.InitializeCharacter();
+
+                return RedirectToAction("View", "Character", new { Id = newCharacter.CharacterId });
             }
             else
             {
@@ -58,7 +60,7 @@ namespace Pathfinder.Controllers
         [HttpPost]
         public ActionResult UpdateAbility(Ability ability)
         {
-            string redirectUrl = new UrlHelper(Request.RequestContext).Action("ViewCharacter", "Character", new { Id = ability.CharacterId });
+            string redirectUrl = new UrlHelper(Request.RequestContext).Action("View", "Character", new { Id = ability.CharacterId });
     
             if (ModelState.IsValid)
             {

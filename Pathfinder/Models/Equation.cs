@@ -17,6 +17,8 @@ namespace Pathfinder.Models
         public int AbilityId { get; set; }
         public bool ShowFormula { get; set; }
         public string BonusType { get; set; }
+        public bool Editable { get; set; }
+        public bool Deletable { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 

@@ -194,6 +194,7 @@
     <Compile Include="Models\SubAttack.cs" />
     <Compile Include="Models\EquationCategory.cs" />
     <Compile Include="Models\MagicItem.cs" />
+    <Compile Include="Models\Temp.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="ViewModels\AbilityBonusViewer.cs" />
     <Compile Include="ViewModels\AbilityTypeViewer.cs" />
