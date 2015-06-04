@@ -1,11 +1,7 @@
-﻿@model Pathfinder.ViewModels.PlayerCharacter
+﻿@model Pathfinder.ViewModels.CharacterView
 
 @using Pathfinder.Models;
 @using Pathfinder.ViewModels;
-
-@*<script type="text/javascript">
-    
-</script>*@
 
 @{
     ViewBag.Title = Model.Name;
@@ -145,111 +141,13 @@
                 </thead>
                 @foreach (var item in Model.Skills)
                 {
-                    <tr class="single_roll" data-name="@item.Name" data-value="@item.Bonus">
-                        <td>@item.Name</td>
-                        <td style="text-align: right;" colspan="2">@item.Bonus</td>
+                    <tr class="single_roll" data-name="@item.Key" data-value="@item.Value">
+                        <td>@item.Key</td>
+                        <td style="text-align: right;" colspan="2">@item.Value</td>
                     </tr>
                 }
             </table>
-            <div style="padding-left: 5px;">@Html.ActionLink("[Edit Skills]", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</div>
+            <div style="padding-left: 5px;">@Html.ActionLink("[Edit Skills]", "Index", "Skill", new { Id = Model.CharacterId }, null)</div>
         </div>
-
-        @*<div id="divCenter" class="inline center-column">
-        <div id="divClasses">
-            <table id="tblClasses" class="section full">
-                <thead onclick="ToggleRowsVisible('tblClasses')">
-                    <tr>
-                        <td>Class</td>
-                        <td>Levels</td>
-                        <td>BAB</td>
-                        <td>Fort</td>
-                        <td>Ref</td>
-                        <td>Will</td>
-                    </tr>
-                </thead>
-                @foreach (var item in Model.Classes)
-                {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Levels</td>
-                        <td>@item.BaseAttackBonus</td>
-                        <td>@item.ForitudeSave</td>
-                        <td>@item.ReflexSave</td>
-                        <td>@item.WillSave</td>
-                    </tr>
-                }
-            </table>
-        </div>
-
-        <div id="divAttacks">
-            <table id="tblAttacks" class="section full">
-                <thead onclick="ToggleRowsVisible('tblAttacks')">
-                    <tr>
-                        <td>Name</td>
-                        <td>Attacks</td>
-                        <td>Damage</td>
-                        <td>Crit</td>
-                    </tr>
-                </thead>
-                @foreach (var item in Model.Attacks)
-                {
-                    <tr>
-                        <td>@item.WeaponName</td>
-                        <td>@item.AttackBonuses</td>
-                        <td>@item.Damage</td>
-                        <td>@item.Critical</td>
-                    </tr>
-                }
-            </table>
-        </div>
-
-        <div id="divAbilities" class="js-masonry inline full" data-masonry-options='{ "columnWidth": 280, "gutter": 10, "itemSelector": ".masonry-box" }'>
-            @Html.HiddenFor(m => m.AbilityViewer)
-            @foreach (AbilityTypeViewer type in Model.AbilityViewer.Abilities)
-            {
-                <div id="@("div" + type.Name.Replace(" ",""))" class="inline masonry-box">
-                    <table id="@("tbl" + type.Name.Replace(" ",""))" class="section">
-                        <thead onclick="ToggleRowsVisible('@("tbl" + type.Name.Replace(" ",""))')"><tr><td colspan="2">@type.Name</td></tr></thead>
-                        @foreach (Ability ability in type.Abilities)
-                        {
-                            <tr>
-                                <td>@ability.Name</td>
-                                <td align="right" style="vertical-align: central;">
-                                    @if (ability.IsConditional)
-                                    {
-                                        @Html.EditorFor(m => ability.Active, new
-                                   {
-                                       htmlAttributes = new
-                                       {
-                                           @class = "form-control",
-                                           @onclick = "UpdateAbility(" + ability.AbilityId + ","
-                                                                       + ability.CharacterId + ","
-                                                                       + ability.AbilityTypeId + ",'"
-                                                                       + ability.Name + "','"
-                                                                       + ability.Description + "','"
-                                                                       + ability.IsConditional + "','"
-                                                                       + !ability.Active + "')"
-                                       }
-                                   });
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            }
-
-            <div id="divManage" class="inline float-right masonry-box">
-                <table id="tblManage" class="section">
-                    <thead onclick="ToggleRowsVisible('tblManage')"><tr><td>Manager Panel</td></tr></thead>
-                    <tr><td>@Html.ActionLink("Manage Classes", "Index", "Class", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                    <tr><td>@Html.ActionLink("Manage Skills", "Index", "Skill", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                    <tr><td>@Html.ActionLink("Manage Attacks", "Index", "Attack", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                    <tr><td>@Html.ActionLink("Manage Abilities", "Index", "Ability", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                    <tr><td>@Html.ActionLink("Manage Equations", "Index", "Equation", new { Id = Model.MyCharacter.CharacterId }, null)</td></tr>
-                </table>
-            </div>
-        </div>
-    </div>*@
     </div>
 }

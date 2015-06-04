@@ -20,7 +20,7 @@ namespace Pathfinder.Models
 
         private PathfinderContext db = new PathfinderContext();
 
-        public int Evaluate(PlayerCharacter character)
+        public int Evaluate(CharacterView character)
         {
             string replacedEquation = this.Formula;
 
@@ -52,7 +52,7 @@ namespace Pathfinder.Models
             return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
         }
 
-        public string EvaluateClass(string replacedEquation, PlayerCharacter character)
+        public string EvaluateClass(string replacedEquation, CharacterView character)
         {
             //see if evaluation is needed
             if (replacedEquation.Contains("Class."))
@@ -69,7 +69,7 @@ namespace Pathfinder.Models
 
                 //load class based on class name
                 Class playerClass = db.Classes
-                    .Where(m => m.Name == className && m.CharacterId == character.MyCharacter.CharacterId)
+                    .Where(m => m.Name == className && m.CharacterId == character.CharacterId)
                     .FirstOrDefault<Class>();
 
                 //find end of class attribute
@@ -109,7 +109,7 @@ namespace Pathfinder.Models
             }
         }
 
-        public string EvaluateClasses(string replacedEquation, PlayerCharacter character)
+        public string EvaluateClasses(string replacedEquation, CharacterView character)
         {
             if (replacedEquation.Contains("Classes."))
             {

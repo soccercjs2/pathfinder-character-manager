@@ -48,6 +48,13 @@ namespace Pathfinder.Controllers
             return View(playerCharacter);
         }
 
+        public ActionResult View(int id)
+        {
+            CharacterView character = new CharacterView(id);
+            Session["CharacterId"] = character.CharacterId;
+            return View(character);
+        }
+
         [HttpPost]
         public ActionResult UpdateAbility(Ability ability)
         {

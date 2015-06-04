@@ -7,6 +7,19 @@
     $('#singleD20Roll').modal('show');
 }
 
+function Roll(roll) {
+    roll = roll.split('d');
+    var result = 0
+    var count = roll[0];
+    var sides = roll[1];
+
+    for (j = 0; j < count; j++) {
+        result += Math.floor((Math.random() * sides) + 1);
+    }
+
+    return result;
+}
+
 function AttackRoller(title, weapon, bonuses, damage, critical) {
     $('#attackerTitle').text(title);
     FillAttackTable($('#tblAttacks')[0], weapon, bonuses, damage, critical);
@@ -52,20 +65,6 @@ function UpdateRoller(lblResult, lblMath, roll, value) {
 
     lblResult.text(roll + value);
     lblMath.text(RollString(roll, value));
-}
-
-function Roll(roll)
-{
-    roll = roll.split('d');
-    var result = 0
-    var count = roll[0];
-    var sides = roll[1];
-
-    for (j = 0; j < count; j++) {
-        result += Math.floor((Math.random() * sides) + 1);
-    }
-
-    return result;
 }
 
 function RollString(roll, value)

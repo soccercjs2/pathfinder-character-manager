@@ -199,6 +199,7 @@
     <Compile Include="ViewModels\AbilityTypeViewer.cs" />
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
+    <Compile Include="ViewModels\CharacterView.cs" />
     <Compile Include="ViewModels\InventoryViewer.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
     <Compile Include="ViewModels\PlayerCharacter.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Scripts\pathfinder.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\roller.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -303,6 +305,7 @@
     <Content Include="Views\Inventory\CreateArmor.cshtml" />
     <Content Include="Views\Inventory\CreateGear.cshtml" />
     <Content Include="Views\Inventory\CreateMagicItem.cshtml" />
+    <Content Include="Views\Character\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
