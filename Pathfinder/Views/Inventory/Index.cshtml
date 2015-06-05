@@ -6,7 +6,7 @@
 
 <h2>Inventory</h2>
 
-<div class="inline float-left half-column">
+<div class="col-sm-6 col-xs-12">
     <table id="tblWeapons" class="section full">
         <thead onclick="ToggleRowsVisible('tblWeapons')"><tr><td>Weapons</td></tr></thead>
         @foreach (var item in @Model.Weapons)
@@ -63,7 +63,7 @@
     </table>
 </div>
 
-<div class="inline float-right half-column">
+<div class="col-sm-6 col-xs-12">
     <table id="tblEquippedWondrous" class="section full">
         <thead onclick="ToggleRowsVisible('tblEquippedWondrous')">
             <tr>
