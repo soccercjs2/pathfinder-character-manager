@@ -16,43 +16,53 @@ namespace Pathfinder.Controllers
         // GET: Attack
         public ActionResult Index(int id)
         {
-            return View(new PlayerCharacter(id));
+            return View(db.AttackGroups.Where(m => m.CharacterId == id));
         }
 
         public ActionResult Create(int id)
         {
-            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
-            
-            EquationCategory damageCategory = db.EquationCategories
-                .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
-
-            List<Equation> damageCategories = db.Equations
-                .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
-
-            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
-            ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
-            
-            Attack attack = new Attack();
-            attack.CharacterId = id;
-
-            return View(attack);
+            return View(new AttackGroup(id));
         }
 
         [HttpPost]
-        public ActionResult Create(Attack attack)
+        public ActionResult Create(AttackGroup attackGroup)
         {
             if (ModelState.IsValid)
             {
-                db.Attacks.Add(attack);
+                db.AttackGroups.Add(attackGroup);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Attack", new { Id = attack.CharacterId });
+                return RedirectToAction("View", "Attack", new { Id = attackGroup.AttackGroupId });
             }
             else
             {
-                return View(attack);
+                return View(attackGroup);
             }
         }
+
+        public ActionResult View(int id)
+        {
+            return View(new AttackGroupView(id));
+        }
+
+        //public ActionResult Create(int id)
+        //{
+        //    List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
+            
+        //    EquationCategory damageCategory = db.EquationCategories
+        //        .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
+
+        //    List<Equation> damageCategories = db.Equations
+        //        .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
+
+        //    ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
+        //    ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
+            
+        //    Attack attack = new Attack();
+        //    attack.CharacterId = id;
+
+        //    return View(attack);
+        //}
 
         public ActionResult Edit(int id)
         {
@@ -67,15 +77,15 @@ namespace Pathfinder.Controllers
             ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
             ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
             
-            return View(db.Attacks.Find(id));
+            return View(db.AttackGroups.Find(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(Attack attack)
+        public ActionResult Edit(AttackGroup attack)
         {
             if (ModelState.IsValid)
             {
-                db.Attacks.Attach(attack);
+                db.AttackGroups.Attach(attack);
                 db.Entry(attack).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -89,12 +99,13 @@ namespace Pathfinder.Controllers
 
         public ActionResult SubAttack(int id)
         {
-            return View(new AttackView(id));
+            return View();
+            //return View(new AttackView(id));
         }
 
         public ActionResult CreateSubAttack(int id)
         {
-            Attack attack = db.Attacks.Where(m => m.AttackId == id).FirstOrDefault<Attack>();
+            AttackGroup attack = db.AttackGroups.Where(m => m.AttackGroupId == id).FirstOrDefault<AttackGroup>();
             EquationCategory attackCategory = db.EquationCategories
                 .Where(m => m.CharacterId == attack.CharacterId 
                     && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
@@ -105,20 +116,20 @@ namespace Pathfinder.Controllers
 
             ViewBag.Equations = new SelectList(equations, "EquationId", "Name");
             
-            SubAttack subAttack = new SubAttack();
-            subAttack.AttackId = id;
+            Attack subAttack = new Attack();
+            subAttack.AttackGroupId = id;
             return View(subAttack);
         }
 
         [HttpPost]
-        public ActionResult CreateSubAttack(SubAttack subAttack)
+        public ActionResult CreateSubAttack(Attack subAttack)
         {
             if (ModelState.IsValid)
             {
                 db.SubAttacks.Add(subAttack);
                 db.SaveChanges();
 
-                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackId });
+                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackGroupId });
             }
             else
             {
@@ -128,7 +139,7 @@ namespace Pathfinder.Controllers
 
         public ActionResult EditSubAttack(int id)
         {
-            Attack attack = db.Attacks.Where(m => m.AttackId == id).FirstOrDefault<Attack>();
+            AttackGroup attack = db.AttackGroups.Where(m => m.AttackGroupId == id).FirstOrDefault<AttackGroup>();
             EquationCategory attackCategory = db.EquationCategories
                 .Where(m => m.CharacterId == attack.CharacterId
                     && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
@@ -143,7 +154,7 @@ namespace Pathfinder.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditSubAttack(SubAttack subAttack)
+        public ActionResult EditSubAttack(Attack subAttack)
         {
             if (ModelState.IsValid)
             {
@@ -151,7 +162,7 @@ namespace Pathfinder.Controllers
                 db.Entry(subAttack).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackId });
+                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackGroupId });
             }
             else
             {

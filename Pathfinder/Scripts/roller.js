@@ -111,7 +111,7 @@ function ListenForAttackRoller() {
             }
         }
 
-        var result = eval(rollString);
+        var result = math.eval(rollString);
         $(this).fadeOut(200, function () {
             if (isCritical) {
                 $(this).addClass("btn-success");

@@ -1,4 +1,4 @@
-﻿@model Pathfinder.ViewModels.PlayerCharacter
+﻿@model IEnumerable<Pathfinder.Models.AttackGroup>
 
 @{
     ViewBag.Title = "Attacks";
@@ -9,30 +9,21 @@
 <table class="section noclick full">
     <thead onclick="ToggleRowsVisible('tblAttacks')">
         <tr>
-            <td>Weapon</td>
-            <td>Attacks</td>
-            <td>Damage</td>
-            <td>Critical</td>
-            <td class="hidden-xs">Range</td>
-            <td class="hidden-xs">Type</td>
+            <td colspan="2">Name</td>
         </tr>
     </thead>
-    @foreach (var item in Model.Attacks)
+    @foreach (var item in Model)
     {
-        <tr class="attack_roll" data-weapon="@item.WeaponName" data-bonuses="@item.AttackBonuses" data-damage="@item.Damage" data-critical="@item.Weapon.CriticalMinimum">
-            <td>@item.WeaponName</td>
-            <td>@item.AttackBonuses</td>
-            <td>@item.Damage</td>
-            <td>@item.Critical</td>
-            <td class="hidden-xs">@item.Range</td>
-            <td class="hidden-xs">@item.Type</td>
+        <tr class="attack_roll">
+            <td>@item.Name</td>
+            <td width="50">@Html.ActionLink("View", "View", new { Id = item.AttackId })</td>
         </tr>
     }
 </table>
-@Html.ActionLink("+ [New Attack]", "Create", new { Id = Model.MyCharacter.CharacterId })
+@Html.ActionLink("+ [New Attack]", "Create", new { Id = Session["CharacterId"] })
 
 <!-- Attack Roller -->
-<div class="modal fade" id="attackRoller" tabindex="-1" role="dialog" aria-labelledby="attackerTitle" aria-hidden="true">
+@*<div class="modal fade" id="attackRoller" tabindex="-1" role="dialog" aria-labelledby="attackerTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,5 +48,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 

@@ -11,7 +11,7 @@ namespace Pathfinder.ViewModels
     {
         public Character MyCharacter { get; set; }
         public List<Class> Classes { get; set; }
-        public List<AttackView> Attacks { get; set; }
+        public List<AttackGroupView> Attacks { get; set; }
         public List<SkillView> Skills { get; set; }
         public AbilityViewer AbilityViewer { get; set; }
 
@@ -150,14 +150,14 @@ namespace Pathfinder.ViewModels
             }
         }
 
-        private List<AttackView> LoadAttacks(int characterId)
+        private List<AttackGroupView> LoadAttacks(int characterId)
         {
-            List<Attack> attacks = db.Attacks.Where(m => m.CharacterId == characterId).ToList<Attack>();
-            List<AttackView> attackViews = new List<AttackView>();
+            List<AttackGroup> attacks = db.AttackGroups.Where(m => m.CharacterId == characterId).ToList<AttackGroup>();
+            List<AttackGroupView> attackViews = new List<AttackGroupView>();
 
-            foreach (Attack attack in attacks)
+            foreach (AttackGroup attack in attacks)
             {
-                attackViews.Add(new AttackView(attack.AttackId, this));
+                //attackViews.Add(new AttackView(attack.AttackId, this));
             }
 
             return attackViews;

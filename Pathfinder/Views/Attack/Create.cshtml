@@ -15,18 +15,10 @@
         @Html.HiddenFor(m => m.CharacterId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WeaponId, "Weapon", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.WeaponId, (SelectList)ViewBag.Weapons, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WeaponId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DamageEquationId, "Damage Equation", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.DamageEquationId, (SelectList)ViewBag.DamageEquations, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DamageEquationId, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 

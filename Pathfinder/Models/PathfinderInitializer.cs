@@ -14,8 +14,8 @@ namespace Pathfinder.Models
             List<Class> classes = GetClassList();
             List<Skill> skills = GetSkillList();
             List<Weapon> weapons = GetWeaponList();
-            List<Attack> attacks = GetAttackList();
-            List<SubAttack> subAttacks = GetSubAttackList();
+            List<AttackGroup> attacks = GetAttackList();
+            List<Attack> subAttacks = GetSubAttackList();
             List<Equation> equations = GetEquationList();
             List<EquationCategory> equationCategories = GetEquationCategoryList();
             List<AbilityType> abilityTypes = GetAbilityTypeList();
@@ -41,12 +41,12 @@ namespace Pathfinder.Models
                 context.Weapons.Add(weapon);
             }
 
-            foreach (Attack attack in attacks)
+            foreach (AttackGroup attack in attacks)
             {
-                context.Attacks.Add(attack);
+                context.AttackGroups.Add(attack);
             }
 
-            foreach (SubAttack subAttack in subAttacks)
+            foreach (Attack subAttack in subAttacks)
             {
                 context.SubAttacks.Add(subAttack);
             }
@@ -156,22 +156,22 @@ namespace Pathfinder.Models
             return weapons;
         }
 
-        private List<Attack> GetAttackList()
+        private List<AttackGroup> GetAttackList()
         {
-            List<Attack> attacks = new List<Attack>
+            List<AttackGroup> attacks = new List<AttackGroup>
             {
-                new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 25 }
+                //new Attack{ CharacterId = 1, WeaponId = 1, DamageEquationId = 25 }
             };
 
             return attacks;
         }
 
-        private List<SubAttack> GetSubAttackList()
+        private List<Attack> GetSubAttackList()
         {
-            List<SubAttack> subAttacks = new List<SubAttack>
+            List<Attack> subAttacks = new List<Attack>
             {
-                new SubAttack{ AttackId = 1, AttackEquationId = 24 },
-                new SubAttack{ AttackId = 1, AttackEquationId = 24 }
+                new Attack{ AttackGroupId = 1, AttackEquationId = 24 },
+                new Attack{ AttackGroupId = 1, AttackEquationId = 24 }
             };
 
             return subAttacks;

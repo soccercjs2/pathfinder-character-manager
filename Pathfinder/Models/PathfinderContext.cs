@@ -15,8 +15,8 @@ namespace Pathfinder.Models
         public DbSet<AbilityType> AbilityTypes { get; set; }
         public DbSet<EquationCategory> EquationCategories { get; set; }
         public DbSet<Equation> Equations { get; set; }
-        public DbSet<Attack> Attacks { get; set; }
-        public DbSet<SubAttack> SubAttacks { get; set; }
+        public DbSet<AttackGroup> AttackGroups { get; set; }
+        public DbSet<Attack> SubAttacks { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Armor> Armors { get; set; }
