@@ -1,41 +1,77 @@
-﻿//create hammer event listener
-window.onload = function () {
-    (function (factory) {
-        if (typeof define === 'function' && define.amd) {
-            define(['jquery', 'hammerjs'], factory);
-        } else if (typeof exports === 'object') {
-            factory(require('jquery'), require('hammerjs'));
-        } else {
-            factory(jQuery, Hammer);
+﻿function RollbarListener()
+{
+    $('#roll_result').hammer().on('doubletap', function (e) {
+        $(this).fadeToggle("fast", function () {
+            $('#roller').fadeToggle("fast", "linear");
+        });
+    });
+
+    $('#roll_result').hammer().on('press', function (e) {
+        $(this).fadeToggle("fast", function () {
+            $('#roller').fadeToggle("fast", "linear");
+        });
+    });
+
+    $('#roll_button').click(function () {
+        var roll_string = $('#roll_input').val();
+        var roll_equation = EvaluateRolls(roll_string);
+
+        $('#roller').fadeToggle("fast", function () {
+            $('#roll_label').text(roll_string + ': ' + roll_equation);
+            $('#roll_value').text(math.eval(roll_equation));
+            $('#roll_result').fadeToggle("fast", "linear");
+        });
+    });
+}
+
+function EvaluateRolls(roll_string)
+{
+    var dIndex = roll_string.indexOf('d');
+
+    if (dIndex >= 0)
+    {
+        var diceQuantityStart = FindDiceQuantityStart(roll_string.substring(0, dIndex));
+        var diceSizeEnd = FindDiceSizeEnd(roll_string.substring(dIndex + 1)) + dIndex;
+
+        var diceQuantity = roll_string.substring(diceQuantityStart, dIndex);
+        var diceSize = roll_string.substring(dIndex + 1, diceSizeEnd + 1);
+        var roll;
+
+        for (i = 0; i < diceQuantity; i++)
+        {
+            roll = '(' + math.randomInt(1, diceSize) + ')';
         }
-    }(function ($, Hammer) {
-        function hammerify(el, options) {
-            var $el = $(el);
-            if (!$el.data("hammer")) {
-                $el.data("hammer", new Hammer($el[0], options));
-            }
+
+        if (diceSizeEnd + 1 == roll_string.length) {
+            return roll_string.substring(0, diceQuantityStart) + roll;
         }
+        else
+        {
+            return roll_string.substring(0, diceQuantityStart) + roll + EvaluateRolls(roll_string.substring(diceSizeEnd + 1));
+        }
+    }
+    else
+    {
+        return roll_string;
+    }
 
-        $.fn.hammer = function (options) {
-            return this.each(function () {
-                hammerify(this, options);
-            });
-        };
+}
 
-        // extend the emit method to also trigger jQuery events
-        Hammer.Manager.prototype.emit = (function (originalEmit) {
-            return function (type, data) {
-                originalEmit.call(this, type, data);
-                $(this.element).trigger({
-                    type: type,
-                    gesture: data
-                });
-            };
-        })(Hammer.Manager.prototype.emit);
-    }));
+function FindDiceQuantityStart(prefix)
+{
+    var index = prefix.length - 1;
+    while (index - 1 > 0 && IsNumeric(prefix[index - 1])) { index--; }
+    return index;
+}
 
-    ListenForSingleD20Roll();
-    ListenForAttackRoller();
+function FindDiceSizeEnd(suffix) {
+    var index = 0;
+    while (index < suffix.length && IsNumeric(suffix[index])) { index++; }
+    return index;
+}
+
+function IsNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 function ListenForSingleD20Roll() {
@@ -127,4 +163,45 @@ function ListenForAttackRoller() {
         });
         $(this).fadeIn(200);
     });
+}
+
+//create hammer event listener
+window.onload = function () {
+    (function (factory) {
+        if (typeof define === 'function' && define.amd) {
+            define(['jquery', 'hammerjs'], factory);
+        } else if (typeof exports === 'object') {
+            factory(require('jquery'), require('hammerjs'));
+        } else {
+            factory(jQuery, Hammer);
+        }
+    }(function ($, Hammer) {
+        function hammerify(el, options) {
+            var $el = $(el);
+            if (!$el.data("hammer")) {
+                $el.data("hammer", new Hammer($el[0], options));
+            }
+        }
+
+        $.fn.hammer = function (options) {
+            return this.each(function () {
+                hammerify(this, options);
+            });
+        };
+
+        // extend the emit method to also trigger jQuery events
+        Hammer.Manager.prototype.emit = (function (originalEmit) {
+            return function (type, data) {
+                originalEmit.call(this, type, data);
+                $(this.element).trigger({
+                    type: type,
+                    gesture: data
+                });
+            };
+        })(Hammer.Manager.prototype.emit);
+    }));
+
+    //ListenForSingleD20Roll();
+    //ListenForAttackRoller();
+    RollbarListener();
 }

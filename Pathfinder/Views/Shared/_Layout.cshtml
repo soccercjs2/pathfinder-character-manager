@@ -41,56 +41,26 @@
             </div>
         </div>
     </div>
-    @*<div class="rollbar">
+    <div class="rollbar">
         <div class="container body-content" style="height: 100%;">
-            <div class="col-xs-12">
-                <table class="rollbar-table">
+            <div id="roll_result" style="display: none;">
+                <table class="rollbar_table">
                     <tr>
-                        <td class="full">Acrobatic</td>
-                        <td><b>25</b></td>
+                        <td class="full h4"><span id="roll_label"></span></td>
+                        <td class="h4"><b><span id="roll_value"></span></b></td>
                     </tr>
                 </table>
             </div>
-            <div class="col-xs-12">
-                <table class="rollbar-table">
+            <div id="roller">
+                <table class="rollbar_table">
                     <tr>
-                        <td class="full"><input type="text" class="form-control full" /></td>
-                        <td><button class="btn btn-primary">Roll</button></td>
+                        <td class="full"><input type="text" class="form-control full" id="roll_input" placeholder="Enter Roll Here" /></td>
+                        <td><button class="btn btn-primary" id="roll_button">Roll</button></td>
                     </tr>
                 </table>
             </div>
         </div>
-    </div>*@
-    <ul class="bxslider">
-        <li>
-            <div class="rollbar">
-                <div class="container body-content" style="height: 100%;">
-                    <div class="col-xs-12">
-                        <table class="rollbar-table">
-                            <tr>
-                                <td class="full">Acrobatic</td>
-                                <td><b>25</b></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="rollbar">
-                <div class="container body-content" style="height: 100%;">
-                    <div class="col-xs-12">
-                        <table class="rollbar-table">
-                            <tr>
-                                <td class="full"><input type="text" class="form-control full" /></td>
-                                <td><button class="btn btn-primary">Roll</button></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <footer>
@@ -119,8 +89,6 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Scripts/jquery.easing.1.3.js")
-    @Scripts.Render("~/Scripts/jquery.bxslider.min.js")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
