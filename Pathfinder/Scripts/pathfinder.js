@@ -1,4 +1,11 @@
-﻿function SingleD20Roll(name, value) {
+﻿$(document).ready(function () {
+    $('.bxslider').bxSlider({
+        pager: false,
+        useCSS: false
+    });
+});
+
+function SingleD20Roll(name, value) {
     $('#rollTitle').text(name);
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);

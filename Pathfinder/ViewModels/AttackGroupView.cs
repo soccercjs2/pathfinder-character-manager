@@ -10,7 +10,7 @@ namespace Pathfinder.ViewModels
     {
         public int AttackGroupId { get; set; }
         public string Name { get; set; }
-        public List<AttackView> Attacks { get; set; }
+        //public List<AttackView> Attacks { get; set; }
         //public int CharacterId { get; set; }
         //public string WeaponName { get; set; }
         //public string AttackBonuses { get; set; }

@@ -14,6 +14,11 @@ body {
     -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
+.full {
+    width: 100%;
+    max-width: 100% !important;
+}
+
 body.modal-open, 
 .modal-open .navbar-fixed-top, 
 .modal-open .navbar-fixed-bottom 
@@ -152,10 +157,6 @@ input[type=button] {
     cursor: default !important;
 }
 
-.full {
-    width: 100%;
-}
-
 .min {
     width: 1%;
 }
@@ -244,4 +245,28 @@ input[type=button] {
 .attack-roller-button {
     width: 50px;
     height: 32px;
+}
+
+.rollbar
+{
+    background-color: #ff9900;
+    height: 50px;
+}
+
+.rollbar-table
+{    
+    height: 50px;
+}
+
+@media (max-width: 767px) {
+    .rollbar-table
+    {    
+    margin-left: 20px;
+    margin-right: 20px;
+    }
+}
+
+.bx-wrapper
+{
+    border: 0px;
 }
