@@ -19,13 +19,13 @@ namespace Pathfinder.Controllers
             return View(db.AttackGroups.Where(m => m.CharacterId == id));
         }
 
-        public ActionResult Create(int id)
+        public ActionResult CreateAttackGroup(int id)
         {
             return View(new AttackGroup(id));
         }
 
         [HttpPost]
-        public ActionResult Create(AttackGroup attackGroup)
+        public ActionResult CreateAttackGroup(AttackGroup attackGroup)
         {
             if (ModelState.IsValid)
             {

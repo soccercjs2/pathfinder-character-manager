@@ -292,7 +292,7 @@
     <Content Include="Views\Equation\Create.cshtml" />
     <Content Include="Views\Equation\Edit.cshtml" />
     <Content Include="Views\Attack\Index.cshtml" />
-    <Content Include="Views\Attack\Create.cshtml" />
+    <Content Include="Views\Attack\CreateAttackGroup.cshtml" />
     <Content Include="Views\Attack\SubAttack.cshtml" />
     <Content Include="Views\Attack\CreateSubAttack.cshtml" />
     <Content Include="Views\Attack\Edit.cshtml" />
