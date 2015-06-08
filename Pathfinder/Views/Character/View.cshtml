@@ -19,32 +19,32 @@
                         <td colspan="3">Ability Scores</td>
                     </tr>
                 </thead>
-                <tr class="single_roll" data-name="Strength Check" data-value="@Model.StrengthMod">
+                <tr class="rollD20" data-name="Strength Check" data-value="@Model.StrengthMod">
                     <td>Strength</td>
                     <td class="numberCell">@Model.Strength</td>
                     <td class="numberCell"><strong>@Model.StrengthMod</strong></td>
                 </tr>
-                <tr class="single_roll" data-name="Dexterity Check" data-value="@Model.DexterityMod">
+                <tr class="rollD20" data-name="Dexterity Check" data-value="@Model.DexterityMod">
                     <td>Dexterity</td>
                     <td class="numberCell">@Model.Dexterity</td>
                     <td class="numberCell"><strong>@Model.DexterityMod</strong></td>
                 </tr>
-                <tr class="single_roll" data-name="Constitution Check" data-value="@Model.ConstitutionMod">
+                <tr class="rollD20" data-name="Constitution Check" data-value="@Model.ConstitutionMod">
                     <td>Constitution</td>
                     <td class="numberCell">@Model.Constitution</td>
                     <td class="numberCell"><strong>@Model.ConstitutionMod</strong></td>
                 </tr>
-                <tr class="single_roll" data-name="Intelligence Check" data-value="@Model.IntelligenceMod">
+                <tr class="rollD20" data-name="Intelligence Check" data-value="@Model.IntelligenceMod">
                     <td>Intelligence</td>
                     <td class="numberCell">@Model.Intelligence</td>
                     <td class="numberCell"><strong>@Model.IntelligenceMod</strong></td>
                 </tr>
-                <tr class="single_roll" data-name="Wisdom Check" data-value="@Model.WisdomMod">
+                <tr class="rollD20" data-name="Wisdom Check" data-value="@Model.WisdomMod">
                     <td>Wisdom</td>
                     <td class="numberCell">@Model.Wisdom</td>
                     <td class="numberCell"><strong>@Model.WisdomMod</strong></td>
                 </tr>
-                <tr class="single_roll" data-name="Charisma Check" data-value="@Model.CharismaMod">
+                <tr class="rollD20" data-name="Charisma Check" data-value="@Model.CharismaMod">
                     <td>Charisma</td>
                     <td class="numberCell">@Model.Charisma</td>
                     <td class="numberCell"><strong>@Model.CharismaMod</strong></td>
@@ -61,7 +61,7 @@
                     <td>BAB</td>
                     <td class="numberCell">@Model.BaseAttackBonus</td>
                 </tr>
-                <tr id="trCmb" class="single_roll" data-name="Combat Maneuver Check" data-value="@Model.CombatManeuverBonus">
+                <tr id="trCmb" class="rollD20" data-name="Combat Maneuver Check" data-value="@Model.CombatManeuverBonus">
                     <td>CMB</td>
                     <td class="numberCell">@Model.CombatManeuverBonus</td>
                 </tr>
@@ -97,15 +97,15 @@
                         <td colspan="2">Saves</td>
                     </tr>
                 </thead>
-                <tr id="trFortitude" class="single_roll" data-name="Fortitude Save" data-value="@Model.FortitudeSave">
+                <tr id="trFortitude" class="rollD20" data-name="Fortitude Save" data-value="@Model.FortitudeSave">
                     <td>Fortitude</td>
                     <td class="numberCell">@Model.FortitudeSave</td>
                 </tr>
-                <tr id="trReflex" class="single_roll" data-name="Reflex Save" data-value="@Model.ReflexSave">
+                <tr id="trReflex" class="rollD20" data-name="Reflex Save" data-value="@Model.ReflexSave">
                     <td>Reflex</td>
                     <td class="numberCell">@Model.ReflexSave</td>
                 </tr>
-                <tr id="trWill" class="single_roll" data-name="Will Save" data-value="@Model.WillSave">
+                <tr id="trWill" class="rollD20" data-name="Will Save" data-value="@Model.WillSave">
                     <td>Will</td>
                     <td class="numberCell">@Model.WillSave</td>
                 </tr>
@@ -141,7 +141,7 @@
                 </thead>
                 @foreach (var item in Model.Skills)
                 {
-                    <tr class="single_roll" data-name="@item.Key" data-value="@item.Value">
+                    <tr class="rollD20" data-name="@item.Key" data-value="@item.Value">
                         <td>@item.Key</td>
                         <td style="text-align: right;" colspan="2">@item.Value</td>
                     </tr>

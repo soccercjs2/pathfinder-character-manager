@@ -12,16 +12,82 @@
         });
     });
 
-    $('#roll_button').click(function () {
-        var roll_string = $('#roll_input').val();
-        var roll_equation = EvaluateRolls(roll_string);
+    $('#roll_result').hammer().on('tap', function (e) {
+        $('#roll_value').fadeToggle("fast", function () {
+            var label = $('#roll_label').data('label');
+            var value = $('#roll_value').data('value');
+            var equation = $('#roll_value').data('equation');
 
-        $('#roller').fadeToggle("fast", function () {
-            $('#roll_label').text(roll_string + ': ' + roll_equation);
-            $('#roll_value').text(math.eval(roll_equation));
-            $('#roll_result').fadeToggle("fast", "linear");
+            if ($('#roll_value').text() == value) {
+                $('#roll_value').text(equation);
+                $('#roll_label').fadeOut('fast');
+            }
+            else if ($('#roll_value').text() == equation) {
+                $('#roll_value').text(value);
+                $('#roll_label').fadeIn('fast');
+            }
+
+            $('#roll_value').fadeToggle("fast", "linear");
         });
     });
+
+    $('#roll_button').click(function () {
+        var roll_string = $('#roll_input').val();
+        Roll(roll_string, roll_string);
+    });
+
+    $('.rollable').hammer().on('doubletap', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = $(this).data("value");
+        Roll(roll_label, roll_value);
+    });
+
+    $('.rollable').hammer().on('press', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = $(this).data("value");
+        Roll(roll_label, roll_value);
+    });
+
+    $('.rollD20').hammer().on('doubletap', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = '1d20 + ' + $(this).data("value");
+        Roll(roll_label, roll_value);
+    });
+
+    $('.rollD20').hammer().on('press', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = '1d20 + ' + $(this).data("value");
+        Roll(roll_label, roll_value);
+    });
+}
+
+function Roll(label, value)
+{
+    var equation = EvaluateRolls(value);
+
+    if ($('#roller').css('display') == 'none')
+    {
+        $('#roll_result').fadeToggle("fast", function () {
+            ShowResult(label, equation);
+        });
+    }
+    else
+    {
+        $('#roller').fadeToggle("fast", function () {
+            ShowResult(label, equation);
+        });
+    }
+}
+
+function ShowResult(label, equation)
+{
+    var value = math.eval(equation);
+    $('#roll_label').text(label);
+    $('#roll_label').data('label', label);
+    $('#roll_value').data('value', value);
+    $('#roll_value').data('equation', equation);
+    $('#roll_value').text(value);
+    $('#roll_result').fadeToggle("fast", "linear");
 }
 
 function EvaluateRolls(roll_string)
@@ -35,11 +101,12 @@ function EvaluateRolls(roll_string)
 
         var diceQuantity = roll_string.substring(diceQuantityStart, dIndex);
         var diceSize = roll_string.substring(dIndex + 1, diceSizeEnd + 1);
-        var roll;
+        var roll = '';
 
         for (i = 0; i < diceQuantity; i++)
         {
-            roll = '(' + math.randomInt(1, diceSize) + ')';
+            if (roll != '') { roll += ' + ';}
+            roll += '(' + math.randomInt(1, diceSize) + ')';
         }
 
         if (diceSizeEnd + 1 == roll_string.length) {
