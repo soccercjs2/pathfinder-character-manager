@@ -24,6 +24,7 @@ namespace Pathfinder.Models
         public void InitializeCharacter()
         {
             CreateEquations();
+            CreateEquationCategories();
             CreateSkills();
         }
 
@@ -71,6 +72,27 @@ namespace Pathfinder.Models
             for (int i = 0; i < skills.Count; i++)
             {
                 db.Skills.Add(skills[i]);
+                db.SaveChanges();
+            }
+        }
+
+        private void CreateEquationCategories()
+        {
+            List<EquationCategory> categories = new List<EquationCategory>
+            {
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Ability Modifier" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Base Stats" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Maneuvers" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Armor Classes" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Saves" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Movement" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Attacks" },
+                new EquationCategory{ CharacterId = this.CharacterId, Name = "Damage"}
+            };
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                db.EquationCategories.Add(categories[i]);
                 db.SaveChanges();
             }
         }

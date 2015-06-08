@@ -294,7 +294,7 @@
     <Content Include="Views\Attack\Index.cshtml" />
     <Content Include="Views\Attack\CreateAttackGroup.cshtml" />
     <Content Include="Views\Attack\SubAttack.cshtml" />
-    <Content Include="Views\Attack\CreateSubAttack.cshtml" />
+    <Content Include="Views\Attack\CreateAttack.cshtml" />
     <Content Include="Views\Attack\Edit.cshtml" />
     <Content Include="Views\Ability\Index.cshtml" />
     <Content Include="Views\Ability\CreateAbility.cshtml" />
@@ -310,6 +310,7 @@
     <Content Include="Views\Inventory\CreateGear.cshtml" />
     <Content Include="Views\Inventory\CreateMagicItem.cshtml" />
     <Content Include="Views\Character\View.cshtml" />
+    <Content Include="Views\Attack\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

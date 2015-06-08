@@ -29,6 +29,9 @@ namespace Pathfinder.ViewModels
         public AttackGroupView() { }
         public AttackGroupView(int id) 
         {
+            AttackGroup attackGroup = db.AttackGroups.Find(id);
+            this.AttackGroupId = attackGroup.AttackGroupId;
+            this.Name = attackGroup.Name;
             //Initialize(id, new CharacterView(db.AttackGroups.Find(id).CharacterId));
         }
 

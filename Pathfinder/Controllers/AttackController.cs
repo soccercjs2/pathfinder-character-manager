@@ -32,7 +32,7 @@ namespace Pathfinder.Controllers
                 db.AttackGroups.Add(attackGroup);
                 db.SaveChanges();
 
-                return RedirectToAction("View", "Attack", new { Id = attackGroup.AttackGroupId });
+                return RedirectToAction("Index", "Attack", new { Id = attackGroup.CharacterId });
             }
             else
             {
@@ -43,6 +43,46 @@ namespace Pathfinder.Controllers
         public ActionResult View(int id)
         {
             return View(new AttackGroupView(id));
+        }
+
+        public ActionResult CreateAttack(int id)
+        {
+            AttackGroup attackGroup = db.AttackGroups.Find(id);
+            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
+
+            EquationCategory attackCategory = db.EquationCategories
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
+
+            List<Equation> attackEquations = db.Equations
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.EquationCategoryId == attackCategory.EquationCategoryId).ToList<Equation>();
+            
+            EquationCategory damageCategory = db.EquationCategories
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.Name == "Damage").FirstOrDefault<EquationCategory>();
+
+            List<Equation> damageEquations = db.Equations
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
+
+            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
+            ViewBag.AttackEquations = new SelectList(attackEquations, "EquationId", "Name");
+            ViewBag.DamageEquations = new SelectList(damageEquations, "EquationId", "Name");
+            
+            return View(new Attack(id));
+        }
+
+        [HttpPost]
+        public ActionResult CreateAttack(Attack attack)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Attacks.Add(attack);
+                db.SaveChanges();
+
+                return RedirectToAction("View", "Attack", new { Id = attack.AttackGroupId });
+            }
+            else
+            {
+                return View(attack);
+            }
         }
 
         //public ActionResult Create(int id)
@@ -126,7 +166,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SubAttacks.Add(subAttack);
+                db.Attacks.Add(subAttack);
                 db.SaveChanges();
 
                 return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackGroupId });
@@ -150,7 +190,7 @@ namespace Pathfinder.Controllers
 
             ViewBag.Equations = new SelectList(equations, "EquationId", "Name");
 
-            return View(db.SubAttacks.Find(id));
+            return View(db.Attacks.Find(id));
         }
 
         [HttpPost]
@@ -158,7 +198,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.SubAttacks.Attach(subAttack);
+                db.Attacks.Attach(subAttack);
                 db.Entry(subAttack).State = EntityState.Modified;
                 db.SaveChanges();
 

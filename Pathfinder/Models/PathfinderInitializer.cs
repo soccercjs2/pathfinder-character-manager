@@ -48,7 +48,7 @@ namespace Pathfinder.Models
 
             foreach (Attack subAttack in subAttacks)
             {
-                context.SubAttacks.Add(subAttack);
+                context.Attacks.Add(subAttack);
             }
 
             foreach (Equation equation in equations)
