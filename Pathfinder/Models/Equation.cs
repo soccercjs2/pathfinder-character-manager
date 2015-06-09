@@ -33,11 +33,11 @@ namespace Pathfinder.Models
             replacedEquation = replacedEquation.Replace("Wisdom", character.Wisdom.ToString());
             replacedEquation = replacedEquation.Replace("Charisma", character.Charisma.ToString());
 
-            if (character.BonusResults.Keys.Contains("ARMOR")) { replacedEquation = replacedEquation.Replace("ARMOR", character.BonusResults["ARMOR"].ToString()); }
-            if (character.BonusResults.Keys.Contains("SHIELD")) { replacedEquation = replacedEquation.Replace("SHIELD", character.BonusResults["SHIELD"].ToString()); }
-            if (character.BonusResults.Keys.Contains("NATURAL")) { replacedEquation = replacedEquation.Replace("NATURAL", character.BonusResults["NATURAL"].ToString()); }
-            if (character.BonusResults.Keys.Contains("DODGE")) { replacedEquation = replacedEquation.Replace("DODGE", character.BonusResults["DODGE"].ToString()); }
-            if (character.BonusResults.Keys.Contains("DEFLECT")) { replacedEquation = replacedEquation.Replace("DEFLECT", character.BonusResults["DEFLECT"].ToString()); }
+            //if (character.BonusResults.Keys.Contains("ARMOR")) { replacedEquation = replacedEquation.Replace("ARMOR", character.BonusResults["ARMOR"].ToString()); }
+            //if (character.BonusResults.Keys.Contains("SHIELD")) { replacedEquation = replacedEquation.Replace("SHIELD", character.BonusResults["SHIELD"].ToString()); }
+            //if (character.BonusResults.Keys.Contains("NATURAL")) { replacedEquation = replacedEquation.Replace("NATURAL", character.BonusResults["NATURAL"].ToString()); }
+            //if (character.BonusResults.Keys.Contains("DODGE")) { replacedEquation = replacedEquation.Replace("DODGE", character.BonusResults["DODGE"].ToString()); }
+            //if (character.BonusResults.Keys.Contains("DEFLECT")) { replacedEquation = replacedEquation.Replace("DEFLECT", character.BonusResults["DEFLECT"].ToString()); }
             
             if (character.EquationResults != null)
             {

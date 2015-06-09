@@ -200,6 +200,7 @@
     <Compile Include="ViewModels\AbilityTypeViewer.cs" />
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackGroupView.cs" />
+    <Compile Include="ViewModels\AttackView.cs" />
     <Compile Include="ViewModels\CharacterView.cs" />
     <Compile Include="ViewModels\InventoryViewer.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />

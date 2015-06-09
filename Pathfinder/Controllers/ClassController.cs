@@ -16,7 +16,8 @@ namespace Pathfinder.Controllers
         // GET: Class
         public ActionResult Index(int id)
         {
-            return View(new PlayerCharacter(id));
+            List<Class> classes = db.Classes.Where(m => m.CharacterId == id).ToList<Class>();
+            return View(classes);
         }
 
         public ActionResult Create(int id)

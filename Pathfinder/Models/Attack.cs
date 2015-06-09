@@ -13,6 +13,8 @@ namespace Pathfinder.Models
         public int AttackEquationId { get; set; }
         public int DamageEquationId { get; set; }
 
+        private PathfinderContext db = new PathfinderContext();
+
         public Attack() { }
         public Attack(int attackGroupId)
         {

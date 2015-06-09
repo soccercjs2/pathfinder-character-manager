@@ -10,7 +10,9 @@ namespace Pathfinder.ViewModels
     {
         public int AttackGroupId { get; set; }
         public string Name { get; set; }
-        //public List<AttackView> Attacks { get; set; }
+        //public List<Attack> Attacks { get; set; }
+        public List<AttackView> AttackViews { get; set; }
+        public CharacterView Character { get; set; }
         //public int CharacterId { get; set; }
         //public string WeaponName { get; set; }
         //public string AttackBonuses { get; set; }
@@ -32,12 +34,60 @@ namespace Pathfinder.ViewModels
             AttackGroup attackGroup = db.AttackGroups.Find(id);
             this.AttackGroupId = attackGroup.AttackGroupId;
             this.Name = attackGroup.Name;
-            //Initialize(id, new CharacterView(db.AttackGroups.Find(id).CharacterId));
+            this.Character = new CharacterView(attackGroup.CharacterId);
+            this.AttackViews = LoadAttackViews(attackGroup);
         }
 
-        public AttackGroupView(int id, CharacterView character)
+        private List<AttackView> LoadAttackViews(AttackGroup attackGroup)
         {
-            //Initialize(id, character);
+            List<Attack> attacks = db.Attacks.Where(m => m.AttackGroupId == attackGroup.AttackGroupId).ToList<Attack>();
+            List<AttackView> attackViews = new List<AttackView>();
+
+            foreach (Attack attack in attacks)
+            {
+                Weapon weapon = db.Weapons.Where(m => m.WeaponId == attack.WeaponId).FirstOrDefault<Weapon>();
+                Equation attackEquation = db.Equations.Find(attack.AttackEquationId);
+                Equation damageEquation = db.Equations.Find(attack.DamageEquationId);
+                
+                AttackView attackView = new AttackView();
+                attackView.Weapon = weapon.Name;
+                attackView.AttackBonus = GetAttackBonus(attackEquation.Name, weapon);
+                attackView.Damage = GetDamage(damageEquation.Name, weapon);
+                attackView.Critical = GetCritical(weapon);
+                attackViews.Add(attackView);
+            }
+
+            return attackViews;
+        }
+
+        private string GetAttackBonus(string equationName, Weapon weapon)
+        {
+            int bonus = this.Character.EquationResults[equationName];
+            
+            if (weapon.EnhancementBonus != 0) { bonus += weapon.EnhancementBonus; }
+            else if (weapon.Masterwork) { bonus += 1; }
+
+            if (bonus >= 0) { return "+" + bonus; }
+            else { return bonus.ToString(); }
+        }
+
+        private string GetDamage(string equationName, Weapon weapon)
+        {
+            string damage = weapon.Damage;
+            int damageBonus = this.Character.EquationResults[equationName];
+
+            if (weapon.EnhancementBonus != 0) { damageBonus += weapon.EnhancementBonus; }
+
+            return damage + " + " + damageBonus;
+        }
+
+        private string GetCritical(Weapon weapon)
+        {
+            string critical = weapon.CriticalMinimum.ToString();
+            if (weapon.CriticalMinimum < 20) { critical += "-20"; }
+            critical += "/x" + weapon.CriticalModifier;
+
+            return critical;
         }
 
         //private void Initialize(int id, CharacterView character)

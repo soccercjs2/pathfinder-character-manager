@@ -10,68 +10,68 @@ namespace Pathfinder.Models
     {
         protected override void Seed(PathfinderContext context)
         {
-            List<Character> characters = GetCharacterList();
-            List<Class> classes = GetClassList();
-            List<Skill> skills = GetSkillList();
-            List<Weapon> weapons = GetWeaponList();
-            List<AttackGroup> attacks = GetAttackList();
-            List<Attack> subAttacks = GetSubAttackList();
-            List<Equation> equations = GetEquationList();
-            List<EquationCategory> equationCategories = GetEquationCategoryList();
-            List<AbilityType> abilityTypes = GetAbilityTypeList();
-            List<Ability> abilities = GetAbilityList();
+            //List<Character> characters = GetCharacterList();
+            //List<Class> classes = GetClassList();
+            //List<Skill> skills = GetSkillList();
+            //List<Weapon> weapons = GetWeaponList();
+            //List<AttackGroup> attacks = GetAttackList();
+            //List<Attack> subAttacks = GetSubAttackList();
+            //List<Equation> equations = GetEquationList();
+            //List<EquationCategory> equationCategories = GetEquationCategoryList();
+            //List<AbilityType> abilityTypes = GetAbilityTypeList();
+            //List<Ability> abilities = GetAbilityList();
 
-            foreach (Character character in characters)
-            {
-                context.Characters.Add(character);
-            }
+            //foreach (Character character in characters)
+            //{
+            //    context.Characters.Add(character);
+            //}
 
-            foreach (Class playerClass in classes)
-            {
-                context.Classes.Add(playerClass);
-            }
+            //foreach (Class playerClass in classes)
+            //{
+            //    context.Classes.Add(playerClass);
+            //}
 
-            foreach (Skill skill in skills)
-            {
-                context.Skills.Add(skill);
-            }
+            //foreach (Skill skill in skills)
+            //{
+            //    context.Skills.Add(skill);
+            //}
 
-            foreach (Weapon weapon in weapons)
-            {
-                context.Weapons.Add(weapon);
-            }
+            //foreach (Weapon weapon in weapons)
+            //{
+            //    context.Weapons.Add(weapon);
+            //}
 
-            foreach (AttackGroup attack in attacks)
-            {
-                context.AttackGroups.Add(attack);
-            }
+            //foreach (AttackGroup attack in attacks)
+            //{
+            //    context.AttackGroups.Add(attack);
+            //}
 
-            foreach (Attack subAttack in subAttacks)
-            {
-                context.Attacks.Add(subAttack);
-            }
+            //foreach (Attack subAttack in subAttacks)
+            //{
+            //    context.Attacks.Add(subAttack);
+            //}
 
-            foreach (Equation equation in equations)
-            {
-                context.Equations.Add(equation);
-            }
+            //foreach (Equation equation in equations)
+            //{
+            //    context.Equations.Add(equation);
+            //}
 
-            foreach (EquationCategory equationCategory in equationCategories)
-            {
-                context.EquationCategories.Add(equationCategory);
-            }
+            //foreach (EquationCategory equationCategory in equationCategories)
+            //{
+            //    context.EquationCategories.Add(equationCategory);
+            //}
 
-            foreach (AbilityType type in abilityTypes)
-            {
-                context.AbilityTypes.Add(type);
-            }
+            //foreach (AbilityType type in abilityTypes)
+            //{
+            //    context.AbilityTypes.Add(type);
+            //}
 
-            foreach (Ability ability in abilities)
-            {
-                context.Abilities.Add(ability);
-            }
+            //foreach (Ability ability in abilities)
+            //{
+            //    context.Abilities.Add(ability);
+            //}
 
-            context.SaveChanges();
+            //context.SaveChanges();
         }
 
         private List<Character> GetCharacterList()

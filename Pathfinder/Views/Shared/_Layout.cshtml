@@ -35,6 +35,8 @@
                         <li>@Html.ActionLink("Attacks", "Index", "Attack", new { Id = Session["CharacterId"] }, null)</li>
                         <li>@Html.ActionLink("Spells", "Index", "Spell", new { Id = Session["CharacterId"] }, null)</li>
                         <li>@Html.ActionLink("Inventory", "Index", "Inventory", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Equations", "Index", "Equation", new { Id = Session["CharacterId"] }, null)</li>
+                        <li>@Html.ActionLink("Classes", "Index", "Class", new { Id = Session["CharacterId"] }, null)</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -48,7 +48,7 @@ namespace Pathfinder.Controllers
         public ActionResult CreateAttack(int id)
         {
             AttackGroup attackGroup = db.AttackGroups.Find(id);
-            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
+            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == attackGroup.CharacterId).ToList<Weapon>();
 
             EquationCategory attackCategory = db.EquationCategories
                 .Where(m => m.CharacterId == attackGroup.CharacterId && m.Name == "Attacks").FirstOrDefault<EquationCategory>();

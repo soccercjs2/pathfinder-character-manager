@@ -17,6 +17,15 @@
                     <td>Critical</td>
                 </tr>
             </thead>
+            @foreach (var item in Model.AttackViews)
+            {
+                <tr>
+                    <td>@item.Weapon</td>
+                    <td>@item.AttackBonus</td>
+                    <td>@item.Damage</td>
+                    <td>@item.Critical</td>
+                </tr>
+            }
         </table>
         @Html.ActionLink("+ [New Attack]", "CreateAttack", new { Id = Model.AttackGroupId })
     </div>

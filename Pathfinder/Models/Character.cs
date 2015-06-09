@@ -23,7 +23,6 @@ namespace Pathfinder.Models
 
         public void InitializeCharacter()
         {
-            CreateEquations();
             CreateEquationCategories();
             CreateSkills();
         }
@@ -94,26 +93,23 @@ namespace Pathfinder.Models
             {
                 db.EquationCategories.Add(categories[i]);
                 db.SaveChanges();
+
+                if (categories[i].Name == "Ability Modifier") { CreateAbilityModEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Base Stats") { CreateBaseStatsEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Maneuvers") { CreateManeuverEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Armor Classes") { CreateArmorClassEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Saves") { CreateSaveEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Movement") { CreateMovementEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Attacks") { CreateAttackEquations(categories[i].EquationCategoryId); }
+                if (categories[i].Name == "Damage") { CreateDamageEquations(categories[i].EquationCategoryId); }
             }
         }
 
-        private void CreateEquations()
-        {
-            CreateAbilityModEquations();
-            CreateBaseStatsEquations();
-            CreateManeuverEquations();
-            CreateArmorClassEquations();
-            CreateSaveEquations();
-            CreateMovementEquations();
-            CreateAttackEquations();
-            CreateDamageEquations();
-        }
-
-        private void CreateAbilityModEquations()
+        private void CreateAbilityModEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 1; //ability modifier
+            equation.EquationCategoryId = equationCategoryId; //ability modifier
             equation.ShowFormula = true;
             equation.Editable = false;
             equation.Deletable = false;
@@ -131,11 +127,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateBaseStatsEquations()
+        private void CreateBaseStatsEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 2; //base stats
+            equation.EquationCategoryId = equationCategoryId; //base stats
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -152,11 +148,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateManeuverEquations()
+        private void CreateManeuverEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 3; //maneuvers
+            equation.EquationCategoryId = equationCategoryId; //maneuvers
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -173,11 +169,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateArmorClassEquations()
+        private void CreateArmorClassEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 4; //armor class
+            equation.EquationCategoryId = equationCategoryId; //armor class
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -194,11 +190,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateSaveEquations()
+        private void CreateSaveEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 5; //save
+            equation.EquationCategoryId = equationCategoryId; //save
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -215,11 +211,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateMovementEquations()
+        private void CreateMovementEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 6; //movement
+            equation.EquationCategoryId = equationCategoryId; //movement
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -236,11 +232,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateAttackEquations()
+        private void CreateAttackEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 7; //attack
+            equation.EquationCategoryId = equationCategoryId; //attack
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;
@@ -257,11 +253,11 @@ namespace Pathfinder.Models
             }
         }
 
-        private void CreateDamageEquations()
+        private void CreateDamageEquations(int equationCategoryId)
         {
             Equation equation = new Equation();
             equation.CharacterId = this.CharacterId;
-            equation.EquationCategoryId = 8; //damage
+            equation.EquationCategoryId = equationCategoryId; //damage
             equation.ShowFormula = true;
             equation.Editable = true;
             equation.Deletable = false;

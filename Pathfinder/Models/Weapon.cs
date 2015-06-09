@@ -9,6 +9,7 @@ namespace Pathfinder.Models
     [Table("Weapons")]
     public class Weapon : Equipment
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int WeaponId { get; set; }
         public int EnhancementBonus { get; set; }
         public string Damage { get; set; }
