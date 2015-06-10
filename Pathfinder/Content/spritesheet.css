@@ -1,7 +1,7 @@
 ﻿.sprite {
     background-image: url("../icons/spritesheet.png");
     background-repeat: no-repeat;
-    display: block;
+    display: inline-block;
     margin: auto;
 }
 

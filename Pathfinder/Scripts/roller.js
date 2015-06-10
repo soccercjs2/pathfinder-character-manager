@@ -48,17 +48,41 @@
         Roll(roll_label, roll_value);
     });
 
+    $('.rollable_button').hammer().on('tap', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = $(this).data("value");
+        Roll(roll_label, roll_value);
+    });
+
     $('.rollD20').hammer().on('doubletap', function (e) {
         var roll_label = $(this).data("name");
-        var roll_value = '1d20 + ' + $(this).data("value");
+        var roll_value = MakeD20Roll($(this).data("value"));
         Roll(roll_label, roll_value);
     });
 
     $('.rollD20').hammer().on('press', function (e) {
         var roll_label = $(this).data("name");
-        var roll_value = '1d20 + ' + $(this).data("value");
+        var roll_value = MakeD20Roll($(this).data("value"));
         Roll(roll_label, roll_value);
     });
+
+    $('.rollD20button').hammer().on('tap', function (e) {
+        var roll_label = $(this).data("name");
+        var roll_value = MakeD20Roll($(this).data("value"));
+        Roll(roll_label, roll_value);
+    });
+}
+
+function MakeD20Roll(value)
+{
+    value = value.replace('+','');
+    var roll = '1d20 ';
+
+    if (value >= 0) { roll += '+'; }
+    else { roll += '-' }
+
+    roll += ' ' + math.abs(parseInt(value));
+    return roll;
 }
 
 function Roll(label, value)
@@ -88,6 +112,7 @@ function ShowResult(label, equation)
     $('#roll_value').data('equation', equation);
     $('#roll_value').text(value);
     $('#roll_result').fadeToggle("fast", "linear");
+    $('#roll_label').fadeIn('fast');
 }
 
 function EvaluateRolls(roll_string)
@@ -100,7 +125,7 @@ function EvaluateRolls(roll_string)
         var diceSizeEnd = FindDiceSizeEnd(roll_string.substring(dIndex + 1)) + dIndex;
 
         var diceQuantity = roll_string.substring(diceQuantityStart, dIndex);
-        var diceSize = roll_string.substring(dIndex + 1, diceSizeEnd + 1);
+        var diceSize = parseInt(roll_string.substring(dIndex + 1, diceSizeEnd + 1)) + 1;
         var roll = '';
 
         for (i = 0; i < diceQuantity; i++)

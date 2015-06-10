@@ -12,18 +12,26 @@
             <thead>
                 <tr>
                     <td>Weapon</td>
-                    <td>Bonus</td>
-                    <td>Damage</td>
-                    <td>Critical</td>
+                    <td class="min">Bonus</td>
+                    <td class="min">Damage</td>
+                    <td class="hidden-xs min">Critical</td>
                 </tr>
             </thead>
             @foreach (var item in Model.AttackViews)
             {
                 <tr>
                     <td>@item.Weapon</td>
-                    <td>@item.AttackBonus</td>
-                    <td>@item.Damage</td>
-                    <td>@item.Critical</td>
+                    <td class="min">
+                        <button class="btn btn-default attack-roller-button rollD20button" data-name="@item.Weapon" data-value="@item.AttackBonus">
+                            @item.AttackBonus
+                        </button>
+                    </td>
+                    <td class="min">
+                        <button class="btn btn-default attack-roller-button rollable_button" data-name="@item.Weapon" data-value="@item.Damage">
+                            @item.Damage
+                        </button>
+                    </td>
+                    <td class="hidden-xs min">@item.Critical</td>
                 </tr>
             }
         </table>
