@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <td>Weapon</td>
-                    <td class="min">Bonus</td>
+                    <td class="min">Attack</td>
                     <td class="min">Damage</td>
                     <td class="hidden-xs min">Critical</td>
                 </tr>
@@ -22,8 +22,9 @@
                 <tr>
                     <td>@item.Weapon</td>
                     <td class="min">
-                        <button class="btn btn-default attack-roller-button rollD20button" data-name="@item.Weapon" data-value="@item.AttackBonus">
-                            @item.AttackBonus
+                        <button class="btn btn-default attack-roller-button rollD20button" 
+                                data-name="@item.Weapon" data-value="@item.AttackBonus" data-critical-minimum="@item.CriticalMinimum">
+                            @item.AttackBonusString()
                         </button>
                     </td>
                     <td class="min">
@@ -31,7 +32,7 @@
                             @item.Damage
                         </button>
                     </td>
-                    <td class="hidden-xs min">@item.Critical</td>
+                    <td class="hidden-xs min">@item.CriticalString()</td>
                 </tr>
             }
         </table>

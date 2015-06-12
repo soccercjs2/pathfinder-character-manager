@@ -9,7 +9,7 @@ namespace Pathfinder.Models
     public class Character
     {
         public int CharacterId { get; set; }
-        public int Health { get; set; }
+        public int CurrentHealth { get; set; }
         public int Experience { get; set; }
         public string Name { get; set; }
         public int Strength { get; set; }
@@ -24,7 +24,24 @@ namespace Pathfinder.Models
         public void InitializeCharacter()
         {
             CreateEquationCategories();
+            CreateAbilityTypes();
             CreateSkills();
+        }
+
+        private void CreateAbilityTypes()
+        {
+            List<AbilityType> types = new List<AbilityType>
+            {
+                new AbilityType{ CharacterId = this.CharacterId, Name = "Class Ability" },
+                new AbilityType{ CharacterId = this.CharacterId, Name = "Racial Ability" },
+                new AbilityType{ CharacterId = this.CharacterId, Name = "Feat" }
+            };
+
+            for (int i = 0; i < types.Count; i++)
+            {
+                db.AbilityTypes.Add(types[i]);
+                db.SaveChanges();
+            }
         }
 
         private void CreateSkills()
@@ -136,8 +153,8 @@ namespace Pathfinder.Models
             equation.Editable = true;
             equation.Deletable = false;
 
-            String[] equationNames = { "BAB", "ARMOR", "SHIELD", "NATURAL", "DODGE", "DEFLECT" };
-            String[] equationValues = { "Classes.BaseAttackBonus", "0", "0", "0", "0", "0" };
+            String[] equationNames = { "BAB", "ARMOR", "SHIELD", "NATURAL", "DODGE", "DEFLECT", "SKILL_POINTS", "MAX_HEALTH" };
+            String[] equationValues = { "Classes.BaseAttackBonus", "0", "0", "0", "0", "0", "Classes.Level * INT + Classes.SkillPoints", "Classes.Level * CON + Classes.ClassHealth" };
 
             for (int i = 0; i < equationNames.Length; i++)
             {

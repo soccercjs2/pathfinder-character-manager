@@ -78,9 +78,9 @@ namespace Pathfinder.Models
         {
             List<Character> characters = new List<Character>
             {
-                new Character{Name = "Wolverine", Experience = 0, Health = 0, Strength = 22, Dexterity = 16, Constitution = 24, Intelligence = 8, Wisdom = 16, Charisma = 6},
-                new Character{Name = "Balerion", Experience = 0, Health = 0, Strength = 18, Dexterity = 14, Constitution = 16, Intelligence = 8, Wisdom = 12, Charisma = 18},
-                new Character{Name = "Leroy Beauregard", Experience = 0, Health = 0, Strength = 18, Dexterity = 17, Constitution = 16, Intelligence = 12, Wisdom = 11, Charisma = 10}
+                new Character{Name = "Wolverine", Experience = 0, CurrentHealth = 0, Strength = 22, Dexterity = 16, Constitution = 24, Intelligence = 8, Wisdom = 16, Charisma = 6},
+                new Character{Name = "Balerion", Experience = 0, CurrentHealth = 0, Strength = 18, Dexterity = 14, Constitution = 16, Intelligence = 8, Wisdom = 12, Charisma = 18},
+                new Character{Name = "Leroy Beauregard", Experience = 0, CurrentHealth = 0, Strength = 18, Dexterity = 17, Constitution = 16, Intelligence = 12, Wisdom = 11, Charisma = 10}
             };
 
             return characters;

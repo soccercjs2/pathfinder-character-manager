@@ -11,6 +11,7 @@ namespace Pathfinder.Models
         public int CharacterId { get; set; }
         public string Name { get; set; }
         public int Levels { get; set; }
+        public int HitDie { get; set; }
         public int SkillPoints { get; set; }
         public int BaseAttackBonus { get; set; }
         public int ForitudeSave { get; set; }

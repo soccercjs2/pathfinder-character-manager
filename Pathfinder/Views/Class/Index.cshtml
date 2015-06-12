@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pathfinder.Models.Class>
+﻿@model Pathfinder.ViewModels.ClassView
 
     @{
         ViewBag.Title = "Classes";
@@ -11,29 +11,44 @@
             <tr>
                 <td>Name</td>
                 <td>Levels</td>
+                <td>Hit Die</td>
                 <td>Skill Points</td>
                 <td>BAB</td>
                 <td>Fort</td>
                 <td>Ref</td>
                 <td>Will</td>
-                <td></td>
-                <td></td>
             </tr>
         </thead>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Classes)
         {
-            <tr class="rosterItem">
+            <tr class="rosterItem" data-href="@Url.Action("Edit", "Class", new { Id = item.ClassId })">
                 <td>@item.Name</td>
                 <td>@item.Levels</td>
+                <td>@item.HitDie</td>
                 <td>@item.SkillPoints</td>
                 <td>@item.BaseAttackBonus</td>
                 <td>@item.ForitudeSave</td>
                 <td>@item.ReflexSave</td>
                 <td>@item.WillSave</td>
-                <td width="50">@Html.ActionLink("Edit", "Edit", new { Id = item.ClassId })</td>
-                <td width="50">@Html.ActionLink("Delete", "Delete", new { Id = item.ClassId })</td>
             </tr>
         }
-    </table><br />
-    @Html.ActionLink("+ [New Class]", "Create", new { Id = Session["CharacterId"] })
+    </table>
+    @Html.ActionLink("+ [New Class]", "Create", new { Id = Session["CharacterId"] })<br /><br />
+
+    <table class="section noclick full">
+        <thead>
+            <tr>
+                <td>Class</td>
+                <td class="min">Health</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.ClassHealths)
+        {   
+            <tr class="rosterItem">
+                <td>@item.Key</td>
+                <td class="min">@item.Value</td>
+            </tr>
+        }
+    </table>
+    @Html.ActionLink("+ [Add Class Health]", "CreateClassHealth", new { Id = Session["CharacterId"] })
 

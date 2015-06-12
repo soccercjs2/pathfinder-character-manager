@@ -156,8 +156,27 @@ namespace Pathfinder.Models
                 case "FortitudeSave": return playerClass.ForitudeSave;
                 case "ReflexSave": return playerClass.ReflexSave;
                 case "WillSave": return playerClass.WillSave;
+                case "SkillPoints": return (playerClass.SkillPoints * playerClass.Levels);
+                case "ClassHealth": return GetClassHealth(playerClass);
+
                 default: return 0;
             }
+        }
+
+        private int GetClassHealth(Class playerClass)
+        {
+            List<ClassHealth> classHealths = db.ClasseHealths
+                .Where(m => m.CharacterId == playerClass.CharacterId 
+                    && m.ClassId == playerClass.ClassId)
+                .ToList<ClassHealth>();
+
+            int health = 0;
+            foreach (ClassHealth classHealth in classHealths)
+            {
+                health += classHealth.Health;
+            }
+
+            return health;
         }
     }
 }

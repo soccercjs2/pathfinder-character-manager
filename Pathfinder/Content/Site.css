@@ -160,6 +160,7 @@ input[type=button] {
 
 .min {
     width: 1%;
+    white-space: nowrap;
 }
 
 .half-column {
@@ -227,15 +228,11 @@ input[type=button] {
 }
 
 .critical {
-    color: green;
-    border-color: green;
-    border-width: 1px;
+    color: #00cc00;
 }
 
 .critical-failure {
-    color: red;
-    border-color: red;
-    border-width: 1px;
+    color: #ff1a00;
 }
 
 .attack-roller {
@@ -244,21 +241,14 @@ input[type=button] {
 }
 
 .attack-roller-button {
-    /*width: 50px;*/
     height: 32px;
     vertical-align: middle;
 }
 
 .rollbar
 {
-    /*background-color: #00ff66;*/
-    background-color: #9cceff;
+    background-color: #F0F0FF;
     height: 50px;
-    /*position: fixed;
-    top: 50px;
-    left: 0px;
-    right: 0px;*/
-    /*z-index: 9999;*/
 }
 
 .rollbar_table

@@ -81,6 +81,7 @@ namespace Pathfinder.ViewModels
             this.Intelligence = character.Intelligence;
             this.Wisdom = character.Wisdom;
             this.Charisma = character.Charisma;
+            this.CurrentHealth = character.CurrentHealth;
 
             return character;
         }
@@ -228,6 +229,7 @@ namespace Pathfinder.ViewModels
             this.FortitudeSave = equationResults["FORT"];
             this.ReflexSave = equationResults["REF"];
             this.WillSave = equationResults["WILL"];
+            this.MaximumHealth = equationResults["MAX_HEALTH"];
         }
     }
 }

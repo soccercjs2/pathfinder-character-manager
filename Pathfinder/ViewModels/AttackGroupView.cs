@@ -53,22 +53,22 @@ namespace Pathfinder.ViewModels
                 attackView.Weapon = weapon.Name;
                 attackView.AttackBonus = GetAttackBonus(attackEquation.Name, weapon);
                 attackView.Damage = GetDamage(damageEquation.Name, weapon);
-                attackView.Critical = GetCritical(weapon);
+                attackView.CriticalMinimum = weapon.CriticalMinimum;
+                attackView.CriticalModifier = weapon.CriticalModifier;
                 attackViews.Add(attackView);
             }
 
             return attackViews;
         }
 
-        private string GetAttackBonus(string equationName, Weapon weapon)
+        private int GetAttackBonus(string equationName, Weapon weapon)
         {
             int bonus = this.Character.EquationResults[equationName];
             
             if (weapon.EnhancementBonus != 0) { bonus += weapon.EnhancementBonus; }
             else if (weapon.Masterwork) { bonus += 1; }
 
-            if (bonus >= 0) { return "+" + bonus; }
-            else { return bonus.ToString(); }
+            return bonus;
         }
 
         private string GetDamage(string equationName, Weapon weapon)
@@ -80,66 +80,5 @@ namespace Pathfinder.ViewModels
 
             return damage + " + " + damageBonus;
         }
-
-        private string GetCritical(Weapon weapon)
-        {
-            string critical = weapon.CriticalMinimum.ToString();
-            if (weapon.CriticalMinimum < 20) { critical += "-20"; }
-            critical += "/x" + weapon.CriticalModifier;
-
-            return critical;
-        }
-
-        //private void Initialize(int id, CharacterView character)
-        //{
-        //    this.Attack = db.Attacks.Find(id);
-        //    this.AttackId = this.Attack.AttackId;
-        //    this.CharacterId = this.Attack.CharacterId;
-
-        //    this.Weapon = db.Weapons.Find(this.Attack.WeaponId);
-        //    this.SubAttacks = db.SubAttacks.Where(m => m.AttackId == id).ToList<SubAttack>();
-        //    this.MyCharacter = character;
-
-        //    this.WeaponName = this.Weapon.Name;
-        //    this.AttackBonuses = LoadAttackBonuses(this.SubAttacks);
-        //    this.Damage = LoadDamage(this.Weapon, this.Attack);
-        //    this.Critical = LoadCritical(this.Weapon);
-        //    this.Range = this.Weapon.Range + "ft";
-        //    this.Type = this.Weapon.Type;
-        //}
-
-        //private string LoadAttackBonuses(List<SubAttack> attacks)
-        //{
-        //    string attack = "";
-
-        //    foreach (SubAttack subAttack in attacks)
-        //    {
-        //        Equation equation = db.Equations.Find(subAttack.AttackEquationId);
-
-        //        if (attack != "") { attack += "/"; }
-        //        attack += "+" + this.MyCharacter.EquationResults[equation.Name];
-        //    }
-            
-        //    return attack;
-        //}
-
-        //private string LoadDamage(Weapon weapon, Attack attack)
-        //{
-        //    Equation damageEquation = db.Equations.Find(attack.DamageEquationId);
-        //    int damageBonus = this.MyCharacter.EquationResults[damageEquation.Name];
-
-        //    if (damageBonus < 0) { return weapon.Damage + " - " + Math.Abs(damageBonus); }
-        //    else { return weapon.Damage + " + " + damageBonus;  }
-        //}
-
-        //private string LoadCritical(Weapon weapon)
-        //{
-        //    string critical = "";
-
-        //    if (weapon.CriticalMinimum < 20) { critical = weapon.CriticalMinimum + "-"; }
-        //    critical += "20";
-        //    critical += "/x" + weapon.CriticalModifier;
-        //    return critical;
-        //}
     }
 }

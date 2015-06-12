@@ -10,6 +10,7 @@ namespace Pathfinder.Models
     {
         public DbSet<Character> Characters { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<ClassHealth> ClasseHealths { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<AbilityType> AbilityTypes { get; set; }
@@ -22,6 +23,6 @@ namespace Pathfinder.Models
         public DbSet<Armor> Armors { get; set; }
         public DbSet<MagicItem> MagicItems { get; set; }
         public DbSet<Gear> Gears { get; set; }
-        //public DbSet<Temp> Temps { get; set; }
+        public DbSet<Temp> Temps { get; set; }
     }
 }

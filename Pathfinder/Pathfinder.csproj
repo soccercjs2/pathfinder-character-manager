@@ -182,6 +182,7 @@
     <Compile Include="Models\AttackGroup.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\ClassHealth.cs" />
     <Compile Include="Models\Equation.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Gear.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="ViewModels\AttackGroupView.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
     <Compile Include="ViewModels\CharacterView.cs" />
+    <Compile Include="ViewModels\ClassView.cs" />
     <Compile Include="ViewModels\InventoryViewer.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
     <Compile Include="ViewModels\PlayerCharacter.cs" />
@@ -314,10 +316,12 @@
     <Content Include="Views\Inventory\CreateMagicItem.cshtml" />
     <Content Include="Views\Character\View.cshtml" />
     <Content Include="Views\Attack\View.cshtml" />
+    <Content Include="Views\Class\CreateClassHealth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
+    <Folder Include="Views\Health\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

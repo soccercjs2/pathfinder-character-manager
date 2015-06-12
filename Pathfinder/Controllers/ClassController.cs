@@ -16,8 +16,7 @@ namespace Pathfinder.Controllers
         // GET: Class
         public ActionResult Index(int id)
         {
-            List<Class> classes = db.Classes.Where(m => m.CharacterId == id).ToList<Class>();
-            return View(classes);
+            return View(new ClassView(id));
         }
 
         public ActionResult Create(int id)
@@ -73,6 +72,34 @@ namespace Pathfinder.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", "Class", new { Id = characterId });
+        }
+
+        public ActionResult CreateClassHealth(int id)
+        {
+            ClassHealth classHealth = new ClassHealth();
+            classHealth.CharacterId = id;
+
+            List<Class> classes = db.Classes.Where(m => m.CharacterId == id).ToList<Class>();
+
+            ViewBag.Classes = new SelectList(classes, "ClassId", "Name");
+
+            return View(classHealth);
+        }
+
+        [HttpPost]
+        public ActionResult CreateClassHealth(ClassHealth classHealth)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ClasseHealths.Add(classHealth);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Class", new { Id = classHealth.CharacterId });
+            }
+            else
+            {
+                return View(classHealth);
+            }
         }
     }
 }

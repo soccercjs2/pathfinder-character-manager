@@ -8,31 +8,31 @@
 
 @using (Html.BeginForm())
 {
-    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "EquationCategoryId", "Name"),
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "EquationCategoryId", "Name"),
         new { @class = "form-control", @onchange = "this.form.submit();" })<br />
-    
-    @Html.HiddenFor(m => m.CharacterId)
 
-    <table class="section full">
-        <thead>
-            <tr>
-                <td>Name</td>
-                <td>Equation</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-        @foreach (var item in Model.Equations)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Formula</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { Id = item.EquationId })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { Id = item.EquationId })</td>
-            </tr>
-        }
-    </table>
+            @Html.HiddenFor(m => m.CharacterId)
 
-    @Html.ActionLink("+ [New Equation]", "Create", new { Id = Model.CharacterId })<br />
-    @Html.ActionLink("+ [New Equation Category]", "CreateCategory", new { Id = Model.CharacterId })
+            <table class="section">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td class="hidden-xs">Equation</td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Equations)
+                {
+                    <tr data-href="@Url.Action("Edit", "Equation", new { Id = item.EquationId })">
+                        <td>@item.Name</td>
+                        <td class="hidden-xs">@item.Formula</td>
+                    </tr>
+                }
+            </table>
+
+            @Html.ActionLink("+ [New Equation]", "Create", new { Id = Model.CharacterId })<br />
+            @Html.ActionLink("+ [New Equation Category]", "CreateCategory", new { Id = Model.CharacterId })
+        </div>
+    </div>
 }

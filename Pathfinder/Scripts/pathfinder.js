@@ -1,4 +1,10 @@
-﻿function SingleD20Roll(name, value) {
+﻿$(document).ready(function() {
+    $('tr[data-href]').on("click", function () {
+        document.location = $(this).data('href');
+    });
+});
+
+function SingleD20Roll(name, value) {
     $('#rollTitle').text(name);
     $('#rollBonus').text(value);
     $('#btnRoll').data('value', value);
@@ -125,9 +131,5 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
         url: "/Character/UpdateAbility",
         data: ability,
         dataType: 'json',
-        //success: function (response) {
-        //    window.location.href = response.Url;
-        //}
     });
 };
-
