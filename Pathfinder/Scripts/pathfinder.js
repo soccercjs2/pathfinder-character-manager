@@ -1,8 +1,38 @@
 ﻿$(document).ready(function() {
-    $('tr[data-href]').on("click", function () {
+    $('tr[data-href]').on('click', function () {
         document.location = $(this).data('href');
     });
+
+    $('td[data-href]').on('click', function () {
+        document.location = $(this).data('href');
+    });
+
+    $('.sumbox').each(function () {
+        $(this).keyup(function () {
+            calculateSum();
+        });
+    });
+
+    calculateSum();
 });
+
+function calculateSum() {
+    var sum = 0;
+    $('.sumbox').each(function () {
+        if (!isNaN(this.value) && this.value.length != 0) {
+            sum += parseFloat(this.value);
+        }
+    });
+
+    if ($('#sumResult').data('maxval')) {
+        if (sum > $('#sumResult').data('maxval')) {
+            $('#sumResult').addClass('critical-failure');
+        } else {
+            $('#sumResult').removeClass('critical-failure');
+        }
+    }
+    $('#sumResult').html(sum);
+}
 
 function SingleD20Roll(name, value) {
     $('#rollTitle').text(name);

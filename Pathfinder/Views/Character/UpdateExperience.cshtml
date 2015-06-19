@@ -1,0 +1,33 @@
+﻿@model Pathfinder.Models.ExperienceUpdater
+
+@{
+    ViewBag.Title = "Update Experience";
+}
+
+<h2>Update Current Health</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.CharacterId)
+    @Html.HiddenFor(m => m.CurrentExperience)
+    
+    <div class="form-group">
+        <div class="col-xs-12 h4">
+            Current Experience: @Model.CurrentExperience
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-xs-12">
+            @Html.TextBoxFor(model => model.Experience, new { @class = "form-control", Value = "", @placeholder = "Experience" })
+            @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-xs-12">
+            <input name="submit" type="submit" value="Add Experience" class="btn btn-success" />
+        </div>
+    </div>
+}

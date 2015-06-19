@@ -10,10 +10,11 @@ namespace Pathfinder.ViewModels
     {
         public int CharacterId { get; set; }
         public List<Skill> Skills { get; set; }
+        public int TotalSkillPoints { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 
-        public SkillManager() 
+        public SkillManager()
         {
             this.Skills = new List<Skill>();
         }
@@ -24,6 +25,9 @@ namespace Pathfinder.ViewModels
             this.Skills = (from skill in db.Skills 
                            where skill.CharacterId == characterId
                            select skill).OrderBy(m => m.Type).OrderBy(m => m.Name).ToList<Skill>();
+
+            CharacterView characterView = new CharacterView(characterId);
+            this.TotalSkillPoints = characterView.SkillPoints;
         }
     }
 }

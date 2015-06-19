@@ -117,11 +117,11 @@
                         <td colspan="2">Miscellaneous</td>
                     </tr>
                 </thead>
-                <tr>
+                <tr data-href="@Url.Action("UpdateCurrentHealth", "Character", new { Id = Model.CharacterId })">
                     <td>Health</td>
                     <td class="numberCell">@(Model.CurrentHealth + "/" + Model.MaximumHealth)</td>
                 </tr>
-                <tr>
+                <tr data-href="@Url.Action("UpdateExperience", "Character", new { Id = Model.CharacterId })">
                     <td>Experience</td>
                     <td class="numberCell">@Model.Experience</td>
                 </tr>

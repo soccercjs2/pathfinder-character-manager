@@ -44,6 +44,7 @@ namespace Pathfinder.ViewModels
         public int Experience { get; set; }
         public int MoveSpeed { get; set; }
 
+        public int SkillPoints { get; set; }
         public List<KeyValuePair<string, int>> Skills { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
@@ -230,6 +231,7 @@ namespace Pathfinder.ViewModels
             this.ReflexSave = equationResults["REF"];
             this.WillSave = equationResults["WILL"];
             this.MaximumHealth = equationResults["MAX_HEALTH"];
+            this.SkillPoints = equationResults["SKILL_POINTS"];
         }
     }
 }

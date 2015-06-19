@@ -52,23 +52,76 @@ namespace Pathfinder.Controllers
 
         public ActionResult UpdateCurrentHealth(int id)
         {
-            return View(db.Characters.Find(id));
+            CharacterView characterView = new CharacterView(id);
+            HealthUpdater updater = new HealthUpdater();
+            updater.CharacterId = id;
+            updater.CurrentHealth = characterView.CurrentHealth;
+            updater.MaxHealth = characterView.MaximumHealth;
+
+            return View(updater);
         }
 
         [HttpPost]
-        public ActionResult TakeDamage(Character character)
+        public ActionResult UpdateCurrentHealth(HealthUpdater updater, string submit)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && submit != "Max Health")
             {
-                db.Characters.Attach(character);
-                db.Entry(character).State = System.Data.Entity.EntityState.Modified;
+                Character character = db.Characters.Find(updater.CharacterId);
+
+                switch (submit)
+                {
+                    case "Damage":
+                        character.CurrentHealth -= updater.Health;
+                        break;
+                    case "Health":
+                        character.CurrentHealth += updater.Health;
+                        break;
+                    default:
+                        throw new Exception();
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("View", "Character", new { Id = character.CharacterId });
+            }
+            else if (submit == "Max Health")
+            {
+                Character character = db.Characters.Find(updater.CharacterId);
+                character.CurrentHealth = updater.MaxHealth;
                 db.SaveChanges();
 
                 return RedirectToAction("View", "Character", new { Id = character.CharacterId });
             }
             else
             {
-                return View(character);
+                return View(updater);
+            }
+        }
+
+        public ActionResult UpdateExperience(int id)
+        {
+            CharacterView characterView = new CharacterView(id);
+            ExperienceUpdater updater = new ExperienceUpdater();
+            updater.CharacterId = id;
+            updater.CurrentExperience = characterView.Experience;
+
+            return View(updater);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateExperience(ExperienceUpdater updater)
+        {
+            if (ModelState.IsValid)
+            {
+                Character character = db.Characters.Find(updater.CharacterId);
+                character.Experience += updater.Experience;
+                db.SaveChanges();
+
+                return RedirectToAction("View", "Character", new { Id = character.CharacterId });
+            }
+            else
+            {
+                return View(updater);
             }
         }
     }
