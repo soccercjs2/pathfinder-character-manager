@@ -283,7 +283,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Character\Index.cshtml" />
-    <Content Include="Views\Character\ViewCharacter.cshtml" />
     <Content Include="Views\Character\Create.cshtml" />
     <Content Include="Views\Character\Skills.cshtml" />
     <Content Include="Views\Character\Roller.cshtml" />
@@ -317,6 +316,7 @@
     <Content Include="Views\Character\View.cshtml" />
     <Content Include="Views\Attack\View.cshtml" />
     <Content Include="Views\Class\CreateClassHealth.cshtml" />
+    <Content Include="Views\Character\UpdateCurrentHealth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Update Current Health";
+}
+
+<h2>Update Current Health</h2>
+
+<div class="form-group">
+    <div class="col-xs-12 h4">
+        Current Health: @Model.CurrentHealth
+    </div>
+</div>
+    
+<div class="form-group">
+    <div class="col-xs-12">
+        @Html.EditorFor(model => model.CurrentHealth, new { htmlAttributes = new { @class = "form-control", @placeholdder = "Health" } })
+        @Html.ValidationMessageFor(model => model.CurrentHealth, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("TakeDamage", "Character", FormMethod.Post, htmlAttributes: new { @class = "inline" }))
+        {
+            <input type="submit" value="Damage" class="btn btn-danger" />
+        }
+
+        @using (Html.BeginForm("HealDamage", "Character", FormMethod.Post, htmlAttributes: new { @class = "inline" }))
+        {
+            <input type="submit" value="Health" class="btn btn-success" />
+        }
+
+        @using (Html.BeginForm("HealFullHealth", "Character", FormMethod.Post, htmlAttributes: new { @class = "inline" }))
+        {
+            <input type="submit" value="Max Health" class="btn btn-default" />
+        }
+    </div>
+</div>

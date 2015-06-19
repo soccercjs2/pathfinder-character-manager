@@ -43,13 +43,6 @@ namespace Pathfinder.Controllers
             }
         }
 
-        public ActionResult ViewCharacter(int id)
-        {
-            PlayerCharacter playerCharacter = new PlayerCharacter(id);
-            Session["CharacterId"] = playerCharacter.MyCharacter.CharacterId;
-            return View(playerCharacter);
-        }
-
         public ActionResult View(int id)
         {
             CharacterView character = new CharacterView(id);
@@ -57,38 +50,26 @@ namespace Pathfinder.Controllers
             return View(character);
         }
 
-        [HttpPost]
-        public ActionResult UpdateAbility(Ability ability)
+        public ActionResult UpdateCurrentHealth(int id)
         {
-            string redirectUrl = new UrlHelper(Request.RequestContext).Action("View", "Character", new { Id = ability.CharacterId });
-    
+            return View(db.Characters.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult TakeDamage(Character character)
+        {
             if (ModelState.IsValid)
             {
-                db.Abilities.Attach(ability);
-                db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
-                
+                db.Characters.Attach(character);
+                db.Entry(character).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
-                return Json(new { Url = redirectUrl });
+                return RedirectToAction("View", "Character", new { Id = character.CharacterId });
             }
             else
             {
-                return Json(new { Url = redirectUrl });
+                return View(character);
             }
-        }
-
-        public ActionResult Roller(string name, string value)
-        {
-            Roller roller = new Roller(name, value);
-            return View(roller);
-        }
-
-        [HttpPost]
-        public ActionResult Roller(Roller roller)
-        {
-            ModelState.Remove("RollResult");
-            roller.Roll();
-            return View(roller);
         }
     }
 }
