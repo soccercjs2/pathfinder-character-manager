@@ -62,7 +62,6 @@ namespace Pathfinder.Controllers
             equation.CharacterId = ability.CharacterId;
             equation.EquationCategoryId = 0;
             equation.AbilityId = id;
-            equation.Name = ability.Name + " Bonus";
             equation.ShowFormula = false;
 
             return View(equation);
@@ -73,6 +72,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                equation.Name = equation.BonusType + " Bonus";
                 db.Equations.Add(equation);
                 db.SaveChanges();
 

@@ -11,17 +11,13 @@
         <tr>
             <td>Bonus</td>
             <td>Value</td>
-            <td></td>
-            <td></td>
         </tr>
     </thead>
     @foreach (var item in Model.Bonuses)
     {
-        <tr>
+        <tr data-href="@Url.Action("EditAbilityEquation", "Equation", new { Id = item.EquationId })">
             <td>@item.Name</td>
             <td>@item.Formula</td>
-            <td>@Html.ActionLink("Edit", "Edit", "Equation", new { Id = item.EquationId }, null)</td>
-            <td>@Html.ActionLink("Delete", "Delete", "Equation", new { Id = item.EquationId }, null)</td>
         </tr>
     }
 </table><br />

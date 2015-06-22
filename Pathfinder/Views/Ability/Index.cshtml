@@ -27,8 +27,8 @@
             @foreach (var ability in abilityType.Abilities)
             {
                 <tr>
-                    <td>@ability.Name</td>
-                    <td class="hidden-xs">@ability.Description</td>
+                    <td data-href="@Url.Action("AbilityBonuses", "Ability", new { Id = ability.AbilityId })">@ability.Name</td>
+                    <td class="hidden-xs" data-href="@Url.Action("AbilityBonuses", "Ability", new { Id = ability.AbilityId })">@ability.Description</td>
                     <td align="right" style="vertical-align: central;">
                         @if (ability.IsConditional)
                         {

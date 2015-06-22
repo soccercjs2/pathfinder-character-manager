@@ -320,6 +320,7 @@
     <Content Include="Views\Class\CreateClassHealth.cshtml" />
     <Content Include="Views\Character\UpdateCurrentHealth.cshtml" />
     <Content Include="Views\Character\UpdateExperience.cshtml" />
+    <Content Include="Views\Equation\EditAbilityEquation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

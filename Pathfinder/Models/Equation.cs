@@ -136,7 +136,7 @@ namespace Pathfinder.Models
                 string suffix = "";
                 if (end < replacedEquation.Length)
                 {
-                    suffix = EvaluateClasses(replacedEquation.Substring(end + 1), character);
+                    suffix = EvaluateClasses(replacedEquation.Substring(end), character);
                 }
 
                 return prefix + value + suffix;

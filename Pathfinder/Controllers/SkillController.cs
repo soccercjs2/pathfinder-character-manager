@@ -31,7 +31,7 @@ namespace Pathfinder.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("ViewCharacter", "Character", new { Id = manager.CharacterId });
+                return RedirectToAction("View", "Character", new { Id = manager.CharacterId });
             }
             else
             {
