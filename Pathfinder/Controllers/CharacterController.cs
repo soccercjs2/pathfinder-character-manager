@@ -56,7 +56,8 @@ namespace Pathfinder.Controllers
             HealthUpdater updater = new HealthUpdater();
             updater.CharacterId = id;
             updater.CurrentHealth = characterView.CurrentHealth;
-            updater.MaxHealth = characterView.MaximumHealth;
+            //updater.MaxHealth = characterView.MaximumHealth;
+            updater.MaxHealth = 111;
 
             return View(updater);
         }

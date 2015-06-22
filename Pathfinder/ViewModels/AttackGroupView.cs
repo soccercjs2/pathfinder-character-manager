@@ -10,21 +10,8 @@ namespace Pathfinder.ViewModels
     {
         public int AttackGroupId { get; set; }
         public string Name { get; set; }
-        //public List<Attack> Attacks { get; set; }
         public List<AttackView> AttackViews { get; set; }
         public CharacterView Character { get; set; }
-        //public int CharacterId { get; set; }
-        //public string WeaponName { get; set; }
-        //public string AttackBonuses { get; set; }
-        //public string Damage { get; set; }
-        //public string Critical { get; set; }
-        //public string Range { get; set; }
-        //public string Type { get; set; }
-
-        //public CharacterView MyCharacter { get; set; }
-        //public AttackGroup Attack { get; set; }
-        //public Weapon Weapon { get; set; }
-        //public List<Attack> SubAttacks { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 
@@ -61,9 +48,9 @@ namespace Pathfinder.ViewModels
             return attackViews;
         }
 
-        private int GetAttackBonus(string equationName, Weapon weapon)
+        private string GetAttackBonus(string equationName, Weapon weapon)
         {
-            int bonus = this.Character.EquationResults[equationName];
+            string bonus = this.Character.EquationResults[equationName];
             
             if (weapon.EnhancementBonus != 0) { bonus += weapon.EnhancementBonus; }
             else if (weapon.Masterwork) { bonus += 1; }
@@ -74,7 +61,7 @@ namespace Pathfinder.ViewModels
         private string GetDamage(string equationName, Weapon weapon)
         {
             string damage = weapon.Damage;
-            int damageBonus = this.Character.EquationResults[equationName];
+            string damageBonus = this.Character.EquationResults[equationName];
 
             if (weapon.EnhancementBonus != 0) { damageBonus += weapon.EnhancementBonus; }
 

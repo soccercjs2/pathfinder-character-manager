@@ -84,12 +84,12 @@
 
 function MakeD20Roll(value)
 {
-    var roll = '1d20 ';
+    var roll = '1d20 + ' + value;
+    
+    //if (value >= 0) { roll += '+'; }
+    //else { roll += '-' }
 
-    if (value >= 0) { roll += '+'; }
-    else { roll += '-' }
-
-    roll += ' ' + math.abs(parseInt(value));
+    //roll += ' ' + math.abs(parseInt(value));
     return roll;
 }
 

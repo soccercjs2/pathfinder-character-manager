@@ -10,7 +10,7 @@ namespace Pathfinder.ViewModels
     {
         public int CharacterId { get; set; }
         public List<Skill> Skills { get; set; }
-        public int TotalSkillPoints { get; set; }
+        public string TotalSkillPoints { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 

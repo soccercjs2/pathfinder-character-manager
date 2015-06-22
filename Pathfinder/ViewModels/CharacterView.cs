@@ -13,51 +13,51 @@ namespace Pathfinder.ViewModels
         public int Level { get; set; }
         public List<Class> Classes { get; set; }
 
-        public int Strength { get; set; }
-        public int Dexterity { get; set; }
-        public int Constitution { get; set; }
-        public int Intelligence { get; set; }
-        public int Wisdom { get; set; }
-        public int Charisma { get; set; }
+        public string Strength { get; set; }
+        public string Dexterity { get; set; }
+        public string Constitution { get; set; }
+        public string Intelligence { get; set; }
+        public string Wisdom { get; set; }
+        public string Charisma { get; set; }
 
-        public int StrengthMod { get; set; }
-        public int DexterityMod { get; set; }
-        public int ConstitutionMod { get; set; }
-        public int IntelligenceMod { get; set; }
-        public int WisdomMod { get; set; }
-        public int CharismaMod { get; set; }
+        public string StrengthMod { get; set; }
+        public string DexterityMod { get; set; }
+        public string ConstitutionMod { get; set; }
+        public string IntelligenceMod { get; set; }
+        public string WisdomMod { get; set; }
+        public string CharismaMod { get; set; }
 
-        public int BaseAttackBonus { get; set; }
-        public int CombatManeuverBonus { get; set; }
-        public int CombatManeuverDefense { get; set; }
+        public string BaseAttackBonus { get; set; }
+        public string CombatManeuverBonus { get; set; }
+        public string CombatManeuverDefense { get; set; }
 
-        public int ArmorClass { get; set; }
-        public int TouchArmorClass { get; set; }
-        public int FlatFootedArmorClass { get; set; }
+        public string ArmorClass { get; set; }
+        public string TouchArmorClass { get; set; }
+        public string FlatFootedArmorClass { get; set; }
 
-        public int FortitudeSave { get; set; }
-        public int ReflexSave { get; set; }
-        public int WillSave { get; set; }
+        public string FortitudeSave { get; set; }
+        public string ReflexSave { get; set; }
+        public string WillSave { get; set; }
 
         public int CurrentHealth { get; set; }
-        public int MaximumHealth { get; set; }
+        public string MaximumHealth { get; set; }
         public int Experience { get; set; }
-        public int MoveSpeed { get; set; }
+        public string MoveSpeed { get; set; }
 
-        public int SkillPoints { get; set; }
-        public List<KeyValuePair<string, int>> Skills { get; set; }
+        public string SkillPoints { get; set; }
+        public List<KeyValuePair<string, string>> Skills { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
-        public Dictionary<string, int> BonusResults { get; set; }
-        public Dictionary<string, int> EquationResults { get; set; }
+        public Dictionary<string, string> BonusResults { get; set; }
+        public Dictionary<string, string> EquationResults { get; set; }
 
         public CharacterView() { }
         public CharacterView(int characterId)
         {
             Character character = LoadCharacter(characterId);
             this.Classes = LoadClasses(characterId);
-            this.BonusResults = new Dictionary<string, int>();
-            this.EquationResults = new Dictionary<string, int>();
+            this.BonusResults = new Dictionary<string, string>();
+            this.EquationResults = new Dictionary<string, string>();
 
             EvaluateBonuses(characterId);
             ApplyBaseStatBonuses(characterId);
@@ -76,12 +76,12 @@ namespace Pathfinder.ViewModels
             this.CharacterId = character.CharacterId;
             this.Name = character.Name;
             this.Experience = character.Experience;
-            this.Strength = character.Strength;
-            this.Dexterity = character.Dexterity;
-            this.Constitution = character.Constitution;
-            this.Intelligence = character.Intelligence;
-            this.Wisdom = character.Wisdom;
-            this.Charisma = character.Charisma;
+            this.Strength = character.Strength.ToString();
+            this.Dexterity = character.Dexterity.ToString();
+            this.Constitution = character.Constitution.ToString();
+            this.Intelligence = character.Intelligence.ToString();
+            this.Wisdom = character.Wisdom.ToString();
+            this.Charisma = character.Charisma.ToString();
             this.CurrentHealth = character.CurrentHealth;
 
             return character;
@@ -101,55 +101,55 @@ namespace Pathfinder.ViewModels
             return classes;
         }
 
-        private List<KeyValuePair<string, int>> LoadSkills(int characterId)
+        private List<KeyValuePair<string, string>> LoadSkills(int characterId)
         {
             List<Skill> skills = db.Skills.OrderBy(s => s.Name).Where(s => s.CharacterId == characterId).ToList<Skill>();
-            List<KeyValuePair<string, int>> skillViews = new List<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, string>> skillViews = new List<KeyValuePair<string, string>>();
 
             foreach (Skill skill in skills)
             {
                 if (skill.Ranks > 0 || skill.UseUntrained)
                 {
                     string name = skill.Name;
-                    int bonus = 0;
+                    string bonus = "";
 
                     if (skill.Type != null) { name += " (" + skill.Type + ")"; }
                     string skillBonusString = "Skills.[" + name + "]";
 
-                    bonus = skill.Ranks + LoadAbilityModifierFromTag(skill.Ability);
+                    bonus = (skill.Ranks + " + " + LoadAbilityModifierFromTag(skill.Ability)).ToString();
 
-                    if (skill.Ranks > 0 && skill.ClassSkill) { bonus += 3; }
-                    if (this.BonusResults.Keys.Contains(skillBonusString)) { bonus += this.BonusResults[skillBonusString]; }
+                    if (skill.Ranks > 0 && skill.ClassSkill) { bonus += " + " + 3; }
+                    if (this.BonusResults.Keys.Contains(skillBonusString)) { bonus += " + " + this.BonusResults[skillBonusString]; }
 
-                    skillViews.Add(new KeyValuePair<string, int>(name, bonus));
+                    skillViews.Add(new KeyValuePair<string, string>(name, bonus));
                 }
             }
 
             return skillViews;
         }
 
-        private int LoadAbilityModifierFromTag(string tag)
+        private string LoadAbilityModifierFromTag(string tag)
         {
             switch (tag)
             {
-                case "STR": return (Strength - 10) / 2;
-                case "DEX": return (Dexterity - 10) / 2;
-                case "CON": return (Constitution - 10) / 2;
-                case "INT": return (Intelligence - 10) / 2;
-                case "WIS": return (Wisdom - 10) / 2;
-                case "CHA": return (Charisma - 10) / 2;
-                default: return 0;
+                case "STR": return "(" + Strength + " - 10) / 2";
+                case "DEX": return "(" + Dexterity + " - 10) / 2";
+                case "CON": return "(" + Constitution + " - 10) / 2"; ;
+                case "INT": return "(" + Intelligence + " - 10) / 2"; ;
+                case "WIS": return "(" + Wisdom + " - 10) / 2";
+                case "CHA": return "(" + Charisma + " - 10) / 2";
+                default: return "0";
             }
         }
 
         private void ApplyBaseStatBonuses(int characterId)
         {
-            if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += this.BonusResults["Strength"]; }
-            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += this.BonusResults["Dexterity"]; }
-            if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += this.BonusResults["Constitution"]; }
-            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += this.BonusResults["Intelligence"]; }
-            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += this.BonusResults["Wisdom"]; }
-            if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += this.BonusResults["Charisma"]; }
+            if (this.BonusResults.Keys.Contains("Strength")) { this.Strength += " + " + this.BonusResults["Strength"]; }
+            if (this.BonusResults.Keys.Contains("Dexterity")) { this.Dexterity += " + " + this.BonusResults["Dexterity"]; }
+            if (this.BonusResults.Keys.Contains("Constitution")) { this.Constitution += " + " + this.BonusResults["Constitution"]; }
+            if (this.BonusResults.Keys.Contains("Intelligence")) { this.Intelligence += " + " + this.BonusResults["Intelligence"]; }
+            if (this.BonusResults.Keys.Contains("Wisdom")) { this.Wisdom += " + " + this.BonusResults["Wisdom"]; }
+            if (this.BonusResults.Keys.Contains("Charisma")) { this.Charisma += " + " + this.BonusResults["Charisma"]; }
         }
 
         private void EvaluateBonuses(int characterId)
@@ -195,20 +195,20 @@ namespace Pathfinder.ViewModels
 
                 //evaluate the equation and apply equation specific bonuses
                 this.EquationResults.Add(equation.Name, equation.Evaluate(this));
-                if (this.BonusResults.Keys.Contains(equation.Name)) { this.EquationResults[equation.Name] += this.BonusResults[equation.Name]; }
+                if (this.BonusResults.Keys.Contains(equation.Name)) { this.EquationResults[equation.Name] += " + " + this.BonusResults[equation.Name]; }
 
                 //apply bonuses applied to the equations category if the category exists
                 if (category != null)
                 {
                     if (this.BonusResults.Keys.Contains(category.Name))
                     {
-                        this.EquationResults[equation.Name] += this.BonusResults[category.Name];
+                        this.EquationResults[equation.Name] += " + " + this.BonusResults[category.Name];
                     }
                 }
             }
         }
 
-        private void CalculateModifiers(Dictionary<string, int> equationResults)
+        private void CalculateModifiers(Dictionary<string, string> equationResults)
         {
             this.StrengthMod = equationResults["STR"];
             this.DexterityMod = equationResults["DEX"];
@@ -218,7 +218,7 @@ namespace Pathfinder.ViewModels
             this.CharismaMod = equationResults["CHA"];
         }
 
-        private void CalculateBaseStats(Dictionary<string, int> equationResults)
+        private void CalculateBaseStats(Dictionary<string, string> equationResults)
         {
             this.MoveSpeed = equationResults["MOVESPEED"];
             this.BaseAttackBonus = equationResults["BAB"];

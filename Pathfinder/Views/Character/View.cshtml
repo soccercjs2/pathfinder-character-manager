@@ -2,6 +2,7 @@
 
 @using Pathfinder.Models;
 @using Pathfinder.ViewModels;
+@using Pathfinder.Extensions;
 
 @{
     ViewBag.Title = Model.Name;
@@ -19,35 +20,35 @@
                         <td colspan="3">Ability Scores</td>
                     </tr>
                 </thead>
-                <tr class="rollD20" data-name="Strength Check" data-value="@Model.StrengthMod">
+                <tr class="rollD20" data-name="Strength Check" data-value="@Model.StrengthMod.Beautify()">
                     <td>Strength</td>
-                    <td class="numberCell">@Model.Strength</td>
-                    <td class="numberCell"><strong>@Model.StrengthMod</strong></td>
+                    <td class="numberCell">@Model.Strength.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.StrengthMod.Beautify()</strong></td>
                 </tr>
-                <tr class="rollD20" data-name="Dexterity Check" data-value="@Model.DexterityMod">
+                <tr class="rollD20" data-name="Dexterity Check" data-value="@Model.DexterityMod.Beautify()">
                     <td>Dexterity</td>
-                    <td class="numberCell">@Model.Dexterity</td>
-                    <td class="numberCell"><strong>@Model.DexterityMod</strong></td>
+                    <td class="numberCell">@Model.Dexterity.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.DexterityMod.Beautify()</strong></td>
                 </tr>
-                <tr class="rollD20" data-name="Constitution Check" data-value="@Model.ConstitutionMod">
+                <tr class="rollD20" data-name="Constitution Check" data-value="@Model.ConstitutionMod.Beautify()">
                     <td>Constitution</td>
-                    <td class="numberCell">@Model.Constitution</td>
-                    <td class="numberCell"><strong>@Model.ConstitutionMod</strong></td>
+                    <td class="numberCell">@Model.Constitution.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.ConstitutionMod.Beautify()</strong></td>
                 </tr>
-                <tr class="rollD20" data-name="Intelligence Check" data-value="@Model.IntelligenceMod">
+                <tr class="rollD20" data-name="Intelligence Check" data-value="@Model.IntelligenceMod.Beautify()">
                     <td>Intelligence</td>
-                    <td class="numberCell">@Model.Intelligence</td>
-                    <td class="numberCell"><strong>@Model.IntelligenceMod</strong></td>
+                    <td class="numberCell">@Model.Intelligence.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.IntelligenceMod.Beautify()</strong></td>
                 </tr>
-                <tr class="rollD20" data-name="Wisdom Check" data-value="@Model.WisdomMod">
+                <tr class="rollD20" data-name="Wisdom Check" data-value="@Model.WisdomMod.Beautify()">
                     <td>Wisdom</td>
-                    <td class="numberCell">@Model.Wisdom</td>
-                    <td class="numberCell"><strong>@Model.WisdomMod</strong></td>
+                    <td class="numberCell">@Model.Wisdom.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.WisdomMod.Beautify()</strong></td>
                 </tr>
-                <tr class="rollD20" data-name="Charisma Check" data-value="@Model.CharismaMod">
+                <tr class="rollD20" data-name="Charisma Check" data-value="@Model.CharismaMod.Beautify()">
                     <td>Charisma</td>
-                    <td class="numberCell">@Model.Charisma</td>
-                    <td class="numberCell"><strong>@Model.CharismaMod</strong></td>
+                    <td class="numberCell">@Model.Charisma.Beautify()</td>
+                    <td class="numberCell"><strong>@Model.CharismaMod.Beautify()</strong></td>
                 </tr>
             </table>
 
@@ -59,15 +60,15 @@
                 </thead>
                 <tr id="trBab">
                     <td>BAB</td>
-                    <td class="numberCell">@Model.BaseAttackBonus</td>
+                    <td class="numberCell">@Model.BaseAttackBonus.Beautify()</td>
                 </tr>
-                <tr id="trCmb" class="rollD20" data-name="Combat Maneuver Check" data-value="@Model.CombatManeuverBonus">
+                <tr id="trCmb" class="rollD20" data-name="Combat Maneuver Check" data-value="@Model.CombatManeuverBonus.Beautify()">
                     <td>CMB</td>
-                    <td class="numberCell">@Model.CombatManeuverBonus</td>
+                    <td class="numberCell">@Model.CombatManeuverBonus.Beautify()</td>
                 </tr>
                 <tr id="trCmd">
                     <td>CMD</td>
-                    <td class="numberCell">@Model.CombatManeuverDefense</td>
+                    <td class="numberCell">@Model.CombatManeuverDefense.Beautify()</td>
                 </tr>
             </table>
 
@@ -79,15 +80,15 @@
                 </thead>
                 <tr id="trArmorClass">
                     <td>AC</td>
-                    <td class="numberCell">@Model.ArmorClass</td>
+                    <td class="numberCell">@Model.ArmorClass.Beautify()</td>
                 </tr>
                 <tr id="trTouchArmorClass">
                     <td>Touch AC</td>
-                    <td class="numberCell">@Model.TouchArmorClass</td>
+                    <td class="numberCell">@Model.TouchArmorClass.Beautify()</td>
                 </tr>
                 <tr id="trFlatFootedArmorClass">
                     <td>Flat-Footed AC</td>
-                    <td class="numberCell">@Model.FlatFootedArmorClass</td>
+                    <td class="numberCell">@Model.FlatFootedArmorClass.Beautify()</td>
                 </tr>
             </table>
 
@@ -97,17 +98,17 @@
                         <td colspan="2">Saves</td>
                     </tr>
                 </thead>
-                <tr id="trFortitude" class="rollD20" data-name="Fortitude Save" data-value="@Model.FortitudeSave">
+                <tr id="trFortitude" class="rollD20" data-name="Fortitude Save" data-value="@Model.FortitudeSave.Beautify()">
                     <td>Fortitude</td>
-                    <td class="numberCell">@Model.FortitudeSave</td>
+                    <td class="numberCell">@Model.FortitudeSave.Beautify()</td>
                 </tr>
-                <tr id="trReflex" class="rollD20" data-name="Reflex Save" data-value="@Model.ReflexSave">
+                <tr id="trReflex" class="rollD20" data-name="Reflex Save" data-value="@Model.ReflexSave.Beautify()">
                     <td>Reflex</td>
-                    <td class="numberCell">@Model.ReflexSave</td>
+                    <td class="numberCell">@Model.ReflexSave.Beautify()</td>
                 </tr>
-                <tr id="trWill" class="rollD20" data-name="Will Save" data-value="@Model.WillSave">
+                <tr id="trWill" class="rollD20" data-name="Will Save" data-value="@Model.WillSave.Beautify()">
                     <td>Will</td>
-                    <td class="numberCell">@Model.WillSave</td>
+                    <td class="numberCell">@Model.WillSave.Beautify()</td>
                 </tr>
             </table>
 
@@ -119,7 +120,7 @@
                 </thead>
                 <tr data-href="@Url.Action("UpdateCurrentHealth", "Character", new { Id = Model.CharacterId })">
                     <td>Health</td>
-                    <td class="numberCell">@(Model.CurrentHealth + "/" + Model.MaximumHealth)</td>
+                    <td class="numberCell">@(Model.CurrentHealth + "/" + Model.MaximumHealth.Beautify())</td>
                 </tr>
                 <tr data-href="@Url.Action("UpdateExperience", "Character", new { Id = Model.CharacterId })">
                     <td>Experience</td>
@@ -127,7 +128,7 @@
                 </tr>
                 <tr>
                     <td>Move Speed</td>
-                    <td class="numberCell">@Model.MoveSpeed</td>
+                    <td class="numberCell">@Model.MoveSpeed.Beautify()</td>
                 </tr>
             </table>
         </div>
@@ -141,9 +142,9 @@
                 </thead>
                 @foreach (var item in Model.Skills)
                 {
-                    <tr class="rollD20" data-name="@item.Key" data-value="@item.Value">
+                    <tr class="rollD20" data-name="@item.Key" data-value="@item.Value.Beautify()">
                         <td>@item.Key</td>
-                        <td style="text-align: right;" colspan="2">@item.Value</td>
+                        <td style="text-align: right;" colspan="2">@item.Value.Beautify()</td>
                     </tr>
                 }
             </table>

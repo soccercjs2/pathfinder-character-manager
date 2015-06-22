@@ -1,5 +1,4 @@
-﻿using NCalc;
-using Pathfinder.ViewModels;
+﻿using Pathfinder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace Pathfinder.Models
 
         private PathfinderContext db = new PathfinderContext();
 
-        public int Evaluate(CharacterView character)
+        public string Evaluate(CharacterView character)
         {
             string replacedEquation = this.Formula;
 
@@ -50,8 +49,7 @@ namespace Pathfinder.Models
             replacedEquation = EvaluateClass(replacedEquation, character);
             replacedEquation = EvaluateClasses(replacedEquation, character);
 
-            Expression expression = new Expression(replacedEquation, EvaluateOptions.NoCache);
-            return (int)Math.Floor(Convert.ToDecimal(expression.Evaluate()));
+            return replacedEquation;
         }
 
         public string EvaluateClass(string replacedEquation, CharacterView character)
@@ -99,7 +97,7 @@ namespace Pathfinder.Models
                 string suffix = "";
                 if (classAttributeEnd < replacedEquation.Length)
                 {
-                    suffix = EvaluateClass(replacedEquation.Substring(classAttributeEnd + 1), character);
+                    suffix = EvaluateClass(replacedEquation.Substring(classAttributeEnd), character);
                 }
 
                 //put equation back together
