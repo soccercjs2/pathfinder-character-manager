@@ -247,6 +247,7 @@ input[type=button] {
 
 .rollbar
 {
+    
     background-color: #F0F0FF;
     height: 50px;
 }
@@ -279,5 +280,5 @@ input[type="text"].focus {
 
 .body-offset
 {
-    top: 50px;
+    margin-top: 50px;
 }

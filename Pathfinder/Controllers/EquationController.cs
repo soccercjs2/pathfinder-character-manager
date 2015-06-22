@@ -72,7 +72,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                equation.Name = equation.BonusType + " Bonus";
+                equation.Name = equation.BonusType;
                 db.Equations.Add(equation);
                 db.SaveChanges();
 
@@ -94,6 +94,7 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                equation.Name = equation.BonusType;
                 db.Equations.Attach(equation);
                 db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();

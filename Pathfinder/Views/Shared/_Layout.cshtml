@@ -41,34 +41,35 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
-    @* ----- rollbar ----- *@
-    @if (Session["CharacterId"] != null)
-    {
-        <div class="rollbar">
-            <div class="container">
-                <div class="" style="height: 100%;">
-                    <div id="roll_result" style="display: none;">
-                        <table class="rollbar_table">
-                            <tr>
-                                <td class="full h4"><span id="roll_label"></span></td>
-                                <td class="h4"><b><span id="roll_value" class="roll_value"></span></b></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="roller">
-                        <table class="rollbar_table">
-                            <tr>
-                                <td class="full"><input type="text" class="form-control full" id="roll_input" placeholder="Enter Roll Here" /></td>
-                                <td><button class="btn btn-primary" id="roll_button">Roll</button></td>
-                            </tr>
-                        </table>
+        @if (Session["CharacterId"] != null)
+        {
+            <div class="rollbar">
+                <div class="container">
+                    <div class="" style="height: 100%;">
+                        <div id="roll_result" style="display: none;">
+                            <table class="rollbar_table">
+                                <tr>
+                                    <td class="full h4"><span id="roll_label"></span></td>
+                                    <td class="h4"><b><span id="roll_value" class="roll_value"></span></b></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="roller">
+                            <table class="rollbar_table">
+                                <tr>
+                                    <td class="full"><input type="text" class="form-control full" id="roll_input" placeholder="Enter Roll Here" /></td>
+                                    <td><button class="btn btn-primary" id="roll_button">Roll</button></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-    <div @(Session["CharacterId"] != null ? "class=container body-content" : "class=container body-content body-offset")>
+        }
+    </div>
+    @* ----- rollbar ----- *@
+    
+    <div class="@(Session["CharacterId"] == null ? "container body-content" : "container body-content body-offset")">
         @RenderBody()
         <footer>
             <!-- Single D20 Roll -->
