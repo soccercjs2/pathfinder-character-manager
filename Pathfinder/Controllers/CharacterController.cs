@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Pathfinder.Extensions;
 
 namespace Pathfinder.Controllers
 {
@@ -56,8 +57,7 @@ namespace Pathfinder.Controllers
             HealthUpdater updater = new HealthUpdater();
             updater.CharacterId = id;
             updater.CurrentHealth = characterView.CurrentHealth;
-            //updater.MaxHealth = characterView.MaximumHealth;
-            updater.MaxHealth = 111;
+            updater.MaxHealth = Convert.ToInt32(characterView.MaximumHealth.Beautify());
 
             return View(updater);
         }

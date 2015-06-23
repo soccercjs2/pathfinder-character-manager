@@ -30,7 +30,8 @@ namespace Pathfinder.Extensions
                 string diceFound = equation.Substring(prefixStart, suffixEnd - prefixStart);
 
                 //recurse!
-                string replacedEquation = equation.Substring(0, prefixStart) + "0" + equation.Substring(suffixEnd + 1);
+                string replacedEquation = equation.Substring(0, prefixStart) + "0";
+                if (suffixEnd <= replacedEquation.Length) { replacedEquation += equation.Substring(suffixEnd + 1); }
                 return Beautify(replacedEquation, dice + diceFound + " + ");
             }
             else

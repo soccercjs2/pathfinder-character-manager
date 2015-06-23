@@ -238,7 +238,7 @@ namespace Pathfinder.Models
             equation.Deletable = false;
 
             String[] equationNames = { "MOVESPEED" };
-            String[] equationValues = { "30" };
+            String[] equationValues = { "0" };
 
             for (int i = 0; i < equationNames.Length; i++)
             {
