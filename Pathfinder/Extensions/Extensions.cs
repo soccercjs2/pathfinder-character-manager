@@ -31,7 +31,7 @@ namespace Pathfinder.Extensions
 
                 //recurse!
                 string replacedEquation = equation.Substring(0, prefixStart) + "0";
-                if (suffixEnd <= replacedEquation.Length) { replacedEquation += equation.Substring(suffixEnd + 1); }
+                if (suffixEnd <= equation.Length) { replacedEquation += equation.Substring(suffixEnd + 1); }
                 return Beautify(replacedEquation, dice + diceFound + " + ");
             }
             else
