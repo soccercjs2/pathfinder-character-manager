@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Pathfinder.Extensions;
 
 namespace Pathfinder.ViewModels
 {
@@ -15,8 +16,13 @@ namespace Pathfinder.ViewModels
 
         public string AttackBonusString()
         {
-            if (Convert.ToInt32(this.AttackBonus) >= 0) { return '+' + this.AttackBonus.ToString(); }
-            else { return this.AttackBonus.ToString(); }
+            string attackBonus = this.AttackBonus.Beautify();
+            if (!attackBonus.Contains("d"))
+            {
+                if (Convert.ToInt32(attackBonus) >= 0) { return "+" + attackBonus.ToString(); }
+                else { return attackBonus.ToString(); }
+            }
+            else { return attackBonus.ToString(); }
         }
         
         public string CriticalString()
