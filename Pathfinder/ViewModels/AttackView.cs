@@ -8,6 +8,7 @@ namespace Pathfinder.ViewModels
 {
     public class AttackView
     {
+        public int AttackId { get; set; }
         public string Weapon { get; set; }
         public string AttackBonus { get; set; }
         public string Damage { get; set; }

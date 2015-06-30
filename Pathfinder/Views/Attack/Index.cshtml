@@ -14,9 +14,8 @@
     </thead>
     @foreach (var item in Model)
     {
-        <tr class="attack_roll">
+        <tr class="attack_roll" data-href="@Url.Action("View", "Attack", new { Id = item.AttackGroupId })">
             <td>@item.Name</td>
-            <td width="50">@Html.ActionLink("View", "View", new { Id = item.AttackGroupId })</td>
         </tr>
     }
 </table>

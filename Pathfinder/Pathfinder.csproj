@@ -300,9 +300,8 @@
     <Content Include="Views\Equation\Edit.cshtml" />
     <Content Include="Views\Attack\Index.cshtml" />
     <Content Include="Views\Attack\CreateAttackGroup.cshtml" />
-    <Content Include="Views\Attack\SubAttack.cshtml" />
     <Content Include="Views\Attack\CreateAttack.cshtml" />
-    <Content Include="Views\Attack\Edit.cshtml" />
+    <Content Include="Views\Attack\EditAttackGroup.cshtml" />
     <Content Include="Views\Ability\Index.cshtml" />
     <Content Include="Views\Ability\CreateAbility.cshtml" />
     <Content Include="Views\Ability\EditAbility.cshtml" />
@@ -310,7 +309,7 @@
     <Content Include="Views\Ability\AbilityBonuses.cshtml" />
     <Content Include="Views\Equation\CreateAbilityEquation.cshtml" />
     <Content Include="Views\Skill\Edit.cshtml" />
-    <Content Include="Views\Attack\EditSubAttack.cshtml" />
+    <Content Include="Views\Attack\EditAttack.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Inventory\CreateWeapon.cshtml" />
     <Content Include="Views\Inventory\CreateArmor.cshtml" />

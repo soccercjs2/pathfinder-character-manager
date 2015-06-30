@@ -95,7 +95,8 @@ function MakeD20Roll(value)
 
 function Roll(label, value, critical_minimum)
 {
-    var equation = EvaluateRolls(value, critical_minimum);
+    $('#roll_result').data('attack-status', 'normal');
+    var equation = EvaluateRolls(value, critical_minimum, false);
 
     if ($('#roller').css('display') == 'none')
     {
@@ -143,7 +144,7 @@ function ShowResult(label, equation)
     $('#roll_label').fadeIn('fast');
 }
 
-function EvaluateRolls(roll_string, critical_minimum)
+function EvaluateRolls(roll_string, critical_minimum, isCritical)
 {
     var dIndex = roll_string.indexOf('d');
 
@@ -167,10 +168,6 @@ function EvaluateRolls(roll_string, critical_minimum)
             }
             else if (diceSize == 20 && roll_result == 1) {
                 $('#roll_result').data('attack-status', 'critical-failure');
-            }
-            else
-            {
-                $('#roll_result').data('attack-status', 'normal');
             }
         }
 

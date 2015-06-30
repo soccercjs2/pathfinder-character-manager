@@ -37,6 +37,7 @@ namespace Pathfinder.ViewModels
                 Equation damageEquation = db.Equations.Find(attack.DamageEquationId);
                 
                 AttackView attackView = new AttackView();
+                attackView.AttackId = attack.AttackId;
                 attackView.Weapon = weapon.Name;
                 attackView.AttackBonus = GetAttackBonus(attackEquation.Name, weapon);
                 attackView.Damage = GetDamage(damageEquation.Name, weapon);

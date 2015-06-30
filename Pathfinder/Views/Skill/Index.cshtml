@@ -1,4 +1,5 @@
 ﻿@model Pathfinder.ViewModels.SkillManager
+@using Pathfinder.Extensions
 
 @{
     ViewBag.Title = "Skills";
@@ -8,7 +9,7 @@
     <div class="col-xs-12 h4">
         <h2>Skills</h2>
 
-        Skill Points: <span id="sumResult" data-maxval="@Model.TotalSkillPoints"></span> / @Model.TotalSkillPoints
+        Skill Points: <span id="sumResult" data-maxval="@Model.TotalSkillPoints.Beautify()"></span> / @Model.TotalSkillPoints.Beautify()
     </div>
 </div>
 

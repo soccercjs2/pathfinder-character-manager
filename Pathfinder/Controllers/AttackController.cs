@@ -85,43 +85,13 @@ namespace Pathfinder.Controllers
             }
         }
 
-        //public ActionResult Create(int id)
-        //{
-        //    List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
-            
-        //    EquationCategory damageCategory = db.EquationCategories
-        //        .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
-
-        //    List<Equation> damageCategories = db.Equations
-        //        .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
-
-        //    ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
-        //    ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
-            
-        //    Attack attack = new Attack();
-        //    attack.CharacterId = id;
-
-        //    return View(attack);
-        //}
-
-        public ActionResult Edit(int id)
+        public ActionResult EditAttackGroup(int id)
         {
-            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == id).ToList<Weapon>();
-            
-            EquationCategory damageCategory = db.EquationCategories
-                .Where(m => m.CharacterId == id && m.Name == "Damage").FirstOrDefault<EquationCategory>();
-
-            List<Equation> damageCategories = db.Equations
-                .Where(m => m.CharacterId == id && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
-
-            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
-            ViewBag.DamageEquations = new SelectList(damageCategories, "EquationId", "Name");
-            
             return View(db.AttackGroups.Find(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(AttackGroup attack)
+        public ActionResult EditAttackGroup(AttackGroup attack)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +99,7 @@ namespace Pathfinder.Controllers
                 db.Entry(attack).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Attack", new { Id = attack.CharacterId });
+                return RedirectToAction("View", "Attack", new { Id = attack.AttackGroupId });
             }
             else
             {
@@ -137,76 +107,45 @@ namespace Pathfinder.Controllers
             }
         }
 
-        public ActionResult SubAttack(int id)
+        public ActionResult EditAttack(int id)
         {
-            return View();
-            //return View(new AttackView(id));
-        }
+            Attack attack = db.Attacks.Find(id);
+            AttackGroup attackGroup = db.AttackGroups.Find(attack.AttackGroupId);
+            List<Weapon> weapons = db.Weapons.Where(m => m.CharacterId == attackGroup.CharacterId).ToList<Weapon>();
 
-        public ActionResult CreateSubAttack(int id)
-        {
-            AttackGroup attack = db.AttackGroups.Where(m => m.AttackGroupId == id).FirstOrDefault<AttackGroup>();
+            EquationCategory damageCategory = db.EquationCategories
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.Name == "Damage").FirstOrDefault<EquationCategory>();
+
+            List<Equation> damageEquations = db.Equations
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.EquationCategoryId == damageCategory.EquationCategoryId).ToList<Equation>();
+
             EquationCategory attackCategory = db.EquationCategories
-                .Where(m => m.CharacterId == attack.CharacterId 
-                    && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
 
-            List<Equation> equations = db.Equations
-                .Where(m => m.CharacterId == attack.CharacterId 
-                    && m.EquationCategoryId == attackCategory.EquationCategoryId).ToList<Equation>();
+            List<Equation> attackEquations = db.Equations
+                .Where(m => m.CharacterId == attackGroup.CharacterId && m.EquationCategoryId == attackCategory.EquationCategoryId).ToList<Equation>();
 
-            ViewBag.Equations = new SelectList(equations, "EquationId", "Name");
-            
-            Attack subAttack = new Attack();
-            subAttack.AttackGroupId = id;
-            return View(subAttack);
+            ViewBag.Weapons = new SelectList(weapons, "WeaponId", "Name");
+            ViewBag.AttackEquations = new SelectList(attackEquations, "EquationId", "Name");
+            ViewBag.DamageEquations = new SelectList(damageEquations, "EquationId", "Name");
+
+            return View(attack);
         }
 
         [HttpPost]
-        public ActionResult CreateSubAttack(Attack subAttack)
+        public ActionResult EditAttack(Attack attack)
         {
             if (ModelState.IsValid)
             {
-                db.Attacks.Add(subAttack);
+                db.Attacks.Attach(attack);
+                db.Entry(attack).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackGroupId });
+                return RedirectToAction("View", "Attack", new { Id = attack.AttackGroupId });
             }
             else
             {
-                return View(subAttack);
-            }
-        }
-
-        public ActionResult EditSubAttack(int id)
-        {
-            AttackGroup attack = db.AttackGroups.Where(m => m.AttackGroupId == id).FirstOrDefault<AttackGroup>();
-            EquationCategory attackCategory = db.EquationCategories
-                .Where(m => m.CharacterId == attack.CharacterId
-                    && m.Name == "Attacks").FirstOrDefault<EquationCategory>();
-
-            List<Equation> equations = db.Equations
-                .Where(m => m.CharacterId == attack.CharacterId
-                    && m.EquationCategoryId == attackCategory.EquationCategoryId).ToList<Equation>();
-
-            ViewBag.Equations = new SelectList(equations, "EquationId", "Name");
-
-            return View(db.Attacks.Find(id));
-        }
-
-        [HttpPost]
-        public ActionResult EditSubAttack(Attack subAttack)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Attacks.Attach(subAttack);
-                db.Entry(subAttack).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return RedirectToAction("SubAttack", "Attack", new { Id = subAttack.AttackGroupId });
-            }
-            else
-            {
-                return View(subAttack);
+                return View(attack);
             }
         }
     }

@@ -1,27 +1,35 @@
 ﻿@model Pathfinder.Models.Attack
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Attack";
 }
 
-<h2>Edit</h2>
+<h2>Edit Attack</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Attack</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.AttackId)
-        @Html.HiddenFor(model => model.CharacterId)
+
+        @Html.HiddenFor(m => m.AttackId)
+        @Html.HiddenFor(m => m.AttackGroupId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.WeaponId, "Weapon", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.WeaponId, (SelectList)ViewBag.Weapons, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.WeaponId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttackEquationId, "Attack Equation", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.AttackEquationId, (SelectList)ViewBag.AttackEquations, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AttackEquationId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -42,5 +50,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "View", new { Id = Model.AttackGroupId })
 </div>

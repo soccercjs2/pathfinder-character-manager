@@ -22,7 +22,7 @@
             @foreach (var item in Model.AttackViews)
             {
                 <tr>
-                    <td>@item.Weapon</td>
+                    <td data-href="@Url.Action("EditAttack", "Attack", new { Id = item.AttackId })">@item.Weapon</td>
                     <td class="min">
                         <button class="btn btn-default attack-roller-button rollD20button" 
                                 data-name="@item.Weapon" data-value="@item.AttackBonus.Beautify()" data-critical-minimum="@item.CriticalMinimum">
