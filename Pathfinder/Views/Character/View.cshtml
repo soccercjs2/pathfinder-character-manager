@@ -131,6 +131,22 @@
                     <td class="numberCell">@Model.MoveSpeed.Beautify()</td>
                 </tr>
             </table>
+
+            <table id="tblCounters" class="section">
+                <thead onclick="ToggleRowsVisible('tblCounters')">
+                    <tr>
+                        <td colspan="2">Counters</td>
+                    </tr>
+                </thead>
+                @*<tr data-href="@Url.Action("UpdateCurrentHealth", "Character", new { Id = Model.CharacterId })">
+                    <td>Health</td>
+                    <td class="numberCell">@(Model.CurrentHealth + "/" + Model.MaximumHealth.Beautify())</td>
+                </tr>*@
+                <tr>
+                    <td>Panache Points</td>
+                    <td class="numberCell">1</td>
+                </tr>
+            </table>
         </div>
 
         <div id="divSkills" class="col-sm-6 col-xs-12">
