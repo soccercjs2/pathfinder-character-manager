@@ -44,6 +44,8 @@ namespace Pathfinder.ViewModels
         public int Experience { get; set; }
         public string MoveSpeed { get; set; }
 
+        public List<Counter> Counters { get; set; }
+
         public string SkillPoints { get; set; }
         public List<KeyValuePair<string, string>> Skills { get; set; }
 
@@ -66,6 +68,7 @@ namespace Pathfinder.ViewModels
             CalculateModifiers(this.EquationResults);
             CalculateBaseStats(this.EquationResults);
 
+            this.Counters = LoadCounters(characterId);
             this.Skills = LoadSkills(characterId);
         }
 
@@ -101,6 +104,12 @@ namespace Pathfinder.ViewModels
             return classes;
         }
 
+        private List<Counter> LoadCounters(int characterId)
+        {
+            List<Counter> counters = db.Counters.Where(m => m.CharacterId == characterId).ToList<Counter>();
+            return counters;
+        }
+        
         private List<KeyValuePair<string, string>> LoadSkills(int characterId)
         {
             List<Skill> skills = db.Skills.OrderBy(s => s.Name).Where(s => s.CharacterId == characterId).ToList<Skill>();

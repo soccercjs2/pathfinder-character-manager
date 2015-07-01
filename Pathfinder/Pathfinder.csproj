@@ -184,6 +184,7 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassHealth.cs" />
+    <Compile Include="Models\Counter.cs" />
     <Compile Include="Models\Equation.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Gear.cs" />
@@ -233,6 +234,7 @@
     <None Include="Properties\PublishProfiles\pathfindercharacters - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\pathfindercharacters.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\counter.js" />
     <Content Include="Scripts\hammer.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -321,6 +323,8 @@
     <Content Include="Views\Character\UpdateCurrentHealth.cshtml" />
     <Content Include="Views\Character\UpdateExperience.cshtml" />
     <Content Include="Views\Equation\EditAbilityEquation.cshtml" />
+    <Content Include="Views\Character\CreateCounter.cshtml" />
+    <Content Include="Views\Character\UpdateCounter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

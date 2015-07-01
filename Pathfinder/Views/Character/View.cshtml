@@ -138,15 +138,15 @@
                         <td colspan="2">Counters</td>
                     </tr>
                 </thead>
-                @*<tr data-href="@Url.Action("UpdateCurrentHealth", "Character", new { Id = Model.CharacterId })">
-                    <td>Health</td>
-                    <td class="numberCell">@(Model.CurrentHealth + "/" + Model.MaximumHealth.Beautify())</td>
-                </tr>*@
-                <tr>
-                    <td>Panache Points</td>
-                    <td class="numberCell">1</td>
-                </tr>
+                @foreach (var item in Model.Counters)
+                {
+                    <tr data-href="@Url.Action("UpdateCounter", "Character", new { Id = item.CounterId })">
+                        <td>@item.Name</td>
+                        <td class="numberCell"><span class="@(item.Count > 1 ? "critical-failure" : "")">@item.Count</span> / 1</td>
+                    </tr>
+                }
             </table>
+            <div style="padding-left: 5px;">@Html.ActionLink("[+ New Counter]", "CreateCounter", "Character", new { Id = Model.CharacterId }, null)</div><br />
         </div>
 
         <div id="divSkills" class="col-sm-6 col-xs-12">

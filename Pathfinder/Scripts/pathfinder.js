@@ -160,6 +160,6 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
         dataType: 'text',
         url: "/Character/UpdateAbility",
         data: ability,
-        dataType: 'json',
+        dataType: 'json'
     });
 };

@@ -175,6 +175,7 @@ input[type=button] {
 .numberCell {
     text-align: right;
     width: 20px;
+    white-space: nowrap;
 }
 
 .numberText {
@@ -214,6 +215,14 @@ input[type=button] {
 
 .block {
     display: block;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .center-column {

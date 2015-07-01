@@ -126,23 +126,50 @@ namespace Pathfinder.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult UpdateAbility(Ability ability)
+        public ActionResult CreateCounter(int id)
         {
-            string redirectUrl = new UrlHelper(Request.RequestContext).Action("View", "Character", new { Id = ability.CharacterId });
+            Counter counter = new Counter();
+            counter.CharacterId = id;
+            
+            return View(counter);
+        }
 
+        [HttpPost]
+        public ActionResult CreateCounter(Counter counter)
+        {
             if (ModelState.IsValid)
             {
-                db.Abilities.Attach(ability);
-                db.Entry(ability).State = System.Data.Entity.EntityState.Modified;
-
+                db.Counters.Add(counter);
                 db.SaveChanges();
 
-                return Json(new { Url = redirectUrl });
+                return RedirectToAction("View", "Character", new { Id = counter.CharacterId });
             }
             else
             {
-                return Json(new { Url = redirectUrl });
+                return View(counter);
+            }
+        }
+
+        public ActionResult UpdateCounter(int id)
+        {
+            return View(db.Counters.Find(id));
+        }
+        
+        [HttpPost]
+        public ActionResult UpdateCounter(Counter counter)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Counters.Attach(counter);
+                db.Entry(counter).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+
+                return RedirectToAction("View", "Character", new { Id = counter.CharacterId });
+            }
+            else
+            {
+                return RedirectToAction("View", "Character", new { Id = counter.CharacterId });
             }
         }
     }

@@ -11,13 +11,19 @@ namespace Pathfinder.Models
         public DbSet<Character> Characters { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<ClassHealth> ClasseHealths { get; set; }
+
+        public DbSet<Counter> Counters { get; set; }
         public DbSet<Skill> Skills { get; set; }
+
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<AbilityType> AbilityTypes { get; set; }
+
         public DbSet<EquationCategory> EquationCategories { get; set; }
         public DbSet<Equation> Equations { get; set; }
+
         public DbSet<AttackGroup> AttackGroups { get; set; }
         public DbSet<Attack> Attacks { get; set; }
+
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Armor> Armors { get; set; }
