@@ -139,6 +139,10 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+
+                if (i == 0) { equation.EvaluationOrder = 1; }
+                else { equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1; }
+
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -160,6 +164,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -181,6 +186,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -202,6 +208,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -223,6 +230,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -244,6 +252,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -265,6 +274,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }
@@ -286,6 +296,7 @@ namespace Pathfinder.Models
             {
                 equation.Name = equationNames[i];
                 equation.Formula = equationValues[i];
+                equation.EvaluationOrder = db.Equations.Where(m => m.CharacterId == this.CharacterId).Max(m => m.EvaluationOrder) + 1;
                 db.Equations.Add(equation);
                 db.SaveChanges();
             }

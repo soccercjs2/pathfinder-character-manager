@@ -29,6 +29,7 @@ namespace Pathfinder.Models
         public DbSet<Armor> Armors { get; set; }
         public DbSet<MagicItem> MagicItems { get; set; }
         public DbSet<Gear> Gears { get; set; }
+        
         //public DbSet<Temp> Temps { get; set; }
     }
 }

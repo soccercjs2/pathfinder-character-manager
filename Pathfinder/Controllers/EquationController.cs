@@ -197,14 +197,21 @@ namespace Pathfinder.Controllers
 
                 if (hasInvalidEquations)
                 {
+                    //update the evaluation order
                     int nextOrderIndex = equations.Max(e => e.EvaluationOrder) + 1;
                     equations[i].EvaluationOrder = nextOrderIndex;
                     equations.Add(equations[i]);
                     equations.RemoveAt(i);
                     i--;
+
+                    //save the equation
+                    db.Equations.Attach(equations[i]);
+                    db.Entry(equations[i]).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 else
                 {
+                    //mark the equation for 
                     validatedEquationNames.Add(equations[i].Name);
                 }
             }
