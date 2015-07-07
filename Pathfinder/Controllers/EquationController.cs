@@ -150,5 +150,19 @@ namespace Pathfinder.Controllers
                 return View(equation);
             }
         }
+
+        private int AddEquationInOrder(Equation equation)
+        {
+            List<Equation> equations = db.Equations.Where(m => m.CharacterId == equation.CharacterId).ToList<Equation>();
+
+            if (equation == null)
+            {
+                return 1;
+            }
+            else
+            {                
+                return -1;
+            }
+        }
     }
 }

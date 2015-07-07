@@ -17,6 +17,10 @@
         @Html.HiddenFor(model => model.EquationCategoryId)
         @Html.HiddenFor(model => model.Name)
         @Html.HiddenFor(model => model.AbilityId)
+        @Html.HiddenFor(model => model.ShowFormula)
+        @Html.HiddenFor(model => model.EvaluationOrder)
+        @Html.HiddenFor(model => model.Editable)
+        @Html.HiddenFor(model => model.Deletable)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Formula, htmlAttributes: new { @class = "control-label col-md-2" })

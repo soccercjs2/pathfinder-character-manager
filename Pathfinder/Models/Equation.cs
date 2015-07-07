@@ -16,6 +16,7 @@ namespace Pathfinder.Models
         public int AbilityId { get; set; }
         public bool ShowFormula { get; set; }
         public string BonusType { get; set; }
+        public int EvaluationOrder { get; set; }
         public bool Editable { get; set; }
         public bool Deletable { get; set; }
 
@@ -31,18 +32,31 @@ namespace Pathfinder.Models
             replacedEquation = replacedEquation.Replace("Intelligence", character.Intelligence.ToString());
             replacedEquation = replacedEquation.Replace("Wisdom", character.Wisdom.ToString());
             replacedEquation = replacedEquation.Replace("Charisma", character.Charisma.ToString());
-
-            //if (character.BonusResults.Keys.Contains("ARMOR")) { replacedEquation = replacedEquation.Replace("ARMOR", character.BonusResults["ARMOR"].ToString()); }
-            //if (character.BonusResults.Keys.Contains("SHIELD")) { replacedEquation = replacedEquation.Replace("SHIELD", character.BonusResults["SHIELD"].ToString()); }
-            //if (character.BonusResults.Keys.Contains("NATURAL")) { replacedEquation = replacedEquation.Replace("NATURAL", character.BonusResults["NATURAL"].ToString()); }
-            //if (character.BonusResults.Keys.Contains("DODGE")) { replacedEquation = replacedEquation.Replace("DODGE", character.BonusResults["DODGE"].ToString()); }
-            //if (character.BonusResults.Keys.Contains("DEFLECT")) { replacedEquation = replacedEquation.Replace("DEFLECT", character.BonusResults["DEFLECT"].ToString()); }
             
             if (character.EquationResults != null)
             {
                 foreach (string key in character.EquationResults.Keys)
                 {
-                    replacedEquation = replacedEquation.Replace(key, character.EquationResults[key].ToString());
+                    int startIndex = replacedEquation.IndexOf(key);
+
+                    //if you find the equation finds a matched equation result
+                    if (startIndex >= 0)
+                    {
+                        //the end of the sub equation
+                        int endIndex = startIndex + key.Length - 1;
+
+                        //check if the characters before and after the sub equation are symbols or whitespace
+                        bool validPrefix = startIndex == 0 || Char.IsWhiteSpace(replacedEquation[startIndex - 1]) || Char.IsSymbol(replacedEquation[startIndex - 1]);
+                        bool validSuffix = endIndex == replacedEquation.Length - 1 || Char.IsWhiteSpace(replacedEquation[endIndex + 1]) || Char.IsSymbol(replacedEquation[endIndex + 1]);
+
+                        //if both of the above conditions are true, you know you found a sub equation by itself, and not just part of a word
+                        if (validPrefix && validSuffix)
+                        {
+                            replacedEquation = replacedEquation.Substring(0, startIndex) + character.EquationResults[key].ToString() + replacedEquation.Substring(endIndex + 1);
+                        }
+                    }
+
+                    //replacedEquation = replacedEquation.Replace(key, character.EquationResults[key].ToString());
                 }
             }
             

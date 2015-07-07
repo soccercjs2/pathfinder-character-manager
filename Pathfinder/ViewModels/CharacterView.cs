@@ -196,6 +196,8 @@ namespace Pathfinder.ViewModels
                     && m.AbilityId == 0)
                 .ToList<Equation>();
 
+            equations = SortEquations(equations);
+
             //evaluate each equation and apply bonuses
             foreach (Equation equation in equations)
             {
