@@ -194,9 +194,8 @@ namespace Pathfinder.ViewModels
                 .Where(m => m.CharacterId == characterId
                     && m.BonusType == null
                     && m.AbilityId == 0)
+                .OrderBy(m => m.EvaluationOrder)
                 .ToList<Equation>();
-
-            equations = SortEquations(equations);
 
             //evaluate each equation and apply bonuses
             foreach (Equation equation in equations)

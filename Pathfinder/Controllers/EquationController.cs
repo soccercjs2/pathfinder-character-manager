@@ -43,8 +43,11 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                equation.EvaluationOrder = db.Equations.Max(e => e.EvaluationOrder);
                 db.Equations.Add(equation);
                 db.SaveChanges();
+
+                SortEquations(equation.CharacterId);
 
                 return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
             }
@@ -73,8 +76,11 @@ namespace Pathfinder.Controllers
             if (ModelState.IsValid)
             {
                 equation.Name = equation.BonusType;
+                equation.EvaluationOrder = db.Equations.Max(e => e.EvaluationOrder);
                 db.Equations.Add(equation);
                 db.SaveChanges();
+
+                SortEquations(equation.CharacterId);
 
                 return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
             }
@@ -98,6 +104,8 @@ namespace Pathfinder.Controllers
                 db.Equations.Attach(equation);
                 db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();
+
+                SortEquations(equation.CharacterId);
 
                 return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
             }
@@ -143,6 +151,8 @@ namespace Pathfinder.Controllers
                 db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();
 
+                SortEquations(equation.CharacterId);
+
                 return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
             }
             else
@@ -151,17 +161,52 @@ namespace Pathfinder.Controllers
             }
         }
 
-        private int AddEquationInOrder(Equation equation)
+        private void SortEquations(int characterId)
         {
-            List<Equation> equations = db.Equations.Where(m => m.CharacterId == equation.CharacterId).ToList<Equation>();
-
-            if (equation == null)
+            List<Equation> equations = db.Equations.Where(m => m.CharacterId == characterId && m.ShowFormula == true).ToList<Equation>();
+            List<string> equationNames = equations.Select(e => e.Name).ToList<string>();
+            List<string> validatedEquationNames = new List<string>();
+            
+            for (int i = 0; i < equations.Count; i++ )
             {
-                return 1;
-            }
-            else
-            {                
-                return -1;
+                bool hasInvalidEquations = false;
+
+                foreach (string name in equationNames)
+                {
+                    string formula = equations[i].Formula;
+                    int startIndex = formula.IndexOf(name);
+
+                    //if you find the equation finds a matched equation result
+                    if (startIndex >= 0)
+                    {
+                        //the end of the sub equation
+                        int endIndex = startIndex + name.Length - 1;
+
+                        //check if the characters before and after the sub equation are symbols or whitespace
+                        bool validPrefix = startIndex == 0 || Char.IsWhiteSpace(formula[startIndex - 1]) || Char.IsSymbol(formula[startIndex - 1]);
+                        bool validSuffix = endIndex == formula.Length - 1 || Char.IsWhiteSpace(formula[endIndex + 1]) || Char.IsSymbol(formula[endIndex + 1]);
+
+                        //if both of the above conditions are true, you know you found a sub equation by itself, and not just part of a word
+                        if (validPrefix && validSuffix && !validatedEquationNames.Contains(name))
+                        {
+                            hasInvalidEquations = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (hasInvalidEquations)
+                {
+                    int nextOrderIndex = equations.Max(e => e.EvaluationOrder) + 1;
+                    equations[i].EvaluationOrder = nextOrderIndex;
+                    equations.Add(equations[i]);
+                    equations.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    validatedEquationNames.Add(equations[i].Name);
+                }
             }
         }
     }
