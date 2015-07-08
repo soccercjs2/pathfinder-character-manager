@@ -47,7 +47,14 @@ namespace Pathfinder.Controllers
                 db.Equations.Add(equation);
                 db.SaveChanges();
 
-                SortEquations(equation.CharacterId);
+                //if equations are invalid and can't be sorted, remove the equation, and go back to editing it
+                if (!SortEquations(equation.CharacterId))
+                {
+                    db.Equations.Remove(db.Equations.Find(equation.EquationId));
+                    db.SaveChanges();
+
+                    return View(equation);
+                }
 
                 return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
             }
@@ -80,7 +87,14 @@ namespace Pathfinder.Controllers
                 db.Equations.Add(equation);
                 db.SaveChanges();
 
-                SortEquations(equation.CharacterId);
+                //if equations are invalid and can't be sorted, remove the equation, and go back to editing it
+                if (!SortEquations(equation.CharacterId))
+                {
+                    db.Equations.Remove(db.Equations.Find(equation.EquationId));
+                    db.SaveChanges();
+
+                    return View(equation);
+                }
 
                 return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
             }
@@ -100,14 +114,27 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                //keep equation to revert back to if new equation isn't valid
+                Equation oldSavedEquation = db.Equations.Find(equation.EquationId);
+
                 equation.Name = equation.BonusType;
                 db.Equations.Attach(equation);
                 db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();
 
-                SortEquations(equation.CharacterId);
+                //if equations are invalid and can't be sorted, reattach the old equation, and go back to editing the new equation
+                if (!SortEquations(equation.CharacterId))
+                {
+                    db.Equations.Attach(oldSavedEquation);
+                    db.Entry(oldSavedEquation).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+                    return View(equation);
+                } 
+                else
+                {
+                    return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+                }                
             }
             else
             {
@@ -147,13 +174,26 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                //keep equation to revert back to if new equation isn't valid
+                Equation oldSavedEquation = db.Equations.Find(equation.EquationId);
+
                 db.Equations.Attach(equation);
                 db.Entry(equation).State = EntityState.Modified;
                 db.SaveChanges();
 
-                SortEquations(equation.CharacterId);
+                //if equations are invalid and can't be sorted, reattach the old equation, and go back to editing the new equation
+                if (!SortEquations(equation.CharacterId))
+                {
+                    db.Equations.Attach(oldSavedEquation);
+                    db.Entry(oldSavedEquation).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
+                    return View(equation);
+                }
+                else
+                {
+                    return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+                }    
             }
             else
             {
@@ -161,60 +201,72 @@ namespace Pathfinder.Controllers
             }
         }
 
-        private void SortEquations(int characterId)
+        private bool SortEquations(int characterId)
         {
             List<Equation> equations = db.Equations.Where(m => m.CharacterId == characterId && m.ShowFormula == true).ToList<Equation>();
             List<string> equationNames = equations.Select(e => e.Name).ToList<string>();
             List<string> validatedEquationNames = new List<string>();
+            int validationAttempts = 0;
+            int validationAttemptsMax = equations.Count * 4;
             
             for (int i = 0; i < equations.Count; i++ )
             {
-                bool hasInvalidEquations = false;
+                if (validationAttempts < validationAttemptsMax) {
+                    bool hasInvalidEquations = false;
+                    validationAttempts++;
 
-                foreach (string name in equationNames)
-                {
-                    string formula = equations[i].Formula;
-                    int startIndex = formula.IndexOf(name);
-
-                    //if you find the equation finds a matched equation result
-                    if (startIndex >= 0)
+                    foreach (string name in equationNames)
                     {
-                        //the end of the sub equation
-                        int endIndex = startIndex + name.Length - 1;
+                        string formula = equations[i].Formula;
+                        int startIndex = formula.IndexOf(name);
 
-                        //check if the characters before and after the sub equation are symbols or whitespace
-                        bool validPrefix = startIndex == 0 || Char.IsWhiteSpace(formula[startIndex - 1]) || Char.IsSymbol(formula[startIndex - 1]);
-                        bool validSuffix = endIndex == formula.Length - 1 || Char.IsWhiteSpace(formula[endIndex + 1]) || Char.IsSymbol(formula[endIndex + 1]);
-
-                        //if both of the above conditions are true, you know you found a sub equation by itself, and not just part of a word
-                        if (validPrefix && validSuffix && !validatedEquationNames.Contains(name))
+                        //if you find the equation finds a matched equation result
+                        if (startIndex >= 0)
                         {
-                            hasInvalidEquations = true;
-                            break;
+                            //the end of the sub equation
+                            int endIndex = startIndex + name.Length - 1;
+
+                            //check if the characters before and after the sub equation are symbols or whitespace
+                            bool validPrefix = startIndex == 0 || Char.IsWhiteSpace(formula[startIndex - 1]) || Char.IsSymbol(formula[startIndex - 1]);
+                            bool validSuffix = endIndex == formula.Length - 1 || Char.IsWhiteSpace(formula[endIndex + 1]) || Char.IsSymbol(formula[endIndex + 1]);
+
+                            //if both of the above conditions are true, you know you found a sub equation by itself, and not just part of a word
+                            if (validPrefix && validSuffix && !validatedEquationNames.Contains(name))
+                            {
+                                hasInvalidEquations = true;
+                                break;
+                            }
                         }
                     }
-                }
 
-                if (hasInvalidEquations)
-                {
-                    //update the evaluation order
-                    int nextOrderIndex = equations.Max(e => e.EvaluationOrder) + 1;
-                    equations[i].EvaluationOrder = nextOrderIndex;
-                    equations.Add(equations[i]);
-                    equations.RemoveAt(i);
-                    i--;
+                    if (hasInvalidEquations)
+                    {
+                        //update the evaluation order
+                        int nextOrderIndex = equations.Max(e => e.EvaluationOrder) + 1;
+                        equations[i].EvaluationOrder = nextOrderIndex;
+                        equations.Add(equations[i]);
+                        equations.RemoveAt(i);
+                        i--;
 
-                    //save the equation
-                    db.Equations.Attach(equations[i]);
-                    db.Entry(equations[i]).State = EntityState.Modified;
-                    db.SaveChanges();
+                        //save the equation
+                        db.Equations.Attach(equations[i]);
+                        db.Entry(equations[i]).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        //mark the equation for 
+                        validatedEquationNames.Add(equations[i].Name);
+                    }
                 }
                 else
                 {
-                    //mark the equation for 
-                    validatedEquationNames.Add(equations[i].Name);
+                    //if you have reached here, you have probably found some circular logic, so tell the person to fix their equations
+                    return false;
                 }
             }
+
+            return true;
         }
     }
 }
