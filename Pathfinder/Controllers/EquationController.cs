@@ -55,8 +55,10 @@ namespace Pathfinder.Controllers
 
                     return View(equation);
                 }
-
-                return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
+                else
+                {
+                    return RedirectToAction("Index", "Equation", new { Id = equation.CharacterId });
+                }
             }
             else
             {
@@ -95,8 +97,10 @@ namespace Pathfinder.Controllers
 
                     return View(equation);
                 }
-
-                return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+                else
+                {
+                    return RedirectToAction("AbilityBonuses", "Ability", new { Id = equation.AbilityId });
+                }
             }
             else
             {
