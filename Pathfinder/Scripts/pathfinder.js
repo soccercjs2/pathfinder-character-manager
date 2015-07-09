@@ -158,7 +158,7 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
     $.ajax({
         type: 'POST',
         dataType: 'text',
-        url: "/Character/UpdateAbility",
+        url: "/Ability/UpdateAbility",
         data: ability,
         dataType: 'json'
     });
