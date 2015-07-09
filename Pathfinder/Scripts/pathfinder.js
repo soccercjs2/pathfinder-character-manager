@@ -155,6 +155,8 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
         Active: active
     }
 
+    alert('asdf');
+
     $.ajax({
         type: 'POST',
         dataType: 'text',

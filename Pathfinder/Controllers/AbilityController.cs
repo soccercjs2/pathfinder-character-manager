@@ -120,7 +120,7 @@ namespace Pathfinder.Controllers
         [HttpPost]
         public ActionResult UpdateAbility(Ability ability)
         {
-            //string redirectUrl = new UrlHelper(Request.RequestContext).Action("Index", "Ability", new { Id = ability.CharacterId });
+            string redirectUrl = new UrlHelper(Request.RequestContext).Action("View", "Character", new { Id = ability.CharacterId });
 
             if (ModelState.IsValid)
             {
@@ -129,13 +129,11 @@ namespace Pathfinder.Controllers
 
                 db.SaveChanges();
 
-                //return Json(new { Url = redirectUrl });
-                return Json(new { });
+                return Json(new { Url = redirectUrl });
             }
             else
             {
-                //return Json(new { Url = redirectUrl });
-                return Json(new { });
+                return Json(new { Url = redirectUrl });
             }
         }
     }
