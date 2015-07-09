@@ -136,6 +136,7 @@ namespace Pathfinder.Controllers
             {
                 //keep equation to revert back to if new equation isn't valid
                 Equation oldSavedEquation = db.Equations.Find(equation.EquationId);
+                db.Entry(oldSavedEquation).State = EntityState.Detached;
 
                 //add the equation and set the equation name
                 equation.Name = equation.BonusType;
@@ -209,6 +210,7 @@ namespace Pathfinder.Controllers
             {
                 //keep equation to revert back to if new equation isn't valid
                 Equation oldSavedEquation = db.Equations.Find(equation.EquationId);
+                db.Entry(oldSavedEquation).State = EntityState.Detached;
 
                 //update the equation
                 db.Equations.Attach(equation);
