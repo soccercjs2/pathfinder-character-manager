@@ -13,25 +13,30 @@ namespace Pathfinder.Controllers
     {
         private PathfinderContext db = new PathfinderContext();
 
-        // GET: Ability
         public ActionResult Index(int id)
         {
+            //load all abilities and display them
             return View(new AbilityViewer(id));
         }
 
         [HttpPost]
         public ActionResult Index(AbilityViewer viewer)
         {
+            //take selected category and filter abilities
             return View(new AbilityViewer(viewer.CharacterId, viewer.TypeId));
         }
 
         public ActionResult CreateAbility(int id)
         {
+            //load ability categories for dropdown
             List<AbilityType> types = db.AbilityTypes.Where(m => m.CharacterId == id).ToList<AbilityType>();
             ViewBag.AbilityTypes = new SelectList(types, "AbilityTypeId", "Name");
             
+            //initialize ability
             Ability ability = new Ability();
             ability.CharacterId = id;
+
+            //go to ability creater
             return View(ability);
         }
 
@@ -40,24 +45,32 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
+                //if the ability is conditional, default active status to false
+                //otherwise ability is active
                 ability.Active = !ability.IsConditional;
+
+                //add ability
                 db.Abilities.Add(ability);
                 db.SaveChanges();
 
+                //go to ability index
                 return RedirectToAction("Index", "Ability", new { Id = ability.CharacterId });
             }
             else
             {
+                //something was missing, go back to editing
                 return View(ability);
             }
         }
 
         public ActionResult EditAbility(int id)
         {
+            //load ability categories for dropdown
             Ability ability = db.Abilities.Find(id);
             List<AbilityType> types = db.AbilityTypes.Where(m => m.CharacterId == ability.CharacterId).ToList<AbilityType>();
             ViewBag.AbilityTypes = new SelectList(types, "AbilityTypeId", "Name");
 
+            //go to editor
             return View(ability);
         }
 
@@ -120,7 +133,7 @@ namespace Pathfinder.Controllers
         [HttpPost]
         public ActionResult UpdateAbility(Ability ability)
         {
-            string redirectUrl = new UrlHelper(Request.RequestContext).Action("View", "Character", new { Id = ability.CharacterId });
+            //string redirectUrl = new UrlHelper(Request.RequestContext).Action("Index", "Ability", new { Id = ability.CharacterId });
 
             if (ModelState.IsValid)
             {
@@ -129,11 +142,13 @@ namespace Pathfinder.Controllers
 
                 db.SaveChanges();
 
-                return Json(new { Url = redirectUrl });
+                //return Json(new { Url = redirectUrl });
+                return Json(new { });
             }
             else
             {
-                return Json(new { Url = redirectUrl });
+                //return Json(new { Url = redirectUrl });
+                return Json(new { });
             }
         }
     }
