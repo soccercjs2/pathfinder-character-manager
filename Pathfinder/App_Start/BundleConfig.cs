@@ -24,10 +24,10 @@ namespace Pathfinder
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/spritesheet.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/jquery.bxslider.css",
                       "~/Content/site.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
