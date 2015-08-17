@@ -14,6 +14,7 @@ namespace Pathfinder.Models
         public string Name { get; set; }
         public string Formula { get; set; }
         public int AbilityId { get; set; }
+        public int SpellId { get; set; }
         public bool ShowFormula { get; set; }
         public string BonusType { get; set; }
         public int EvaluationOrder { get; set; }

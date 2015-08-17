@@ -168,6 +168,100 @@ namespace Pathfinder.Controllers
             }
         }
 
+        public ActionResult CreateSpellEquation(int id)
+        {
+            //find the abilty to add an equation to
+            Spell spell = db.Spells.Find(id);
+
+            //initialize the equation
+            Equation equation = new Equation();
+            equation.CharacterId = spell.SpellbookId; //CHANGE THIS
+            equation.EquationCategoryId = 0; //equation doesn't have a category because it's tied to an spell
+            equation.AbilityId = id;
+            equation.ShowFormula = false; //equation is not a base equation because it's tied to an spell, and shouldn't be shown
+
+            return View(equation);
+        }
+
+        [HttpPost]
+        public ActionResult CreateSpellEquation(Equation equation)
+        {
+            if (ModelState.IsValid)
+            {
+                //add the equation and set the name
+                equation.Name = equation.BonusType;
+                equation.EvaluationOrder = db.Equations.Max(e => e.EvaluationOrder);
+                db.Equations.Add(equation);
+                db.SaveChanges();
+
+                //if equations are invalid and can't be sorted, remove the equation, and go back to editing it
+                if (!SortEquations(equation.CharacterId))
+                {
+                    //remove the equation
+                    db.Equations.Remove(db.Equations.Find(equation.EquationId));
+                    db.SaveChanges();
+
+                    //go back to editing
+                    return View(equation);
+                }
+                else
+                {
+                    //valid equation added, go back to ability page
+                    return RedirectToAction("View", "Spell", new { Id = equation.SpellId });
+                }
+            }
+            else
+            {
+                //something is missing, go back to editing
+                return View(equation);
+            }
+        }
+
+        public ActionResult EditSpellEquation(int id)
+        {
+            //find ability equation, and go to edit page
+            return View(db.Equations.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditAbilityEquation(Equation equation)
+        {
+            if (ModelState.IsValid)
+            {
+                //keep equation to revert back to if new equation isn't valid
+                Equation oldSavedEquation = db.Equations.Find(equation.EquationId);
+                db.Entry(oldSavedEquation).State = EntityState.Detached;
+
+                //add the equation and set the equation name
+                equation.Name = equation.BonusType;
+                db.Equations.Attach(equation);
+                db.Entry(equation).State = EntityState.Modified;
+                db.SaveChanges();
+
+                //if equations are invalid and can't be sorted, reattach the old equation, and go back to editing the new equation
+                if (!SortEquations(equation.CharacterId))
+                {
+                    //attach the old equation to overwrite changes
+                    db.Equations.Attach(oldSavedEquation);
+                    db.Entry(oldSavedEquation).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    //return to editing
+                    return View(equation);
+                }
+                else
+                {
+                    //valid equation added, return to ability page
+                    return RedirectToAction("View", "Spell", new { Id = equation.SpellId });
+                }
+            }
+            else
+            {
+                //something is missing, go back to editing
+                return View(equation);
+            }
+        }
+
         public ActionResult CreateCategory(int id)
         {
             //initialize category
