@@ -224,7 +224,7 @@ namespace Pathfinder.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAbilityEquation(Equation equation)
+        public ActionResult EditSpellEquation(Equation equation)
         {
             if (ModelState.IsValid)
             {

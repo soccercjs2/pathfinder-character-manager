@@ -173,6 +173,7 @@
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SkillController.cs" />
+    <Compile Include="Controllers\SpellController.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +192,7 @@
     <Compile Include="Models\Gear.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
+    <Compile Include="Models\SpellsKnown.cs" />
     <Compile Include="Tools\HealthUpdater.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -217,6 +219,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EquationViewer.cs" />
+    <Compile Include="ViewModels\SpellsKnownView.cs" />
     <Compile Include="ViewModels\TagViewer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +332,9 @@
     <Content Include="Views\Equation\EditAbilityEquation.cshtml" />
     <Content Include="Views\Character\CreateCounter.cshtml" />
     <Content Include="Views\Character\UpdateCounter.cshtml" />
+    <Content Include="Views\Spell\Index.cshtml" />
+    <Content Include="Views\Spell\CreateSpellbook.cshtml" />
+    <Content Include="Views\Spell\EditSpellbook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

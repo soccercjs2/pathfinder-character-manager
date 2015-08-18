@@ -11,5 +11,6 @@ namespace Pathfinder.Models
         public int SpellbookId { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
+        public bool Prepared { get; set; }
     }
 }

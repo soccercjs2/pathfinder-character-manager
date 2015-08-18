@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Pathfinder.Models.Spellbook>
+
+@{
+    ViewBag.Title = "Spellbooks";
+}
+
+<h2>Spellbooks</h2>
+
+<table class="section full noclick">
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td class="min">@Html.ActionLink("Known", "SpellsKnown", new { Id = item.SpellbookId })</td>
+            <td class="min">@Html.ActionLink("Cast", "CastSpell", new { Id = item.SpellbookId })</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("+ [New Spellbook]", "CreateSpellbook", new { Id = Session["CharacterId"] })
+
+
+

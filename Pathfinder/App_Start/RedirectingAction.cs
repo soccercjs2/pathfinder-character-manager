@@ -15,7 +15,7 @@ namespace Pathfinder.App_Start
 
             if (characterId == null && 
                 (filterContext.RouteData.Values["controller"].ToString().ToLower() != "character" ||
-                filterContext.RouteData.Values["action"].ToString().ToLower() != "index"))
+                (filterContext.RouteData.Values["action"].ToString().ToLower() != "index" && filterContext.RouteData.Values["action"].ToString().ToLower() != "create")))
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
