@@ -5,12 +5,12 @@ using System.Web;
 
 namespace Pathfinder.Models
 {
-    public class Spell
+    public class SpellLevel
     {
-        public int SpellId { get; set; }
+        public int SpellLevelId { get; set; }
         public int SpellbookId { get; set; }
-        public string Name { get; set; }
         public int Level { get; set; }
-        public int Prepared { get; set; }
+        public int SpellsKnown { get; set; }
+        public int SpellsCast { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model Pathfinder.ViewModels.KnownSpellsView
+
+@{
+    ViewBag.Title = "Spells Known";
+}
+
+<h2>Spells Known</h2>
+
+@using (Html.BeginForm())
+{
+    foreach (var spellLevel in Model.SpellLevels)
+    {
+        <table class="section full noclick" id="@("tblSpellsLevel" + spellLevel.Level)">
+            <thead onclick="ToggleRowsVisible('@("tblSpellsLevel" + spellLevel.Level)')">
+                <tr>
+                    <td>Level @spellLevel.Level Spells</td>
+                    <td class="min">@Model.KnownSpells[spellLevel.Level].Count.ToString() / @spellLevel.SpellsKnown</td>
+                    <td class="min">Prepared</td>
+                </tr>
+            </thead>
+
+            @foreach (var spell in Model.KnownSpells[spellLevel.Level])
+            {
+                <tr>
+                    <td colspan="2">@spell.Name</td>
+                    <td>
+                        @Html.EditorFor(m => spell.Prepared, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @id = "txtPrepared" + spell.SpellId,
+                                @class = "form-control",
+                                @onchange = "UpdateSpell(" + spell.SpellId + ","
+                                                            + spell.SpellbookId + ",'"
+                                                            + spell.Name + "',"
+                                                            + spell.Level + ",'"
+                                                            //+ spell.Prepared + "','"
+                                                            + "txtPrepared" + spell.SpellId + "')"
+                        }
+                        })
+                    </td>
+
+                </tr>
+            }
+        </table>
+    }
+
+    @Html.ActionLink("+ [New Known Spell]", "CreateSpell", new { Id = Model.Spellbook.SpellbookId })<br />
+    @Html.ActionLink("+ [New Spell Level]", "CreateSpellLevel", new { Id = Model.Spellbook.SpellbookId })
+}

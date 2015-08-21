@@ -31,7 +31,7 @@ namespace Pathfinder.Models
         public DbSet<Gear> Gears { get; set; }
 
         public DbSet<Spellbook> Spellbooks { get; set; }
-        public DbSet<KnownSpellsByLevel> KnownSpellsByLevels { get; set; }
+        public DbSet<SpellLevel> SpellLevels { get; set; }
         public DbSet<Spell> Spells { get; set; }
         
         //public DbSet<Temp> Temps { get; set; }

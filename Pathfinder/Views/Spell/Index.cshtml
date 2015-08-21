@@ -11,8 +11,8 @@
     {
         <tr>
             <td>@item.Name</td>
-            <td class="min">@Html.ActionLink("Known", "SpellsKnown", new { Id = item.SpellbookId })</td>
-            <td class="min">@Html.ActionLink("Cast", "CastSpell", new { Id = item.SpellbookId })</td>
+            <td class="min">@Html.ActionLink("Known", "KnownSpells", new { Id = item.SpellbookId })</td>
+            <td class="min">@Html.ActionLink("Cast", "CastSpells", new { Id = item.SpellbookId })</td>
         </tr>
     }
 </table>

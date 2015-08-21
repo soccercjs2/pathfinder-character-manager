@@ -68,6 +68,7 @@ input[type="checkbox"]
     width: 20px;
     height: 20px;
     margin: 0px;
+    padding-bottom: 0px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

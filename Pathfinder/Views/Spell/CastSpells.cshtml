@@ -1,0 +1,33 @@
+﻿@model Pathfinder.ViewModels.CastSpellsView
+
+@{
+    ViewBag.Title = "Cast Spells";
+}
+
+<h2>Cast Spells</h2>
+
+@using (Html.BeginForm())
+{
+    foreach (var spellLevel in Model.SpellLevels)
+    {
+        <table class="section full noclick" id="@("tblSpellsLevel" + spellLevel.Level)">
+            <thead onclick="ToggleRowsVisible('@("tblSpellsLevel" + spellLevel.Level)')">
+                <tr>
+                    <td>Level @spellLevel.Level Spells</td>
+                    <td class="min">0 / @spellLevel.SpellsCast</td>
+                </tr>
+            </thead>
+
+            @foreach (var spell in Model.PreparedSpells[spellLevel.Level])
+            {
+                <tr>
+                    <td>@spell.Name</td>
+                    <td><input type="submit" value="Cast" class="btn btn-success" /></td>
+                </tr>
+            }
+        </table>
+    }
+
+    @Html.ActionLink("+ [New Known Spell]", "CreateSpell", new { Id = Model.Spellbook.SpellbookId })<br />
+    @Html.ActionLink("+ [New Spell Level]", "CreateSpellLevel", new { Id = Model.Spellbook.SpellbookId })
+}

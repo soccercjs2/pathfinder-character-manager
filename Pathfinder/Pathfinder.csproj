@@ -192,10 +192,10 @@
     <Compile Include="Models\Gear.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
-    <Compile Include="Models\SpellsKnown.cs" />
+    <Compile Include="Models\SpellLevel.cs" />
     <Compile Include="Tools\HealthUpdater.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Tools\ManageViewModels.cs" />
     <Compile Include="Tools\PathfinderContext.cs" />
     <Compile Include="Tools\PathfinderInitializer.cs" />
     <Compile Include="Models\Roller.cs" />
@@ -211,6 +211,7 @@
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackGroupView.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
+    <Compile Include="ViewModels\CastSpellsView.cs" />
     <Compile Include="ViewModels\CharacterView.cs" />
     <Compile Include="ViewModels\ClassView.cs" />
     <Compile Include="ViewModels\InventoryViewer.cs" />
@@ -219,7 +220,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EquationViewer.cs" />
-    <Compile Include="ViewModels\SpellsKnownView.cs" />
+    <Compile Include="ViewModels\KnownSpellsView.cs" />
     <Compile Include="ViewModels\TagViewer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +336,12 @@
     <Content Include="Views\Spell\Index.cshtml" />
     <Content Include="Views\Spell\CreateSpellbook.cshtml" />
     <Content Include="Views\Spell\EditSpellbook.cshtml" />
+    <Content Include="Views\Spell\KnownSpells.cshtml" />
+    <Content Include="Views\Spell\CreateSpell.cshtml" />
+    <Content Include="Views\Spell\EditSpell.cshtml" />
+    <Content Include="Views\Spell\CreateSpellLevel.cshtml" />
+    <Content Include="Views\Spell\EditSpellLevel.cshtml" />
+    <Content Include="Views\Spell\CastSpells.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
