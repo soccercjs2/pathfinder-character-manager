@@ -71,7 +71,7 @@ namespace Pathfinder.Controllers
 
         public ActionResult CastSpells(int id)
         {
-            return View(new CastSpellsViewasdf(id));
+            return View(new CastSpellsView(id));
         }
 
         public ActionResult CreateSpellLevel(int id)
