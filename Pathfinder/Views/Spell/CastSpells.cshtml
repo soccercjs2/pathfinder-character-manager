@@ -14,7 +14,7 @@
             <thead onclick="ToggleRowsVisible('@("tblSpellsLevel" + spellLevel.Level)')">
                 <tr>
                     <td>Level @spellLevel.Level Spells</td>
-                    <td class="min">0 / @spellLevel.SpellsCast</td>
+                    <td class="min">0 / @*@spellLevel.SpellsCast*@</td>
                 </tr>
             </thead>
 
@@ -27,7 +27,4 @@
             }
         </table>
     }
-
-    @Html.ActionLink("+ [New Known Spell]", "CreateSpell", new { Id = Model.Spellbook.SpellbookId })<br />
-    @Html.ActionLink("+ [New Spell Level]", "CreateSpellLevel", new { Id = Model.Spellbook.SpellbookId })
 }

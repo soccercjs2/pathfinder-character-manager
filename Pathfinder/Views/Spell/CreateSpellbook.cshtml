@@ -33,10 +33,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PrimaryStat, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrimaryStatistic, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PrimaryStat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PrimaryStat, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.PrimaryStatistic, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrimaryStatistic, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PointsCounterId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PointsCounterId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PointsCounterId, "", new { @class = "text-danger" })
             </div>
         </div>
 

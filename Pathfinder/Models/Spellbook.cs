@@ -10,8 +10,9 @@ namespace Pathfinder.Models
     {
         public int SpellbookId { get; set; }
         public int CharacterId { get; set; }
-        public string Name { get; set; }
         public string Type { get; set; }
-        public string PrimaryStat { get; set; }
+        public string PrimaryStatistic { get; set; }
+        public string Name { get; set; }
+        public int PointsCounterId { get; set; }
     }
 }

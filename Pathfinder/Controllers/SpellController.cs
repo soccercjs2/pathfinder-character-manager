@@ -23,6 +23,7 @@ namespace Pathfinder.Controllers
         {
             Spellbook spellbook = new Spellbook();
             spellbook.CharacterId = id;
+            spellbook.PointsCounterId = -1;
             return View(spellbook);
         }
 

@@ -190,9 +190,13 @@
     <Compile Include="Models\Equation.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Gear.cs" />
+    <Compile Include="Models\PointSpellBook.cs" />
+    <Compile Include="Models\PointsSpellLevel.cs" />
+    <Compile Include="Models\PreparedSpellLevel.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
     <Compile Include="Models\SpellLevel.cs" />
+    <Compile Include="Models\SpontaneousSpellLevel.cs" />
     <Compile Include="Tools\HealthUpdater.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Tools\ManageViewModels.cs" />
