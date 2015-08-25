@@ -12,5 +12,11 @@ namespace Pathfinder.Models
         public string Name { get; set; }
         public int Count { get; set; }
         public int MaxValueEquationId { get; set; }
+
+        public string GetEquationName()
+        {
+            PathfinderContext db = new PathfinderContext();
+            return db.Equations.Find(MaxValueEquationId).Name;
+        }
     }
 }

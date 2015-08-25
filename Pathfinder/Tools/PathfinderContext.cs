@@ -32,11 +32,10 @@ namespace Pathfinder.Models
 
         public DbSet<Spellbook> Spellbooks { get; set; }
 
-
         public DbSet<SpellLevel> SpellLevels { get; set; }
-        public DbSet<SpellLevel> PreparedSpellLevels { get; set; }
-        public DbSet<SpellLevel> SpontaneousSpellLevels { get; set; }
-        public DbSet<SpellLevel> PointsSpellLevels { get; set; }
+        public DbSet<PreparedSpellLevel> PreparedSpellLevels { get; set; }
+        public DbSet<SpontaneousSpellLevel> SpontaneousSpellLevels { get; set; }
+        public DbSet<PointsSpellLevel> PointsSpellLevels { get; set; }
 
         public DbSet<Spell> Spells { get; set; }
         

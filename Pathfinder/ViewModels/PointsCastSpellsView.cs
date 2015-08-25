@@ -6,23 +6,23 @@ using System.Web;
 
 namespace Pathfinder.ViewModels
 {
-    public class CastSpellsView
+    public class PointsCastSpellsView
     {
         public Spellbook Spellbook { get; set; }
-        public List<SpellLevel> SpellLevels { get; set; }
+        public List<PointsSpellLevel> SpellLevels { get; set; }
         public Dictionary<int, List<Spell>> PreparedSpells { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 
-        public CastSpellsView() { }
-        public CastSpellsView(int id)
+        public PointsCastSpellsView() { }
+        public PointsCastSpellsView(int id)
         {
             this.Spellbook = db.Spellbooks.Find(id);
 
-            this.SpellLevels = db.SpellLevels
+            this.SpellLevels = db.PointsSpellLevels
                 .Where(m => m.SpellbookId == this.Spellbook.SpellbookId)
                 .OrderBy(m => m.Level)
-                .ToList<SpellLevel>();
+                .ToList<PointsSpellLevel>();
 
             this.PreparedSpells = LoadPreparedSpells();
         }
@@ -39,7 +39,7 @@ namespace Pathfinder.ViewModels
                     .ToList<Spell>();
 
                 preparedSpells.Add(item.Level, preparedSpellsAtLevel);
-            } //asdf
+            }
 
             return preparedSpells;
         }

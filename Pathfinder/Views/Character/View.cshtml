@@ -142,7 +142,7 @@
                 {
                     <tr data-href="@Url.Action("UpdateCounter", "Character", new { Id = item.CounterId })">
                         <td>@item.Name</td>
-                        <td class="numberCell"><span class="@(item.Count > 1 ? "critical-failure" : "")">@item.Count</span> / 1</td>
+                        <td class="numberCell"><span class="@(item.Count > 1 ? "critical-failure" : "")">@item.Count</span> / @Model.EquationResults[item.GetEquationName()].Beautify()</td>
                     </tr>
                 }
             </table>

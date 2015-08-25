@@ -9,8 +9,9 @@ namespace Pathfinder.Models
     [Table("SpontaneousSpellLevels")]
     public class SpontaneousSpellLevel : SpellLevel
     {
-        public int SpellLevelId { get; set; }
+        public int SpontaneousSpellLevelId { get; set; }
         public int SpellsKnown { get; set; }
         public int SpellsPerDay { get; set; }
+        public int SpellsCast { get; set; }
     }
 }

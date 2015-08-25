@@ -6,23 +6,23 @@ using System.Web;
 
 namespace Pathfinder.ViewModels
 {
-    public class KnownSpellsView
+    public class SpontaneousKnownSpellsView
     {
         public Spellbook Spellbook { get; set; }
-        public List<SpellLevel> SpellLevels { get; set; }
+        public List<SpontaneousSpellLevel> SpellLevels { get; set; }
         public Dictionary<int, List<Spell>> KnownSpells { get; set; }
 
         private PathfinderContext db = new PathfinderContext();
 
-        public KnownSpellsView() { }
-        public KnownSpellsView(int id)
+        public SpontaneousKnownSpellsView() { }
+        public SpontaneousKnownSpellsView(int id)
         {
             this.Spellbook = db.Spellbooks.Find(id);
-            
-            this.SpellLevels = db.SpellLevels
+
+            this.SpellLevels = db.SpontaneousSpellLevels
                 .Where(m => m.SpellbookId == this.Spellbook.SpellbookId)
                 .OrderBy(m => m.Level)
-                .ToList<SpellLevel>();
+                .ToList<SpontaneousSpellLevel>();
 
             this.KnownSpells = LoadKnownSpells();
         }

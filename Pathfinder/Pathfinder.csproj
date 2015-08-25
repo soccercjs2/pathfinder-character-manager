@@ -190,7 +190,6 @@
     <Compile Include="Models\Equation.cs" />
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Gear.cs" />
-    <Compile Include="Models\PointSpellBook.cs" />
     <Compile Include="Models\PointsSpellLevel.cs" />
     <Compile Include="Models\PreparedSpellLevel.cs" />
     <Compile Include="Models\Spell.cs" />
@@ -215,16 +214,20 @@
     <Compile Include="ViewModels\AbilityViewer.cs" />
     <Compile Include="ViewModels\AttackGroupView.cs" />
     <Compile Include="ViewModels\AttackView.cs" />
-    <Compile Include="ViewModels\CastSpellsView.cs" />
+    <Compile Include="ViewModels\PointsCastSpellsView.cs" />
+    <Compile Include="ViewModels\SpontaneousCastSpellsView.cs" />
+    <Compile Include="ViewModels\PreparedCastSpellsView.cs" />
     <Compile Include="ViewModels\CharacterView.cs" />
     <Compile Include="ViewModels\ClassView.cs" />
     <Compile Include="ViewModels\InventoryViewer.cs" />
+    <Compile Include="ViewModels\PointsKnownSpellsView.cs" />
+    <Compile Include="ViewModels\SpontaneousKnownSpellsView.cs" />
     <Compile Include="ViewModels\SkillManager.cs" />
     <Compile Include="ViewModels\PlayerCharacter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EquationViewer.cs" />
-    <Compile Include="ViewModels\KnownSpellsView.cs" />
+    <Compile Include="ViewModels\PreparedKnownSpellsView.cs" />
     <Compile Include="ViewModels\TagViewer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -340,12 +343,21 @@
     <Content Include="Views\Spell\Index.cshtml" />
     <Content Include="Views\Spell\CreateSpellbook.cshtml" />
     <Content Include="Views\Spell\EditSpellbook.cshtml" />
-    <Content Include="Views\Spell\KnownSpells.cshtml" />
+    <Content Include="Views\Spell\PreparedKnownSpells.cshtml" />
     <Content Include="Views\Spell\CreateSpell.cshtml" />
     <Content Include="Views\Spell\EditSpell.cshtml" />
     <Content Include="Views\Spell\CreateSpellLevel.cshtml" />
     <Content Include="Views\Spell\EditSpellLevel.cshtml" />
     <Content Include="Views\Spell\CastSpells.cshtml" />
+    <Content Include="Views\Character\EditCounter.cshtml" />
+    <Content Include="Views\Spell\PointsKnownSpells.cshtml" />
+    <Content Include="Views\Spell\SpontaneousKnownSpells.cshtml" />
+    <Content Include="Views\Spell\CreatePreparedSpellLevel.cshtml" />
+    <Content Include="Views\Spell\CreatePointsSpellLevel.cshtml" />
+    <Content Include="Views\Spell\CreateSpontaneousSpellLevel.cshtml" />
+    <Content Include="Views\Spell\EditPointsSpellLevel.cshtml" />
+    <Content Include="Views\Spell\EditPreparedSpellLevel.cshtml" />
+    <Content Include="Views\Spell\EditSpontaneousSpellLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

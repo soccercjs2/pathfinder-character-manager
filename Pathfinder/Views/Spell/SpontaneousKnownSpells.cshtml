@@ -1,0 +1,32 @@
+﻿@model Pathfinder.ViewModels.SpontaneousKnownSpellsView
+
+@{
+    ViewBag.Title = "Spells Known";
+}
+
+<h2>Spells Known</h2>
+
+@using (Html.BeginForm())
+{
+    foreach (var spellLevel in Model.SpellLevels)
+    {
+        <table class="section full noclick" id="@("tblSpellsLevel" + spellLevel.Level)">
+            <thead onclick="ToggleRowsVisible('@("tblSpellsLevel" + spellLevel.Level)')">
+                <tr>
+                    <td>Level @spellLevel.Level Spells</td>
+                    <td class="min">@Model.KnownSpells[spellLevel.Level].Count.ToString() / @spellLevel.SpellsKnown</td>
+                </tr>
+            </thead>
+
+            @foreach (var spell in Model.KnownSpells[spellLevel.Level])
+            {
+                <tr>
+                    <td colspan="2">@spell.Name</td>
+                </tr>
+            }
+        </table>
+    }
+
+    @Html.ActionLink("+ [New Known Spell]", "CreateSpell", new { Id = Model.Spellbook.SpellbookId })<br />
+    @Html.ActionLink("+ [New Spell Level]", "CreateSpontaneousSpellLevel", new { Id = Model.Spellbook.SpellbookId })
+}

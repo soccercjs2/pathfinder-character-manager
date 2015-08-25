@@ -9,14 +9,44 @@
 <table class="section full noclick">
     @foreach (var item in @Model)
     {
-        <tr>
-            <td>@item.Name</td>
-            <td class="min">@Html.ActionLink("Known", "KnownSpells", new { Id = item.SpellbookId })</td>
-            <td class="min">@Html.ActionLink("Cast", "CastSpells", new { Id = item.SpellbookId })</td>
-            @*asdf*@
-        </tr>
+        if (item.Type == "Prepared")
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td class="min">@Html.ActionLink("Known", "PreparedKnownSpells", new { Id = item.SpellbookId })</td>
+                <td class="min">@Html.ActionLink("Cast", "PreparedCastSpells", new { Id = item.SpellbookId })</td>
+            </tr>
+        }
+        else if (item.Type == "Spontaneous")
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td class="min">@Html.ActionLink("Known", "SpontaneousKnownSpells", new { Id = item.SpellbookId })</td>
+                <td class="min">@Html.ActionLink("Cast", "SpontaneousCastSpells", new { Id = item.SpellbookId })</td>
+            </tr>
+        }
+        else if (item.Type == "Points")
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td class="min">@Html.ActionLink("Known", "PointsKnownSpells", new { Id = item.SpellbookId })</td>
+                <td class="min">@Html.ActionLink("Cast", "PointsCastSpells", new { Id = item.SpellbookId })</td>
+            </tr>
+        }
     }
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
 
 @Html.ActionLink("+ [New Spellbook]", "CreateSpellbook", new { Id = Session["CharacterId"] })
 

@@ -9,7 +9,7 @@ namespace Pathfinder.Models
     [Table("PointsSpellLevels")]
     public class PointsSpellLevel : SpellLevel
     {
-        public int SpellLevelId { get; set; }
+        public int PointsSpellLevelId { get; set; }
         public int SpellsKnown { get; set; }
         public int SpellCost { get; set; }
     }

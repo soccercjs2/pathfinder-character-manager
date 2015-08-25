@@ -65,58 +65,168 @@ namespace Pathfinder.Controllers
             }
         }
 
-        public ActionResult KnownSpells(int id)
+        public ActionResult PreparedKnownSpells(int id)
         {
-            return View(new KnownSpellsView(id));
+            return View(new PreparedKnownSpellsView(id));
         }
 
-        public ActionResult CastSpells(int id)
+        public ActionResult SpontaneousKnownSpells(int id)
         {
-            return View(new CastSpellsView(id));
+            return View(new SpontaneousKnownSpellsView(id));
         }
 
-        public ActionResult CreateSpellLevel(int id)
+        public ActionResult PointsKnownSpells(int id)
         {
-            SpellLevel knownSpellsByLevel = new SpellLevel();
-            knownSpellsByLevel.SpellbookId = id;
-            return View(knownSpellsByLevel);
+            return View(new PointsKnownSpellsView(id));
+        }
+
+        public ActionResult PreparedCastSpells(int id)
+        {
+            return View(new PointsCastSpellsView(id));
+        }
+
+        public ActionResult SpontaneousCastSpells(int id)
+        {
+            return View(new PointsCastSpellsView(id));
+        }
+
+        public ActionResult PointsCastSpells(int id)
+        {
+            return View(new PointsCastSpellsView(id));
+        }
+
+        public ActionResult CreatePreparedSpellLevel(int id)
+        {
+            PreparedSpellLevel preparedSpellLevel = new PreparedSpellLevel();
+            preparedSpellLevel.SpellbookId = id;
+            return View(preparedSpellLevel);
         }
 
         [HttpPost]
-        public ActionResult CreateSpellLevel(SpellLevel knownSpellsByLevel)
+        public ActionResult CreatePreparedSpellLevel(PreparedSpellLevel preparedSpellLevel)
         {
             if (ModelState.IsValid)
             {
-                db.SpellLevels.Add(knownSpellsByLevel);
+                db.SpellLevels.Add(preparedSpellLevel);
                 db.SaveChanges();
 
-                return RedirectToAction("KnownSpells", "Spell", new { Id = knownSpellsByLevel.SpellbookId });
+                return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = preparedSpellLevel.SpellbookId });
             }
             else
             {
-                return View(knownSpellsByLevel);
+                return View(preparedSpellLevel);
             }
         }
 
-        public ActionResult EditSpellLevel(int id)
+        public ActionResult CreatePointsSpellLevel(int id)
         {
-            return View(db.SpellLevels.Find(id));
+            PointsSpellLevel pointsSpellLevel = new PointsSpellLevel();
+            pointsSpellLevel.SpellbookId = id;
+            return View(pointsSpellLevel);
         }
 
         [HttpPost]
-        public ActionResult EditSpellLevel(SpellLevel knownSpellsByLevel)
+        public ActionResult CreatePointsSpellLevel(PointsSpellLevel pointsSpellLevel)
         {
             if (ModelState.IsValid)
             {
-                db.SpellLevels.Attach(knownSpellsByLevel);
-                db.Entry(knownSpellsByLevel).State = EntityState.Modified;
+                db.SpellLevels.Add(pointsSpellLevel);
                 db.SaveChanges();
 
-                return RedirectToAction("KnownSpells", "Spell", new { Id = knownSpellsByLevel.SpellbookId });
+                return RedirectToAction("PointsKnownSpells", "Spell", new { Id = pointsSpellLevel.SpellbookId });
             }
             else
             {
-                return View(knownSpellsByLevel);
+                return View(pointsSpellLevel);
+            }
+        }
+
+        public ActionResult CreateSpontaneousSpellLevel(int id)
+        {
+            SpontaneousSpellLevel spontaneousSpellLevel = new SpontaneousSpellLevel();
+            spontaneousSpellLevel.SpellbookId = id;
+            return View(spontaneousSpellLevel);
+        }
+
+        [HttpPost]
+        public ActionResult CreateSpontaneousSpellLevel(SpontaneousSpellLevel spontaneousSpellLevel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SpellLevels.Add(spontaneousSpellLevel);
+                db.SaveChanges();
+
+                return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spontaneousSpellLevel.SpellbookId });
+            }
+            else
+            {
+                return View(spontaneousSpellLevel);
+            }
+        }
+
+        public ActionResult EditPreparedSpellLevel(int id)
+        {
+            return View(db.PreparedSpellLevels.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditPreparedSpellLevel(PreparedSpellLevel preparedSpellLevel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PreparedSpellLevels.Attach(preparedSpellLevel);
+                db.Entry(preparedSpellLevel).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = preparedSpellLevel.SpellbookId });
+            }
+            else
+            {
+                return View(preparedSpellLevel);
+            }
+        }
+
+        public ActionResult EditSpontaneousSpellLevel(int id)
+        {
+            return View(db.SpontaneousSpellLevels.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditSpontaneousSpellLevel(SpontaneousSpellLevel spontaneousSpellLevel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SpontaneousSpellLevels.Attach(spontaneousSpellLevel);
+                db.Entry(spontaneousSpellLevel).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spontaneousSpellLevel.SpellbookId });
+            }
+            else
+            {
+                return View(spontaneousSpellLevel);
+            }
+        }
+
+        public ActionResult EditPointsSpellLevel(int id)
+        {
+            return View(db.PointsSpellLevels.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditPointsSpellLevel(PointsSpellLevel pointsSpellLevel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PointsSpellLevels.Attach(pointsSpellLevel);
+                db.Entry(pointsSpellLevel).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("PointsKnownSpells", "Spell", new { Id = pointsSpellLevel.SpellbookId });
+            }
+            else
+            {
+                return View(pointsSpellLevel);
             }
         }
 
@@ -135,7 +245,24 @@ namespace Pathfinder.Controllers
                 db.Spells.Add(spell);
                 db.SaveChanges();
 
-                return RedirectToAction("KnownSpells", "Spell", new { Id = spell.SpellbookId });
+                Spellbook spellbook = db.Spellbooks.Find(spell.SpellbookId);
+
+                if (spellbook.Type == "Points")
+                {
+                    return RedirectToAction("PointsKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                }
+                else if (spellbook.Type == "Prepared")
+                {
+                    return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                }
+                else if (spellbook.Type == "Spontaneous")
+                {
+                    return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Spell", new { Id = Session["CharacterId"] });
+                }
             }
             else
             {

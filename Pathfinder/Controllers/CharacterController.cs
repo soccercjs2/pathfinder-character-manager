@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Pathfinder.Extensions;
+using System.Data.Entity;
 
 namespace Pathfinder.Controllers
 {
@@ -153,6 +154,28 @@ namespace Pathfinder.Controllers
         public ActionResult UpdateCounter(int id)
         {
             return View(db.Counters.Find(id));
+        }
+
+        public ActionResult EditCounter(int id)
+        {
+            return View(db.Counters.Find(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditCounter(Counter counter)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Counters.Attach(counter);
+                db.Entry(counter).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("View", "Character", new { Id = counter.CharacterId });
+            }
+            else
+            {
+                return View(counter);
+            }
         }
         
         [HttpPost]
