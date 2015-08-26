@@ -172,10 +172,12 @@ namespace Pathfinder.Controllers
         {
             //find the abilty to add an equation to
             Spell spell = db.Spells.Find(id);
+            SpellLevel spellLevel = db.SpellLevels.Find(spell.SpellLevelId);
+            Spellbook spellbook = db.Spellbooks.Find(spellLevel.SpellbookId);
 
             //initialize the equation
             Equation equation = new Equation();
-            equation.CharacterId = spell.SpellbookId; //CHANGE THIS
+            equation.CharacterId = spellbook.CharacterId;
             equation.EquationCategoryId = 0; //equation doesn't have a category because it's tied to an spell
             equation.AbilityId = id;
             equation.ShowFormula = false; //equation is not a base equation because it's tied to an spell, and shouldn't be shown

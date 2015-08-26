@@ -233,7 +233,6 @@ namespace Pathfinder.Controllers
         public ActionResult CreateSpell(int id)
         {
             Spell spell = new Spell();
-            spell.SpellbookId = id;
             return View(spell);
         }
 
@@ -245,19 +244,20 @@ namespace Pathfinder.Controllers
                 db.Spells.Add(spell);
                 db.SaveChanges();
 
-                Spellbook spellbook = db.Spellbooks.Find(spell.SpellbookId);
+                SpellLevel spellLevel = db.SpellLevels.Find(spell.SpellLevelId);
+                Spellbook spellbook = db.Spellbooks.Find(spellLevel.SpellbookId);
 
                 if (spellbook.Type == "Points")
                 {
-                    return RedirectToAction("PointsKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                    return RedirectToAction("PointsKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else if (spellbook.Type == "Prepared")
                 {
-                    return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                    return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else if (spellbook.Type == "Spontaneous")
                 {
-                    return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spell.SpellbookId });
+                    return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else
                 {
@@ -284,7 +284,9 @@ namespace Pathfinder.Controllers
                 db.Entry(spell).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("KnownSpells", "Spell", new { Id = spell.SpellbookId });
+                SpellLevel spellLevel = db.SpellLevels.Find(spell.SpellLevelId);
+
+                return RedirectToAction("KnownSpells", "Spell", new { Id = spellLevel.SpellbookId });
             }
             else
             {

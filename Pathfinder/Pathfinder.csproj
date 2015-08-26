@@ -348,7 +348,7 @@
     <Content Include="Views\Spell\EditSpell.cshtml" />
     <Content Include="Views\Spell\CreateSpellLevel.cshtml" />
     <Content Include="Views\Spell\EditSpellLevel.cshtml" />
-    <Content Include="Views\Spell\CastSpells.cshtml" />
+    <Content Include="Views\Spell\PreparedCastSpells.cshtml" />
     <Content Include="Views\Character\EditCounter.cshtml" />
     <Content Include="Views\Spell\PointsKnownSpells.cshtml" />
     <Content Include="Views\Spell\SpontaneousKnownSpells.cshtml" />
@@ -358,6 +358,8 @@
     <Content Include="Views\Spell\EditPointsSpellLevel.cshtml" />
     <Content Include="Views\Spell\EditPreparedSpellLevel.cshtml" />
     <Content Include="Views\Spell\EditSpontaneousSpellLevel.cshtml" />
+    <Content Include="Views\Spell\PointsCastSpells.cshtml" />
+    <Content Include="Views\Spell\SpontaneousCastSpells.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

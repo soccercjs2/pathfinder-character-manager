@@ -34,7 +34,7 @@ namespace Pathfinder.ViewModels
             foreach (var item in this.SpellLevels)
             {
                 List<Spell> knownSpellsAtLevel = db.Spells
-                    .Where(m => m.SpellbookId == this.Spellbook.SpellbookId && m.Level == item.Level)
+                    .Where(m => m.SpellLevelId == item.SpellLevelId)
                     .OrderBy(m => m.Name)
                     .ToList<Spell>();
 
