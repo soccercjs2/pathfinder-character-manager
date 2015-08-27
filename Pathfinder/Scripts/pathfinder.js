@@ -164,15 +164,14 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
     });
 };
 
-function UpdateSpell(spellId, spellbookId, name, level, txtPreparedId) {
+function UpdateSpell(spellId, spellLevelId, name, txtPreparedId) {
     var preparedCount = $('#' + txtPreparedId).val();
     if (preparedCount < 0) { preparedCount = 0; }
 
     var spell = {
         SpellId: spellId,
-        SpellbookId: spellbookId,
+        SpellLevelId: spellLevelId,
         Name: name,
-        Level: level,
         Prepared: preparedCount
     }
 

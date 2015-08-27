@@ -8,13 +8,14 @@
 
 @using (Html.BeginForm())
 {
+    <span style="font-size: medium;">@Model.Counter.Name: @Model.Counter.Count / @Model.Character.EquationResults[Model.Counter.GetEquationName()]</span><br />
+
     foreach (var spellLevel in Model.SpellLevels)
     {
         <table class="section full noclick" id="@("tblSpellsLevel" + spellLevel.Level)">
             <thead onclick="ToggleRowsVisible('@("tblSpellsLevel" + spellLevel.Level)')">
                 <tr>
-                    <td>Level @spellLevel.Level Spells</td>
-                    <td class="min">0 / @*@spellLevel.SpellsCast*@</td>
+                    <td colspan="2">Level @spellLevel.Level Spells</td>
                 </tr>
             </thead>
 
@@ -22,7 +23,9 @@
             {
                 <tr>
                     <td>@spell.Name</td>
-                    <td><input type="submit" value="Cast" class="btn btn-success" /></td>
+                    <td class="min">
+                        @Html.ActionLink("Cast", "CastPointsSpell", "Spell", new { Id = spell.SpellId }, new { @class = "btn btn-success" })
+                    </td>
                 </tr>
             }
         </table>

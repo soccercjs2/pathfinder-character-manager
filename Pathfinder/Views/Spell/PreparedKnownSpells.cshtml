@@ -30,11 +30,10 @@
                                 @id = "txtPrepared" + spell.SpellId,
                                 @class = "form-control",
                                 @onchange = "UpdateSpell(" + spell.SpellId + ","
-                                                            + spell.SpellbookId + ",'"
-                                                            + spell.Name + "',"
-                                                            + spell.Level + ",'"
+                                                            + spell.SpellLevelId + ",'"
+                                                            + spell.Name + "','"
                                                             + "txtPrepared" + spell.SpellId + "')"
-                        }
+                            }
                         })
                     </td>
 

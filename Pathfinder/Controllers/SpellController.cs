@@ -82,12 +82,12 @@ namespace Pathfinder.Controllers
 
         public ActionResult PreparedCastSpells(int id)
         {
-            return View(new PointsCastSpellsView(id));
+            return View(new PreparedCastSpellsView(id));
         }
 
         public ActionResult SpontaneousCastSpells(int id)
         {
-            return View(new PointsCastSpellsView(id));
+            return View(new SpontaneousCastSpellsView(id));
         }
 
         public ActionResult PointsCastSpells(int id)
@@ -241,22 +241,31 @@ namespace Pathfinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Spells.Add(spell);
-                db.SaveChanges();
-
                 SpellLevel spellLevel = db.SpellLevels.Find(spell.SpellLevelId);
                 Spellbook spellbook = db.Spellbooks.Find(spellLevel.SpellbookId);
 
                 if (spellbook.Type == "Points")
                 {
+                    spell.Prepared = 1;
+                    db.Spells.Add(spell);
+                    db.SaveChanges();
+
                     return RedirectToAction("PointsKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else if (spellbook.Type == "Prepared")
                 {
+                    spell.Prepared = 0;
+                    db.Spells.Add(spell);
+                    db.SaveChanges();
+                    
                     return RedirectToAction("PreparedKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else if (spellbook.Type == "Spontaneous")
                 {
+                    spell.Prepared = 1;
+                    db.Spells.Add(spell);
+                    db.SaveChanges();
+                    
                     return RedirectToAction("SpontaneousKnownSpells", "Spell", new { Id = spellbook.SpellbookId });
                 }
                 else
@@ -310,6 +319,28 @@ namespace Pathfinder.Controllers
             {
                 return Json(new { });
             }
+        }
+
+        public ActionResult CastPointsSpell(int id)
+        {
+            Spell spell = db.Spells.Find(id);
+            PointsSpellLevel spellLevel = db.PointsSpellLevels.Find(spell.SpellLevelId);
+            Spellbook spellbook = db.Spellbooks.Find(spellLevel.SpellbookId);
+            Counter counter = db.Counters.Find(spellbook.PointsCounterId);
+
+            counter.Count += spellLevel.SpellCost;
+            db.SaveChanges();
+
+            return RedirectToAction("View", "Spell", new { Id = spell.SpellId });
+        }
+
+        public ActionResult CastPreparedSpell(int id)
+        {
+            Spell spell = db.Spells.Find(id);
+            spell.Prepared -= 1;
+            db.SaveChanges();
+
+            return RedirectToAction("View", "Spell", new { Id = spell.SpellId });
         }
     }
 }
