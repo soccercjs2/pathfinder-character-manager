@@ -311,7 +311,7 @@ namespace Pathfinder.Controllers
                 db.Spells.Attach(spell);
                 db.Entry(spell).State = System.Data.Entity.EntityState.Modified;
 
-                db.SaveChanges(); //asdf
+                db.SaveChanges();
 
                 return Json(new { });
             }

@@ -164,7 +164,7 @@ function UpdateAbility(abilityId, characterId, abilityTypeId, name, description,
     });
 };
 
-function UpdateSpell(spellId, spellLevelId, name, txtPreparedId) {
+function UpdateSpell(spellId, spellLevelId, name, txtPreparedId, spellbookId) {
     var preparedCount = $('#' + txtPreparedId).val();
     if (preparedCount < 0) { preparedCount = 0; }
 
@@ -180,6 +180,9 @@ function UpdateSpell(spellId, spellLevelId, name, txtPreparedId) {
         dataType: 'text',
         url: "/Spell/UpdateSpell",
         data: spell,
-        dataType: 'json'
+        dataType: 'json',
+        success: function (response) {
+            window.location.href = spellbookId;
+        }
     });
 };

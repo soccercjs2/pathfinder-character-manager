@@ -21,7 +21,9 @@
             {
                 <tr>
                     <td>@spell.Name</td>
-                    <td><input type="submit" value="Cast" class="btn btn-success" /></td>
+                    <td class="min">
+                        @Html.ActionLink("Cast", "CastPreparedSpell", "Spell", new { Id = spell.SpellId }, new { @class = "btn btn-success" })
+                    </td>
                 </tr>
             }
         </table>
